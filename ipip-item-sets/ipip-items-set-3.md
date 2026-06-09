@@ -1,4 +1,7 @@
-## IPIP Items Set 3
+## Reordered 50-item Scale III
+
+This set of IPIP items is a reordered version of the table in 
+[ipip-50-item-scale.md](https://github.com/sghetticode/conform/blob/main/ipip-item-sets/ipip-50-item-scale.md)
 
 | #  | Item                                                   | Factor                | Key |
 | -- | ------------------------------------------------------ | --------------------- | --- |
@@ -52,3 +55,11 @@
 | 48 | Pay attention to details.                              | Conscientiousness     | 3+  |
 | 49 | Worry about things.                                    | Emotional Stability   | 4-  |
 | 50 | Have a vivid imagination.                              | Intellect/Imagination | 5+  |
+
+---
+
+Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. 
+*Psychological Assessment*, 4, 26-42.
+
+Link to the [IPIP website](https://ipip.ori.org/)  
+Source for the [IPIP 50-item scale](https://ipip.ori.org/New_IPIP-50-item-scale.htm)
