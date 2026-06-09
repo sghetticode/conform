@@ -1,13 +1,8 @@
 ## IPIP 50-item Scale
 
-### How Accurately Can You Describe Yourself?
-
-Describe yourself as you generally are now, not as you wish to be in the future. Describe yourself 
-as you honestly see yourself, in relation to other people you know of the same sex as you are, and 
-roughly your same age. So that you can describe yourself in an honest manner, your responses will 
-be kept in absolute confidence. Indicate for each statement whether it is 1. Very Inaccurate, 2. 
-Moderately Inaccurate, 3. Neither Accurate Nor Inaccurate, 4. Moderately Accurate, or 5. Very 
-Accurate as a description of you.
+This is an IPIP 50-item representation of the Goldberg (1992) markers for measuring the Big-Five 
+personality factors. It was obtained from the official International Personality Item Pool website 
+that is linked at the bottom of this page.
 
 | #  | Item                                                   | Factor                | Key |
 | -- | ------------------------------------------------------ | --------------------- | --- |
@@ -62,10 +57,10 @@ Accurate as a description of you.
 | 49 | Often feel blue.                                       | Emotional Stability   | 4-  |
 | 50 | Am full of ideas.                                      | Intellect/Imagination | 5+  |
 
-Note. These five scales were developed to measure the Big-Five factor markers reported in the 
-following article: Goldberg, L. R. (1992). The development of markers for the Big-Five factor 
-structure. Psychological Assessment, 4, 26-42.
-
 ---
 
-[Data source](https://ipip.ori.org/New_IPIP-50-item-scale.htm)
+Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. 
+*Psychological Assessment*, 4, 26-42.
+
+Link to the [IPIP website](https://ipip.ori.org/)  
+Source for the [IPIP 50-item scale](https://ipip.ori.org/New_IPIP-50-item-scale.htm)
