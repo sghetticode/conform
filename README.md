@@ -5,5 +5,7 @@
 *Conform* helps your agent form a deeper understanding of your personality. You start by answering 
 a set of questions designed to evaluate personal traits. The results are separated into five 
 factors: extraversion, agreeableness, conscientiousness, emotional stability, and 
-intellect/imagination. Each of these will have a percentage associated with it, which are used 
-to write a short description of your personality.
+intellect/imagination. Each of these will have a percentage associated with it, which is used to 
+write a short description of you. This is saved to a **CONFORM.md** file that you put in your home 
+directory and then referenced in your AGENTS.md to adapt the responses of an agent to your 
+personality.
