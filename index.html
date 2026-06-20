@@ -11,38 +11,40 @@
     <title>Conform</title>
   </head>
   <body
-    class="font-rubik h-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat pt-5 pl-7 pr-9 text-neutral-300"
+    class="font-rubik h-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat pl-6
+      text-neutral-300"
   >
-    <main class="grid w-full grid-cols-[auto_1fr] gap-8">
-      <div class="max-w-min">
-        <h1 class="text-[12.5rem]/none font-medium text-shadow-mist-800/50 text-shadow-xs">
-          Conform
-        </h1>
-        <section class="text-justify">
-          <h2 class="mb-6 pl-3 text-5xl leading-[1.1] font-normal tracking-tight">
-            Make any agent your agent, by giving it the insight of knowing more about you.
-          </h2>
-          <div class="card ml-4 rounded-md bg-mist-600/60 shadow-sm shadow-mist-800/50">
-            <div class="card-body px-[18px] py-4">
-              <p class="text-2xl leading-tight font-light tracking-normal">
-                <span class="italic">Conform</span> helps your agent form a deeper understanding of
-                your personality. You start by answering a set of questions designed to evaluate
-                personal traits. The results are separated into five factors: extraversion,
-                agreeableness, conscientiousness, emotional stability, and intellect/imagination.
-                Each of these will have a percentage associated with it, which is used to write a
-                short description of you. This is saved to a
-                <span class="font-normal">CONFORM.md</span> file that you put in your home directory
-                and then referenced in your AGENTS.md to adapt the responses of an agent to your
-                personality.
-              </p>
-            </div>
+    <div class="navbar h-[12vh] rounded-bl-[48px] bg-mist-600/60 pl-8 shadow-md shadow-mist-800/50">
+      <h1 class="text-8xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">Conform</h1>
+    </div>
+    <main class="w-full">
+      <section class="pl-10 text-justify space-y-9">
+        <h2 class="text-5xl leading-[1.1] font-normal tracking-tight mt-8 max-w-3/5">
+          Make any agent your agent, by giving it the insight of knowing more about you.
+        </h2>
+        <div class="flex items-center gap-8">
+          <h3 class="text-4xl font-normal">Take the trait test</h3>
+          <button id="ready-btn"
+            class="btn btn-lg btn-ghost border-none bg-mist-500/70 font-normal hover:bg-mist-500/90"
+          >
+            Ready to start?
+          </button>
+        </div>
+        <div class="card rounded-md bg-mist-600/60 shadow-sm shadow-mist-800/50 w-1/2">
+          <div class="card-body px-[18px] py-4">
+            <p class="text-2xl leading-tight font-light tracking-normal">
+              <span class="italic">Conform</span> helps your agent form a deeper understanding of
+              your personality. You start by answering a set of questions designed to evaluate
+              personal traits. The results are separated into five factors: extraversion,
+              agreeableness, conscientiousness, emotional stability, and intellect/imagination. Each
+              of these will have a percentage associated with it, which is used to write a short
+              description of you. This is saved to a <span class="font-normal">CONFORM.md</span> 
+              file that you put in your home directory and then referenced in your AGENTS.md to 
+              adapt the responses of an agent to your personality.
+            </p>
           </div>
-        </section>
-      </div>
-      <div class="grid justify-items-end content-start mt-12">
-        <h3 class="text-[42px] font-normal">Take the trait test</h3>
-        <button class="btn btn-lg btn-ghost mt-4 bg-mist-500/70 font-normal hover:bg-mist-500/90 border-none">Ready to start?</button>
-      </div>
+        </div>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
