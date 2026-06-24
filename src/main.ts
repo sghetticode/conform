@@ -4,8 +4,8 @@ import './style.css'
 console.log('Starting up Conform...')
 
 // Start trait test
-const readyBtn = document.getElementById('ready-btn')
+const readyCollapse = document.getElementById('ready-collapse')
 
-readyBtn?.addEventListener('click', () => {
+readyCollapse?.addEventListener('click', () => {
   console.log('Ready to start.')
 })
