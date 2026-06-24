@@ -8,50 +8,40 @@
       content="Make any agent your agent, by giving it the insight of knowing more about you."
     />
     <link href="/src/style.css" rel="stylesheet" />
-    <title>Conform</title>
+    <title>Conform.md</title>
   </head>
   <body
-    class="font-rubik h-screen flex flex-col bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat
-      text-neutral-300"
+    class="font-rubik h-screen w-full bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat text-neutral-300"
   >
-    <div class="navbar h-[12vh] rounded-bl-[48px] bg-mist-600/60 ml-6 pl-5 shadow-md shadow-mist-800/50">
-      <h1 class="text-[6.25rem]/none font-medium text-shadow-mist-800/50 text-shadow-xs">Conform</h1>
+    <div
+      class="navbar ml-6 h-[12vh] rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 bg-mist-600/60 pl-5"
+    >
+      <h1 class="text-8xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
     </div>
-    <main class="flex flex-1 flex-col w-full">
-      <section id="tagline-intro" class="mt-8 ml-12 text-justify">
-        <h2 class="text-[3.125rem] leading-[1.1] font-normal tracking-tight max-w-1/2">
+    <main class="flex">
+      <section id="tagline-intro" class="mt-6 ml-12 w-1/2 flex-auto text-justify">
+        <h2 class="text-5xl leading-[1.15] font-normal tracking-tight">
           Give your agent the insight it needs to adapt to your personality.
         </h2>
-        <div class="card rounded-md rounded-bl-[24px] bg-mist-600/60 shadow-sm shadow-mist-800/50 w-1/2 mt-6">
-          <p class="text-2xl leading-tight font-light tracking-normal px-[18px] py-4">
-            <span class="italic">Conform</span> helps your agent form a deeper understanding of
-            your personality. You start by answering a set of questions designed to evaluate
-            personal traits.
+        <div
+          class="card mt-6 rounded-md rounded-bl-[24px] bg-mist-600/60 shadow-sm shadow-mist-800/50"
+        >
+          <p class="px-5 py-4 text-2xl leading-tight font-light tracking-normal">
+            <span class="italic">Conform</span> helps agents form a deeper understanding of your
+            personality. You start by answering a set of questions designed to evaluate personal
+            traits then use the results to adapt an agent to your personality.
           </p>
         </div>
       </section>
-      <section id="trait-test" class="mt-14 ml-12">
-        <div class="flex items-center gap-8">
-          <h3 class="text-4xl font-normal">Take the trait test</h3>
-          <button id="ready-btn"
-            class="btn btn-lg btn-ghost border-none bg-mist-500/70 font-normal hover:bg-mist-500/90"
-          >
-            Ready to start?
-          </button>
-        </div>
-      </section>
-      <section id="description" class="mt-auto pb-6 ml-6 text-justify">
-        <div class="card rounded-md bg-mist-600/60 shadow-sm shadow-mist-800/50 w-3/5">
-          <div class="card-body px-5 py-4">
-            <p class="text-[1.375rem] leading-tight font-light tracking-normal">
-              The results are separated into five factors: extraversion, agreeableness, 
-              conscientiousness, emotional stability, and intellect/imagination. Each of these will 
-              have a percentage associated with it, which is used to write a short description of 
-              you. This is saved to a <span class="font-normal">CONFORM.md</span> file that you put 
-              in your home directory. It's meant to be referenced in your AGENTS.md to adapt the responses of 
-              an agent to your personality.
-            </p>
-          </div>
+      <section id="trait-test" class="mt-6 mr-8 flex w-1/2 flex-auto flex-col items-end">
+        <h3 class="text-4xl font-normal">Take the trait test</h3>
+        <div
+          id="ready-collapse"
+          class="collapse-arrow collapse mt-[18px] w-1/4 bg-mist-500/70 hover:bg-mist-500/90"
+        >
+          <input type="checkbox" />
+          <div class="collapse-title text-lg">Ready to start?</div>
+          <div class="collapse-content">...</div>
         </div>
       </section>
     </main>
