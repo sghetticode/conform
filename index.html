@@ -11,36 +11,52 @@
     <title>Conform.md</title>
   </head>
   <body
-    class="font-rubik h-screen w-full bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat text-neutral-300"
+    class="font-rubik h-screen w-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat text-neutral-200"
   >
     <div
-      class="navbar ml-6 h-[12vh] rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 bg-mist-600/60 pl-5"
+      class="navbar ml-6 h-[100px] rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 bg-mist-600/60 pl-5"
     >
-      <h1 class="text-8xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
+      <h1 class="text-7xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
     </div>
     <main class="flex">
-      <section id="tagline-intro" class="mt-6 ml-12 w-1/2 flex-auto text-justify">
-        <h2 class="text-5xl leading-[1.15] font-normal tracking-tight">
+      <section id="tagline-intro" class="mt-6 ml-12 w-2/5 flex-auto text-justify">
+        <h2 class="text-4xl leading-[1.15] font-normal tracking-tight mb-6">
           Give your agent the insight it needs to adapt to your personality.
         </h2>
         <div
-          class="card mt-6 rounded-md rounded-bl-[24px] bg-mist-600/60 shadow-sm shadow-mist-800/50"
+          class="card rounded-md rounded-bl-[24px] bg-mist-600/60 shadow-sm shadow-mist-800/50 mb-12"
         >
           <p class="px-5 py-4 text-2xl leading-tight font-light tracking-normal">
-            <span class="italic">Conform</span> helps agents form a deeper understanding of your
-            personality. You start by answering a set of questions designed to evaluate personal
-            traits then use the results to adapt an agent to your personality.
+            <span class="italic">Conform</span> gives your agent a deeper understanding of you, by 
+            using results from questions designed to evalutate personalities. Take the trait test 
+            to get started then follow the instructions provided after finishing.
           </p>
         </div>
+        <div class="flex-auto">
+          <h3 class="text-2xl mb-5">How it all works</h3>
+          <div class="h-auto border-l-[3px] border-l-neutral-400/75 pl-5">
+            <p class="text-[1.375rem] leading-tight font-light tracking-normal">
+              The results of the trait test are separated into five factors: extraversion, 
+              agreeableness, conscientiousness, emotional stability, and intellect/imagination 
+              (known as the Big-Five markers for modeling personality). Each of these will have a 
+              percentage associated with it, which is used to write a short description of you. This 
+              is saved, along with intructions, to a <span class="font-normal">CONFORM.md</span> 
+              file that you put in your home directory. Then just reference it in any AGENTS.md to 
+              shape how your agent interacts with you based on your personality.
+            </p>
+        </div>
       </section>
-      <section id="trait-test" class="mt-6 mr-8 flex w-1/2 flex-auto flex-col items-end">
-        <h3 class="text-4xl font-normal">Take the trait test</h3>
+      </div>
+      <section id="trait-test" class="mt-6 mr-8 flex w-3/5 flex-auto flex-col items-end">
+        <h3 class="text-3xl font-normal text-right w-1/2">
+          AI should conform to you, not the other way around.
+        </h3>
         <div
           id="ready-collapse"
-          class="collapse-arrow collapse mt-[18px] w-1/4 bg-mist-500/70 hover:bg-mist-500/90"
+          class="collapse-arrow collapse mt-6 w-fit bg-mist-500/70 hover:bg-mist-500/90"
         >
           <input type="checkbox" />
-          <div class="collapse-title text-lg">Ready to start?</div>
+          <div class="collapse-title text-lg">Start the test</div>
           <div class="collapse-content">...</div>
         </div>
       </section>
