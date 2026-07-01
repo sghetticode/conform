@@ -11,59 +11,62 @@
     <title>Conform.md</title>
   </head>
   <body
-    class="font-rubik h-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat text-neutral-200"
+    class="font-rubik h-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat
+      text-neutral-200"
   >
     <div
-      class="navbar w-auto ml-6 h-[100px] rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 bg-mist-600/60 pl-5"
+      class="navbar ml-6 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 
+      bg-mist-600/60 pl-5"
     >
       <h1 class="text-7xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
     </div>
     <main class="flex">
       <section id="tagline-intro" class="mt-6 ml-12 w-2/5 flex-auto text-justify">
-        <h2 class="text-4xl leading-[1.15] font-normal tracking-tight mb-7">
+        <h2 class="mb-7 text-4xl leading-[1.15] font-normal tracking-tight">
           Give your agent the insight it needs to adapt to your personality.
         </h2>
         <div
-          class="card rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm shadow-mist-800/50 mb-12"
+          class="card mb-12 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm shadow-mist-800/50"
         >
           <p class="px-5 py-4 text-2xl leading-tight font-light tracking-normal">
-            <span class="italic">Conform</span> gives your agent a deeper understanding of you, by 
-            using results from questions designed to evaluate your personality. Take the trait test 
-            to get started! Read on to find out how it works.
+            <span class="italic">Conform</span> gives your agent a deeper understanding of you, by
+            using results from a short test designed to evaluate your personality. Take the trait
+            test to get started! Read on to find out how it works.
           </p>
         </div>
         <div class="flex-auto">
-          <h3 class="text-2xl mb-5">How it works</h3>
+          <h3 class="mb-5 text-2xl">How it works</h3>
           <div class="h-auto border-l-[3px] border-l-neutral-400/75 pl-5">
             <p class="text-[1.375rem] leading-tight font-light tracking-normal">
-              The results of the trait test are separated into five factors: extraversion, 
-              agreeableness, conscientiousness, emotional stability, and intellect/imagination 
-              (known as the Big-Five markers for modeling personality). Each of these will have a 
-              percentage associated with it, which is used to write a short description of you. This 
-              is saved, along with instructions, to a <span class="font-normal">CONFORM.md</span> 
-              file that you put in your home directory. Then you can reference it in any AGENTS.md 
-              to shape how your agent interacts with you based on your personality.
+              The results of the trait test are separated into five factors, known as the "Big-Five"
+              markers for modeling personality (extraversion, agreeableness, conscientiousness,
+              emotional stability, and intellect/imagination). Each of them has a percentage
+              associated with it based on how you rank the statements provided by the test. These
+              are used to generate a short description of your personality that's saved to a
+              <span class="font-normal">CONFORM.md</span> file that you put in your home directory.
+              All you have to do is put this in your home directory, then reference it in an
+              AGENTS.md to shape how your agent interacts with you.
             </p>
+          </div>
         </div>
       </section>
-      </div>
       <section id="trait-test" class="mt-5 mr-8 flex w-3/5 flex-auto flex-col items-end">
-        <h3 class="text-3xl font-normal text-right w-1/2">
-          Personalize your agent
-        </h3>
+        <h3 class="w-1/2 text-right text-3xl font-normal">Personalize your agent</h3>
         <div class="dropdown dropdown-end">
           <button
             id="dropdown-btn"
-            tableindex="0"
-            class="btn btn-lg btn-ghost rounded-lg mt-3 mb-4 p-3 bg-mist-500/70 font-normal hover:bg-mist-500/90 border-none"
-            >
+            tabindex="0"
+            class="btn btn-lg btn-ghost mt-3 mb-4 rounded-lg border-none bg-mist-500/70 p-3 
+            font-normal hover:bg-mist-500/90"
+          >
             Start the test
           </button>
           <div
             id="dropdown-card"
             tabindex="0"
-            class="dropdown-content card w-[750px] h-[500px] rounded-lg bg-mist-400"
+            class="dropdown-content card h-[500px] w-[750px] rounded-lg bg-mist-400 p-4"
           >
+            <p class="text-2xl">Placeholder text</p>
           </div>
         </div>
       </section>
