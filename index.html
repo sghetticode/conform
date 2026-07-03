@@ -15,8 +15,8 @@
       text-neutral-200"
   >
     <div
-      class="navbar ml-6 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px] border-b-mist-800/75 
-      bg-mist-600/60 pl-5"
+      class="navbar ml-6 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px]
+        border-b-mist-800/75 bg-mist-600/60 pl-5"
     >
       <h1 class="text-7xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
     </div>
@@ -26,7 +26,8 @@
           Give your agent the insight it needs to adapt to your personality.
         </h2>
         <div
-          class="card mb-12 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm shadow-mist-800/50"
+          class="card mb-12 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm
+            shadow-mist-800/50"
         >
           <p class="px-5 py-4 text-2xl leading-tight font-light tracking-normal">
             <span class="italic">Conform</span> gives your agent a deeper understanding of you, by
@@ -52,21 +53,367 @@
       </section>
       <section id="trait-test" class="mt-5 mr-8 flex w-3/5 flex-auto flex-col items-end">
         <h3 class="w-1/2 text-right text-3xl font-normal">Personalize your agent</h3>
-        <div class="dropdown dropdown-end">
+        <div class="dropdown dropdown-end flex w-19/20 justify-end">
           <button
             id="dropdown-btn"
             tabindex="0"
-            class="btn btn-lg btn-ghost mt-3 mb-4 rounded-lg border-none bg-mist-500/70 p-3 
-            font-normal hover:bg-mist-500/90"
+            class="btn btn-lg btn-ghost mt-3 mb-4 rounded-lg border-none bg-mist-500/70
+              p-3 font-normal hover:bg-mist-500/90"
           >
             Start the test
           </button>
           <div
             id="dropdown-card"
             tabindex="0"
-            class="dropdown-content card h-[500px] w-[750px] rounded-lg bg-mist-400 p-4"
+            class="dropdown-content card mt-20 rounded-lg bg-mist-400 p-1"
           >
-            <p class="text-2xl">Placeholder text</p>
+            <div class="card-body">
+              <progress class="progress" value="0" max="50"></progress>
+              <div>
+                <table class="table w-full table-fixed" data-page-panel="1">
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>
+                        <div class="grid grid-cols-5 justify-items-center">
+                          <span>Way off</span>
+                          <span>Inaccurate</span>
+                          <span>Neither</span>
+                          <span>Accurate</span>
+                          <span>Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>01</td>
+                      <td>Am the life of the party.</td>
+                    </tr>
+                    <tr>
+                      <td>02</td>
+                      <td>Feel little concern for others.</td>
+                    </tr>
+                    <tr>
+                      <td>03</td>
+                      <td>Am always prepared.</td>
+                    </tr>
+                    <tr>
+                      <td>04</td>
+                      <td>Get stressed out easily.</td>
+                    </tr>
+                    <tr>
+                      <td>05</td>
+                      <td>Have a rich vocabulary.</td>
+                    </tr>
+                    <tr>
+                      <td>06</td>
+                      <td>Don't talk a lot.</td>
+                    </tr>
+                    <tr>
+                      <td>07</td>
+                      <td>Am interested in people.</td>
+                    </tr>
+                    <tr>
+                      <td>08</td>
+                      <td>Leave my belongings around.</td>
+                    </tr>
+                    <tr>
+                      <td>09</td>
+                      <td>Am relaxed most of the time.</td>
+                    </tr>
+                    <tr>
+                      <td>10</td>
+                      <td>Have difficulty understanding abstract ideas.</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table w-full table-fixed" data-page-panel="2" hidden>
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>
+                        <div class="grid grid-cols-5 justify-items-center">
+                          <span>Way off</span>
+                          <span>Inaccurate</span>
+                          <span>Neither</span>
+                          <span>Accurate</span>
+                          <span>Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>11</td>
+                      <td>Feel comfortable around people.</td>
+                    </tr>
+                    <tr>
+                      <td>12</td>
+                      <td>Insult people.</td>
+                    </tr>
+                    <tr>
+                      <td>13</td>
+                      <td>Pay attention to details.</td>
+                    </tr>
+                    <tr>
+                      <td>14</td>
+                      <td>Worry about things.</td>
+                    </tr>
+                    <tr>
+                      <td>15</td>
+                      <td>Have a vivid imagination.</td>
+                    </tr>
+                    <tr>
+                      <td>16</td>
+                      <td>Keep in the background.</td>
+                    </tr>
+                    <tr>
+                      <td>17</td>
+                      <td>Sympathize with others' feelings.</td>
+                    </tr>
+                    <tr>
+                      <td>18</td>
+                      <td>Make a mess of things.</td>
+                    </tr>
+                    <tr>
+                      <td>19</td>
+                      <td>Seldom feel blue.</td>
+                    </tr>
+                    <tr>
+                      <td>20</td>
+                      <td>Am not interested in abstract ideas.</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table w-full table-fixed" data-page-panel="3" hidden>
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>
+                        <div class="grid grid-cols-5 justify-items-center">
+                          <span>Way off</span>
+                          <span>Inaccurate</span>
+                          <span>Neither</span>
+                          <span>Accurate</span>
+                          <span>Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>21</td>
+                      <td>Start conversations.</td>
+                    </tr>
+                    <tr>
+                      <td>22</td>
+                      <td>Am not interested in other people's problems.</td>
+                    </tr>
+                    <tr>
+                      <td>23</td>
+                      <td>Get chores done right away.</td>
+                    </tr>
+                    <tr>
+                      <td>24</td>
+                      <td>Am easily disturbed.</td>
+                    </tr>
+                    <tr>
+                      <td>25</td>
+                      <td>Have excellent ideas.</td>
+                    </tr>
+                    <tr>
+                      <td>26</td>
+                      <td>Have little to say.</td>
+                    </tr>
+                    <tr>
+                      <td>27</td>
+                      <td>Have a soft heart.</td>
+                    </tr>
+                    <tr>
+                      <td>28</td>
+                      <td>Often forget to put things back in their proper place.</td>
+                    </tr>
+                    <tr>
+                      <td>29</td>
+                      <td>Get upset easily.</td>
+                    </tr>
+                    <tr>
+                      <td>30</td>
+                      <td>Do not have a good imagination.</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table w-full table-fixed" data-page-panel="4" hidden>
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>
+                        <div class="grid grid-cols-5 justify-items-center">
+                          <span>Way off</span>
+                          <span>Inaccurate</span>
+                          <span>Neither</span>
+                          <span>Accurate</span>
+                          <span>Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>31</td>
+                      <td>Talk to a lot of different people at parties.</td>
+                    </tr>
+                    <tr>
+                      <td>32</td>
+                      <td>Am not really interested in others.</td>
+                    </tr>
+                    <tr>
+                      <td>33</td>
+                      <td>Like order.</td>
+                    </tr>
+                    <tr>
+                      <td>34</td>
+                      <td>Change my mood a lot.</td>
+                    </tr>
+                    <tr>
+                      <td>35</td>
+                      <td>Am quick to understand things.</td>
+                    </tr>
+                    <tr>
+                      <td>36</td>
+                      <td>Don't like to draw attention to myself.</td>
+                    </tr>
+                    <tr>
+                      <td>37</td>
+                      <td>Take time out for others.</td>
+                    </tr>
+                    <tr>
+                      <td>38</td>
+                      <td>Shirk my duties.</td>
+                    </tr>
+                    <tr>
+                      <td>39</td>
+                      <td>Have frequent mood swings.</td>
+                    </tr>
+                    <tr>
+                      <td>40</td>
+                      <td>Use difficult words.</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table class="table w-full table-fixed" data-page-panel="5" hidden>
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>
+                        <div class="grid grid-cols-5 justify-items-center">
+                          <span>Way off</span>
+                          <span>Inaccurate</span>
+                          <span>Neither</span>
+                          <span>Accurate</span>
+                          <span>Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>41</td>
+                      <td>Don't mind being the center of attention.</td>
+                    </tr>
+                    <tr>
+                      <td>42</td>
+                      <td>Feel others' emotions.</td>
+                    </tr>
+                    <tr>
+                      <td>43</td>
+                      <td>Follow a schedule.</td>
+                    </tr>
+                    <tr>
+                      <td>44</td>
+                      <td>Get irritated easily.</td>
+                    </tr>
+                    <tr>
+                      <td>45</td>
+                      <td>Spend time reflecting on things.</td>
+                    </tr>
+                    <tr>
+                      <td>46</td>
+                      <td>Am quiet around strangers.</td>
+                    </tr>
+                    <tr>
+                      <td>47</td>
+                      <td>Make people feel at ease.</td>
+                    </tr>
+                    <tr>
+                      <td>48</td>
+                      <td>Am exacting in my work.</td>
+                    </tr>
+                    <tr>
+                      <td>49</td>
+                      <td>Often feel blue.</td>
+                    </tr>
+                    <tr>
+                      <td>50</td>
+                      <td>Am full of ideas.</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="grid place-items-center gap-5" data-page-panel="6" hidden>
+                  <h1 class="card-title">Submit your trait test</h1>
+                  <p id="submit-error" class="text-error" role="alert" hidden></p>
+                  <button class="btn size-fit" type="button" id="submit-button">Submit</button>
+                </div>
+              </div>
+
+              <div class="join mt-5 mr-auto ml-auto">
+                <button
+                  class="join-item btn"
+                  type="button"
+                  data-nav="prev"
+                  aria-label="Previous page"
+                >
+                  <
+                </button>
+                <button class="join-item btn" type="button" data-page="1" aria-current="page">
+                  1
+                </button>
+                <button class="join-item btn" type="button" data-page="2">2</button>
+                <button class="join-item btn" type="button" data-page="3">3</button>
+                <button class="join-item btn" type="button" data-page="4">4</button>
+                <button class="join-item btn" type="button" data-page="5">5</button>
+                <button class="join-item btn" type="button" data-page="6">6</button>
+                <button class="join-item btn" type="button" data-nav="next" aria-label="Next page">
+                  >
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
