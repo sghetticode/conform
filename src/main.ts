@@ -10,7 +10,7 @@ dropdownBtn?.addEventListener('click', () => {
   console.log('Test dropdown opened')
 })
 
-const pages = 6
+const pages = 11
 const progress = document.querySelector<HTMLProgressElement>('.progress')!
 const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
 const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
@@ -45,7 +45,7 @@ itemRows.forEach((row) => {
   row.after(responseRow)
 })
 
-let current = 1
+let current = 0
 
 // Count how many item radios have been selected
 function getAnsweredCount() {
@@ -102,7 +102,7 @@ document.addEventListener('change', (e) => {
   }
 })
 
-// Block incomplete submissions, clear error on success
+// Block incomplete submissions
 submitButton.addEventListener('click', () => {
   if (!isComplete()) {
     updateSubmitState()
@@ -113,7 +113,7 @@ submitButton.addEventListener('click', () => {
   submitError.textContent = ''
 })
 
-// Navigate pages via number, prev, or next buttons
+// Use previous, number, or next buttons to navigate pages
 joinNav.addEventListener('click', (e) => {
   const target = e.target
   if (!(target instanceof Element)) return
@@ -124,9 +124,9 @@ joinNav.addEventListener('click', (e) => {
   if (btn.dataset.page) {
     current = Number(btn.dataset.page)
   } else if (btn.dataset.nav === 'prev') {
-    current = Math.max(1, current - 1)
+    current = Math.max(0, current - 1)
   } else if (btn.dataset.nav === 'next') {
-    current = Math.min(pages, current + 1)
+    current = Math.min(pages - 1, current + 1)
   }
 
   render()
