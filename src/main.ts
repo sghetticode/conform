@@ -3,11 +3,18 @@ import './style.css'
 
 console.log('Starting up Conform...')
 
+const hiwCollapse = document.getElementById('hiw-collapse')
+
+// Log when 'how it works' collapse expands
+hiwCollapse?.addEventListener('focus', () => {
+  console.log('How it works section expanded')
+})
+
 const dropdownBtn = document.getElementById('dropdown-btn')
 
-// Log when test dropdown is opened
-dropdownBtn?.addEventListener('click', () => {
-  console.log('Test dropdown opened')
+// Log when test dropdown opens
+dropdownBtn?.addEventListener('focus', () => {
+  console.log('Trait test dropdown opened')
 })
 
 const pages = 11
@@ -28,17 +35,20 @@ itemRows.forEach((row) => {
 
   radioGroup.className = 'grid grid-cols-5 justify-items-center'
 
-  for (let value = 1; value <= 5; value += 1) {
+  // Generate radio rows for every item and assign rating labels to each button
+  const radioLabels = ['way-off', 'inaccurate', 'neither', 'accurate', 'spot-on']
+
+  radioLabels.forEach((label) => {
     const radio = document.createElement('input')
 
     radio.type = 'radio'
     radio.name = `item-${itemNumber}`
-    radio.value = String(value)
+    radio.value = label
     radio.className = 'radio'
-    radio.setAttribute('aria-label', `${value}`)
+    radio.setAttribute('aria-label', label.replace(/-/g, ' '))
 
     radioGroup.append(radio)
-  }
+  })
 
   responseCell.append(radioGroup)
   responseRow.append(blankCell, responseCell)
@@ -97,10 +107,11 @@ function render() {
   })
 }
 
-// Update progress when an item rating changes
+// Update progress bar when an item rating changes
 document.addEventListener('change', (e) => {
   const target = e.target
   if (target instanceof HTMLInputElement && target.matches('input[type="radio"][name^="item-"]')) {
+    console.log(`${target.name}: ${target.value}`)
     updateProgress()
   }
 })
@@ -114,6 +125,7 @@ submitButton.addEventListener('click', () => {
 
   submitError.hidden = true
   submitError.textContent = ''
+  console.log('Trait test submitted')
 })
 
 // Use previous, number, or next buttons to navigate pages
