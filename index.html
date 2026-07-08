@@ -35,9 +35,9 @@
             test to get started! Read on to find out how it works.
           </p>
         </div>
-        <div class="flex-auto">
-          <h3 class="mb-5 text-2xl">How it works</h3>
-          <div class="h-auto border-l-[3px] border-l-neutral-400/75 pl-5">
+        <div tabindex="0" class="flex-auto collapse collapse-arrow w-8/10 rounded-none">
+          <h3 class="text-2xl collapse-title">How it works</h3>
+          <div class="collapse-content pb-0 pl-5 h-auto border-l-[3px] border-l-neutral-400/75">
             <p class="text-[1.375rem] leading-tight font-light tracking-normal">
               The results of the trait test are separated into five factors, known as the 
               "Big-Five" markers for modeling personality (extraversion, agreeableness, 
@@ -52,7 +52,6 @@
         </div>
       </section>
       <section id="trait-test" class="mt-5 mr-8 flex w-3/5 flex-auto flex-col items-end">
-        <h3 class="w-1/2 text-right text-3xl font-normal">Personalize your agent</h3>
         <div class="dropdown dropdown-end flex w-19/20 justify-end">
           <button
             id="dropdown-btn"
@@ -69,7 +68,7 @@
           >
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
-              <div>
+              <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full"
                   data-page-panel="0"
@@ -82,7 +81,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -129,7 +128,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -176,7 +175,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -223,7 +222,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -270,7 +269,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -317,7 +316,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -364,7 +363,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -411,7 +410,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -458,7 +457,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -505,7 +504,7 @@
                     <tr>
                       <th></th>
                       <th>
-                        <div class="grid grid-cols-5 justify-items-center">
+                        <div class="grid grid-cols-5 justify-items-center mb-2">
                           <span>Way off</span>
                           <span>Inaccurate</span>
                           <span>Neither</span>
@@ -539,14 +538,31 @@
                   </tbody>
                 </table>
 
-                <div class="grid place-items-center gap-5" data-page-panel="10" hidden>
-                  <h1 class="card-title">Submit your trait test</h1>
-                  <p id="submit-error" class="text-error" role="alert" hidden></p>
-                  <button class="btn size-fit" type="button" id="submit-button">Submit</button>
+                <div
+                  class="grid min-h-138 place-content-center place-items-center gap-5"
+                  data-page-panel="10"
+                  hidden
+                >
+                  <h1 class="text-3xl">Submit your trait test</h1>
+                  <p
+                    id="submit-error"
+                    class="text-orange-800 text-xl font-medium"
+                    role="alert"
+                    hidden
+                  >
+                  </p>
+                  <button
+                    id="submit-button"
+                    class="btn btn-lg btn-ghost mt-3 mb-4 rounded-md border-none bg-mist-500/70
+                      p-3 font-normal hover:bg-mist-500/90 shadow-none"
+                    type="button"
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
 
-              <div class="join mt-5 mr-auto ml-auto">
+              <div class="join mr-auto ml-auto">
                 <button
                   class="join-item btn btn-ghost bg-mist-700/80 hover:bg-mist-600/70 
                     border-none shadow-none"
