@@ -86,6 +86,9 @@ function render() {
 
   pageButtons.forEach((button) => {
     const isActive = Number(button.dataset.page) === current
+    button.classList.toggle('bg-mist-700/80', !isActive)
+    button.classList.toggle('bg-mist-600/70', isActive)
+    
     if (isActive) {
       button.setAttribute('aria-current', 'page')
     } else {
