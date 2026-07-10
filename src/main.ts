@@ -3,6 +3,11 @@ import './style.css'
 
 console.log('Starting up Conform...')
 
+// Load any saved answers or create new answers obj
+const answers: { [key: string]: string } = JSON.parse(
+  localStorage.getItem('answers') ?? '{}'
+)
+
 const hiwCollapse = document.getElementById('hiw-collapse')
 
 // Log when 'how it works' collapse expands
@@ -35,7 +40,7 @@ itemRows.forEach((row) => {
 
   radioGroup.className = 'grid grid-cols-5 justify-items-center'
 
-  // Generate radio rows for every item and assign rating labels to each button
+  // Generate radio rows for every item and assign label vals to each btn
   const radioLabels = ['way-off', 'inaccurate', 'neither', 'accurate', 'spot-on']
 
   radioLabels.forEach((label) => {
@@ -48,6 +53,9 @@ itemRows.forEach((row) => {
     radio.setAttribute('aria-label', label.replace(/-/g, ' '))
 
     radioGroup.append(radio)
+
+    // Check localStorage for saved answers and restore on load
+    if (answers[radio.name] === radio.value) radio.checked = true
   })
 
   responseCell.append(radioGroup)
@@ -57,19 +65,19 @@ itemRows.forEach((row) => {
 
 let current = 0
 
-// Count how many item radios have been selected
+// Count number of radio btns currently selected
 function getAnsweredCount() {
   return document.querySelectorAll('input[type="radio"][name^="item-"]:checked').length
 }
 
 // True when all 50 items have a rating
-function isComplete() {
+function formComplete() {
   return getAnsweredCount() === 50
 }
 
 // Enable submit when complete, otherwise show remaining count
 function updateSubmitState() {
-  const complete = isComplete()
+  const complete = formComplete()
   submitButton.disabled = !complete
 
   if (complete) {
@@ -88,7 +96,7 @@ function updateProgress() {
   updateSubmitState()
 }
 
-// Show the active page panel and highlight its nav button
+// Render current page panel and highlight its nav btn
 function render() {
   panels.forEach((panel) => {
     panel.hidden = Number(panel.dataset.pagePanel) !== current
@@ -107,18 +115,21 @@ function render() {
   })
 }
 
-// Update progress bar when an item rating changes
-document.addEventListener('change', (e) => {
-  const target = e.target
-  if (target instanceof HTMLInputElement && target.matches('input[type="radio"][name^="item-"]')) {
+// Save radio input to localStorage and update progress bar
+document.addEventListener('change', (ev) => {
+  const target = ev.target as HTMLInputElement
+
+  if (target.matches('input[type="radio"][name^="item-"]')) {
     console.log(`${target.name}: ${target.value}`)
+    answers[target.name] = target.value
+    localStorage.setItem('answers', JSON.stringify(answers))
     updateProgress()
   }
 })
 
 // Block incomplete submissions
 submitButton.addEventListener('click', () => {
-  if (!isComplete()) {
+  if (!formComplete()) {
     updateSubmitState()
     return
   }
@@ -129,8 +140,8 @@ submitButton.addEventListener('click', () => {
 })
 
 // Use previous, number, or next buttons to navigate pages
-joinNav.addEventListener('click', (e) => {
-  const target = e.target
+joinNav.addEventListener('click', (ev) => {
+  const target = ev.target
   if (!(target instanceof Element)) return
 
   const btn = target.closest('button')
