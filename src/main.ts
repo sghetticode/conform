@@ -1,4 +1,3 @@
-// Conform entry point
 import './style.css'
 
 console.log('Starting up Conform...')
@@ -28,8 +27,8 @@ const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
 const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
 const submitButton = document.getElementById('submit-button') as HTMLButtonElement
 const submitError = document.getElementById('submit-error')!
-const itemRows = document.querySelectorAll<HTMLTableRowElement>('tbody tr')
 const joinNav = document.querySelector<HTMLElement>('.join')!
+const itemRows = document.querySelectorAll<HTMLTableRowElement>('tbody tr')
 
 itemRows.forEach((row) => {
   const itemNumber = row.cells[0].textContent!.trim()
@@ -41,16 +40,22 @@ itemRows.forEach((row) => {
   radioGroup.className = 'grid grid-cols-5 justify-items-center'
 
   // Generate radio rows for every item and assign label vals to each btn
-  const radioLabels = ['way-off', 'inaccurate', 'neither', 'accurate', 'spot-on']
+  const radioProps = [
+    { value: 'way-off', color: 'bg-red-800/60' },
+    { value: 'inaccurate', color: 'bg-amber-700/60' },
+    { value: 'neither', color: 'bg-gray-600/60' },
+    { value: 'accurate', color: 'bg-cyan-700/60' },
+    { value: 'spot-on', color: 'bg-green-800/60' }
+  ]
 
-  radioLabels.forEach((label) => {
+  radioProps.forEach(({ value, color}) => {
     const radio = document.createElement('input')
 
     radio.type = 'radio'
     radio.name = `item-${itemNumber}`
-    radio.value = label
-    radio.className = 'radio'
-    radio.setAttribute('aria-label', label.replace(/-/g, ' '))
+    radio.value = value
+    radio.className = `radio ${color}`
+    radio.setAttribute('aria-label', value.replace(/-/g, ' '))
 
     radioGroup.append(radio)
 
@@ -75,7 +80,7 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
-// Enable submit when complete, otherwise show remaining count
+// Enable submit when complete or show remaining count
 function updateSubmitState() {
   const complete = formComplete()
   submitButton.disabled = !complete
