@@ -31,7 +31,8 @@ const joinNav = document.querySelector<HTMLElement>('.join')!
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('tbody tr')
 
 itemRows.forEach((row) => {
-  const itemNumber = row.cells[0].textContent!.trim()
+  const itemString = row.cells[1].textContent!.trim()
+  const itemKey = itemString.toLowerCase().replace(/\.$/, '')
   const responseRow = document.createElement('tr')
   const blankCell = document.createElement('td')
   const responseCell = document.createElement('td')
@@ -41,22 +42,22 @@ itemRows.forEach((row) => {
 
   // Generate radio rows for every item and assign label vals to each btn
   const radioProps = [
-    { value: 'way-off', color: 'bg-red-800/60' },
+    { value: 'way off', color: 'bg-red-800/60' },
     { value: 'inaccurate', color: 'bg-amber-700/60' },
     { value: 'neither', color: 'bg-gray-600/60' },
     { value: 'accurate', color: 'bg-cyan-700/60' },
-    { value: 'spot-on', color: 'bg-green-800/60' }
+    { value: 'spot on', color: 'bg-green-800/60' }
   ]
 
   radioProps.forEach(({ value, color}) => {
     const radio = document.createElement('input')
 
     radio.type = 'radio'
-    radio.name = `item-${itemNumber}`
+    radio.name = `${itemKey}`
     radio.value = value
+    radio.dataset.traitRadio = ''
     radio.className = `radio ${color}`
-    radio.setAttribute('aria-label', value.replace(/-/g, ' '))
-
+    radio.setAttribute('aria-label', `${value}`)
     radioGroup.append(radio)
 
     // Check localStorage for saved answers and restore on load
@@ -72,7 +73,7 @@ let current = 0
 
 // Count number of radio btns currently selected
 function getAnsweredCount() {
-  return document.querySelectorAll('input[type="radio"][name^="item-"]:checked').length
+  return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
 }
 
 // True when all 50 items have a rating
@@ -124,7 +125,7 @@ function render() {
 document.addEventListener('change', (ev) => {
   const target = ev.target as HTMLInputElement
 
-  if (target.matches('input[type="radio"][name^="item-"]')) {
+  if (target.matches('input[type="radio"][data-trait-radio]')) {
     console.log(`${target.name}: ${target.value}`)
     answers[target.name] = target.value
     localStorage.setItem('answers', JSON.stringify(answers))
