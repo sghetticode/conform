@@ -69,16 +69,29 @@ itemRows.forEach((row) => {
   row.after(responseRow)
 })
 
+// Save radio input to localStorage and update progress bar
+document.addEventListener('change', (ev) => {
+  const target = ev.target as HTMLInputElement
+
+  if (target.matches('input[type="radio"][data-trait-radio]')) {
+    console.log(`${target.name}: ${target.value}`)
+    answers[target.name] = target.value
+    localStorage.setItem('answers', JSON.stringify(answers))
+    updateProgress()
+  }
+})
+
+// Sync progress bar and submit state to current answers
+function updateProgress() {
+  progress.value = getAnsweredCount()
+  updateSubmitState()
+}
+
 let current = 0
 
 // Count number of radio btns currently selected
 function getAnsweredCount() {
   return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
-}
-
-// True when all 50 items have a rating
-function formComplete() {
-  return getAnsweredCount() === 50
 }
 
 // Enable submit when complete or show remaining count
@@ -96,10 +109,36 @@ function updateSubmitState() {
   }
 }
 
-// Sync progress bar and submit state to current answers
-function updateProgress() {
-  progress.value = getAnsweredCount()
-  updateSubmitState()
+// True when all 50 items have a rating
+function formComplete() {
+  return getAnsweredCount() === 50
+}
+
+// Block incomplete submissions
+submitButton.addEventListener('click', () => {
+  if (!formComplete()) {
+    updateSubmitState()
+    return
+  }
+
+  submitError.hidden = true
+  submitError.textContent = ''
+
+  console.log('Trait test submitted')
+  gradeTest()
+})
+
+function gradeTest() {
+  console.log('Grading trait test...')
+  
+  const answers: Record<string, string> = JSON.parse(
+    localStorage.getItem('answers') ?? '{}'
+  )
+  
+  for (const key of Object.keys(answers)) {
+    const val = answers[key]
+    console.log(key, '-', val)
+  }
 }
 
 // Render current page panel and highlight its nav btn
@@ -120,30 +159,6 @@ function render() {
     }
   })
 }
-
-// Save radio input to localStorage and update progress bar
-document.addEventListener('change', (ev) => {
-  const target = ev.target as HTMLInputElement
-
-  if (target.matches('input[type="radio"][data-trait-radio]')) {
-    console.log(`${target.name}: ${target.value}`)
-    answers[target.name] = target.value
-    localStorage.setItem('answers', JSON.stringify(answers))
-    updateProgress()
-  }
-})
-
-// Block incomplete submissions
-submitButton.addEventListener('click', () => {
-  if (!formComplete()) {
-    updateSubmitState()
-    return
-  }
-
-  submitError.hidden = true
-  submitError.textContent = ''
-  console.log('Trait test submitted')
-})
 
 // Use previous, number, or next buttons to navigate pages
 joinNav.addEventListener('click', (ev) => {
