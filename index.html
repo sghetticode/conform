@@ -73,9 +73,24 @@
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
               <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
+                
+                <div
+                  class="grid min-h-138 place-content-center place-items-center gap-5 text-justify"
+                  data-page-panel="0"
+                  hidden
+                >
+                  <h1 class="text-4xl text-mist-700/90 font-medium mb-2">Instructions</h1>
+                  <p class="text-2xl text-mist-600">
+                    This trait test should take less than 5 minutes to complete. In order for it  
+                    to accurately evaluate your personality, respond to every statement as you see 
+                    yourself most of the time <span class="italic">(not how you think you should 
+                    be)</span>.
+                  </p>
+                </div>
+
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="0"
+                  data-page-panel="1"
                 >
                   <colgroup>
                     <col class="w-12" />
@@ -121,7 +136,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="1"
+                  data-page-panel="2"
                   hidden
                 >
                   <colgroup>
@@ -168,7 +183,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="2"
+                  data-page-panel="3"
                   hidden
                 >
                   <colgroup>
@@ -215,7 +230,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="3"
+                  data-page-panel="4"
                   hidden
                 >
                   <colgroup>
@@ -262,7 +277,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="4"
+                  data-page-panel="5"
                   hidden
                 >
                   <colgroup>
@@ -309,7 +324,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="5"
+                  data-page-panel="6"
                   hidden
                 >
                   <colgroup>
@@ -356,7 +371,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="6"
+                  data-page-panel="7"
                   hidden
                 >
                   <colgroup>
@@ -403,7 +418,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="7"
+                  data-page-panel="8"
                   hidden
                 >
                   <colgroup>
@@ -450,7 +465,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="8"
+                  data-page-panel="9"
                   hidden
                 >
                   <colgroup>
@@ -497,7 +512,7 @@
 
                 <table
                   class="table [&_tr>*]:border-b-mist-500/50 table-fixed w-full text-base"
-                  data-page-panel="9"
+                  data-page-panel="10"
                   hidden
                 >
                   <colgroup>
@@ -544,7 +559,7 @@
 
                 <div
                   class="grid min-h-138 place-content-center place-items-center gap-5"
-                  data-page-panel="10"
+                  data-page-panel="11"
                   hidden
                 >
                   <h1 class="text-3xl">Submit your trait test</h1>
@@ -575,13 +590,6 @@
                   aria-label="Previous page"
                 >
                   &lt;
-                </button>
-                <button
-                  class="join-item btn btn-ghost bg-mist-700/80 hover:bg-mist-600/70 
-                    border-none shadow-none"
-                  type="button"
-                  data-page="0" aria-current="page">
-                  0
                 </button>
                 <button
                   class="join-item btn btn-ghost bg-mist-700/80 hover:bg-mist-600/70 
