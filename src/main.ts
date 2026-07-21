@@ -21,7 +21,7 @@ dropdownBtn?.addEventListener('focus', () => {
   console.log('Trait test dropdown opened')
 })
 
-const pages = 11
+const pages = 12
 const progress = document.querySelector<HTMLProgressElement>('.progress')!
 const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
 const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
@@ -125,18 +125,14 @@ submitButton.addEventListener('click', () => {
   submitError.textContent = ''
 
   console.log('Trait test submitted')
-  gradeTest()
+  gradeTest(answers)
 })
 
-function gradeTest() {
+function gradeTest(answersObj: Record<string, string>) {
   console.log('Grading trait test...')
-  
-  const answers: Record<string, string> = JSON.parse(
-    localStorage.getItem('answers') ?? '{}'
-  )
-  
-  for (const key of Object.keys(answers)) {
-    const val = answers[key]
+
+  for (const key of Object.keys(answersObj)) {
+    const val = answersObj[key]
     console.log(key, '-', val)
   }
 }
