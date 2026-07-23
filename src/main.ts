@@ -21,42 +21,56 @@ dropdownBtn?.addEventListener('focus', () => {
   console.log('Trait test dropdown opened')
 })
 
-const pages = 12
-const progress = document.querySelector<HTMLProgressElement>('.progress')!
-const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
-const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
-const submitButton = document.getElementById('submit-button') as HTMLButtonElement
-const submitError = document.getElementById('submit-error')!
-const joinNav = document.querySelector<HTMLElement>('.join')!
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('tbody tr')
+
+// Big Five personality traits
+const factors = [
+  'extraversion',
+  'agreeableness',
+  'conscientiousness',
+  'emotional-stability',
+  'intellect-imagination'
+] as const
+
+type Factor = (typeof factors)[number]
+
+const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
 
 itemRows.forEach((row) => {
   const itemString = row.cells[1].textContent!.trim()
   const itemKey = itemString.toLowerCase().replace(/\.$/, '')
-  const responseRow = document.createElement('tr')
   const blankCell = document.createElement('td')
+  const responseRow = document.createElement('tr')
   const responseCell = document.createElement('td')
   const radioGroup = document.createElement('div')
 
   radioGroup.className = 'grid grid-cols-5 justify-items-center'
 
+  const classes = row.cells[1].classList
+  const factor = factors.find((f) => classes.contains(f))
+
+  // Note this item's factor and key for grading
+  if (factor) items[itemKey] = { factor, sign: classes.contains('minus') ? '-' : '+' }
+
+  const checkedFill = 'checked:text-neutral-100/80'
+
   // Generate radio rows for every item and assign label vals to each btn
   const radioProps = [
-    { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', check: 'checked:text-neutral-100' },
-    { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', check: 'checked:text-neutral-100' },
-    { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', check: 'checked:text-neutral-100' },
-    { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', check: 'checked:text-neutral-100' },
-    { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', check: 'checked:text-neutral-100' }
+    { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', fill: checkedFill },
+    { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', fill: checkedFill },
+    { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', fill: checkedFill },
+    { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', fill: checkedFill },
+    { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', fill: checkedFill }
   ]
 
-  radioProps.forEach(({ val, color, border, check}) => {
+  radioProps.forEach(({ val, color, border, fill}) => {
     const radio = document.createElement('input')
 
     radio.type = 'radio'
     radio.name = `${itemKey}`
     radio.value = val
     radio.dataset.traitRadio = ''
-    radio.className = `radio ${color} ${border} ${check}`
+    radio.className = `radio ${color} ${border} ${fill}`
     radio.setAttribute('aria-label', `${val}`)
     radioGroup.append(radio)
 
@@ -77,12 +91,14 @@ document.addEventListener('change', (ev) => {
     console.log(`${target.name}: ${target.value}`)
     answers[target.name] = target.value
     localStorage.setItem('answers', JSON.stringify(answers))
-    updateProgress()
+    syncProgressBar()
   }
 })
 
-// Sync progress bar and submit state to current answers
-function updateProgress() {
+const progress = document.querySelector<HTMLProgressElement>('.progress')!
+
+// Sync progress bar with answered count
+function syncProgressBar() {
   progress.value = getAnsweredCount()
   updateSubmitState()
 }
@@ -93,6 +109,9 @@ let current = 0
 function getAnsweredCount() {
   return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
 }
+
+const submitButton = document.getElementById('submit-button') as HTMLButtonElement
+const submitError = document.getElementById('submit-error')!
 
 // Enable submit when complete or show remaining count
 function updateSubmitState() {
@@ -114,6 +133,51 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
+// IPIP item plus key scores
+const plusScores: Record<string, number> = {
+  'way off': 1,
+  'inaccurate': 2,
+  'neither': 3,
+  'accurate': 4,
+  'spot on': 5
+}
+
+// IPIP item minus key scores
+const minusScores: Record<string, number> = {
+  'way off': 5,
+  'inaccurate': 4,
+  'neither': 3,
+  'accurate': 2,
+  'spot on': 1
+}
+
+function gradeTest(answersObj: Record<string, string>) {
+  console.log('Grading trait test...')
+
+  const rawSums = {} as Record<Factor, number>
+  for (const factor of factors) rawSums[factor] = 0
+
+  for (const [itemKey, response] of Object.entries(answersObj)) {
+    const meta = items[itemKey]
+    if (meta === undefined) continue
+
+    const scoreMap = meta.sign === '+' ? plusScores : minusScores
+    const score = scoreMap[response]
+    if (score === undefined) continue
+
+    rawSums[meta.factor] += score
+  }
+
+  const results = {} as Record<Factor, { rawSum: number; percentage: number}>
+  for (const factor of factors) {
+    const rawSum = rawSums[factor]
+    results[factor] = { rawSum, percentage: ((rawSum - 10) / 40) * 100 }
+  }
+
+  console.log('Trait test results:\n', results)
+  console.table(results)
+}
+
 // Block incomplete submissions
 submitButton.addEventListener('click', () => {
   if (!formComplete()) {
@@ -128,18 +192,11 @@ submitButton.addEventListener('click', () => {
   gradeTest(answers)
 })
 
-function gradeTest(answersObj: Record<string, string>) {
-  console.log('Grading trait test...')
-
-  for (const key of Object.keys(answersObj)) {
-    const val = answersObj[key]
-  }
-
-  console.log('Answer set:\n', answersObj)
-}
+const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
+const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
 
 // Render current page panel and highlight its nav btn
-function render() {
+function renderPanel() {
   panels.forEach((panel) => {
     panel.hidden = Number(panel.dataset.pagePanel) !== current
   })
@@ -157,6 +214,9 @@ function render() {
   })
 }
 
+const joinNav = document.querySelector<HTMLElement>('.join')!
+const pages = 12
+
 // Use previous, number, or next buttons to navigate pages
 joinNav.addEventListener('click', (ev) => {
   const target = ev.target
@@ -173,8 +233,8 @@ joinNav.addEventListener('click', (ev) => {
     current = Math.min(pages - 1, current + 1)
   }
 
-  render()
+  renderPanel()
 })
 
-render()
-updateProgress()
+renderPanel()
+syncProgressBar()
