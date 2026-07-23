@@ -42,22 +42,22 @@ itemRows.forEach((row) => {
 
   // Generate radio rows for every item and assign label vals to each btn
   const radioProps = [
-    { value: 'way off', color: 'bg-red-800/60' },
-    { value: 'inaccurate', color: 'bg-amber-700/60' },
-    { value: 'neither', color: 'bg-gray-600/60' },
-    { value: 'accurate', color: 'bg-cyan-700/60' },
-    { value: 'spot on', color: 'bg-green-800/60' }
+    { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', check: 'checked:text-neutral-100' },
+    { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', check: 'checked:text-neutral-100' },
+    { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', check: 'checked:text-neutral-100' },
+    { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', check: 'checked:text-neutral-100' },
+    { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', check: 'checked:text-neutral-100' }
   ]
 
-  radioProps.forEach(({ value, color}) => {
+  radioProps.forEach(({ val, color, border, check}) => {
     const radio = document.createElement('input')
 
     radio.type = 'radio'
     radio.name = `${itemKey}`
-    radio.value = value
+    radio.value = val
     radio.dataset.traitRadio = ''
-    radio.className = `radio ${color}`
-    radio.setAttribute('aria-label', `${value}`)
+    radio.className = `radio ${color} ${border} ${check}`
+    radio.setAttribute('aria-label', `${val}`)
     radioGroup.append(radio)
 
     // Check localStorage for saved answers and restore on load
@@ -104,7 +104,7 @@ function updateSubmitState() {
     submitError.textContent = ''
   } else {
     const remaining = 50 - getAnsweredCount()
-    submitError.textContent = `Rate every item to submit (${remaining} items remain)`
+    submitError.textContent = `Rate every item to submit (${remaining} remain)`
     submitError.hidden = false
   }
 }
@@ -133,8 +133,9 @@ function gradeTest(answersObj: Record<string, string>) {
 
   for (const key of Object.keys(answersObj)) {
     const val = answersObj[key]
-    console.log(key, '-', val)
   }
+
+  console.log('Answer set:\n', answersObj)
 }
 
 // Render current page panel and highlight its nav btn
