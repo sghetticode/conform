@@ -2,10 +2,12 @@ import './style.css'
 
 console.log('Starting up Conform...')
 
-// Load any saved answers or create new answers obj
+// Load any saved answers or create empty answers obj
 const answers: { [key: string]: string } = JSON.parse(
   localStorage.getItem('answers') ?? '{}'
 )
+
+const results: { [key: string]: number } = {}
 
 const hiwCollapse = document.getElementById('hiw-collapse')
 
@@ -128,12 +130,28 @@ function updateSubmitState() {
   }
 }
 
-// True when all 50 items have a rating
+// Block incomplete submissions until all items have ratings
 function formComplete() {
   return getAnsweredCount() === 50
 }
 
-// IPIP item plus key scores
+submitButton.addEventListener('click', () => {
+  if (!formComplete()) {
+    updateSubmitState()
+    return
+  }
+
+  submitError.hidden = true
+  submitError.textContent = ''
+
+  console.log('Trait test submitted')
+  gradeTest(answers)
+
+  // Clear answers after scoring
+  localStorage.removeItem('answers')
+})
+
+// IPIP plus key item scores
 const plusScores: Record<string, number> = {
   'way off': 1,
   'inaccurate': 2,
@@ -142,7 +160,7 @@ const plusScores: Record<string, number> = {
   'spot on': 5
 }
 
-// IPIP item minus key scores
+// IPIP minus key item scores
 const minusScores: Record<string, number> = {
   'way off': 5,
   'inaccurate': 4,
@@ -168,29 +186,25 @@ function gradeTest(answersObj: Record<string, string>) {
     rawSums[meta.factor] += score
   }
 
+  // Populate results obj with raw sum and percentage for each factor
   const results = {} as Record<Factor, { rawSum: number; percentage: number}>
   for (const factor of factors) {
     const rawSum = rawSums[factor]
     results[factor] = { rawSum, percentage: ((rawSum - 10) / 40) * 100 }
   }
 
-  console.log('Trait test results:\n', results)
-  console.table(results)
+  // Save results to localStorage
+  localStorage.setItem('results', JSON.stringify(results))
+
+  console.log('Trait test results:')
+  console.table(
+    factors.map((factor) => ({
+      factor,
+      rawSum: results[factor].rawSum,
+      percentage: results[factor].percentage,
+    }))
+  )
 }
-
-// Block incomplete submissions
-submitButton.addEventListener('click', () => {
-  if (!formComplete()) {
-    updateSubmitState()
-    return
-  }
-
-  submitError.hidden = true
-  submitError.textContent = ''
-
-  console.log('Trait test submitted')
-  gradeTest(answers)
-})
 
 const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
 const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
