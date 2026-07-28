@@ -38,8 +38,8 @@
         </section>
         <section
           id="how-it-works"
-          tabindex="0"
           class="collapse-arrow collapse max-w-9/10 flex-auto rounded-none"
+          tabindex="0"
         >
           <h3 class="collapse-title text-2xl">How it works</h3>
           <div
@@ -63,16 +63,16 @@
           <div class="dropdown dropdown-end flex w-19/20 justify-end">
             <button
               id="dropdown-btn"
-              tabindex="0"
               class="btn btn-lg btn-ghost mt-3 mb-4 rounded-lg border-none bg-mist-500/70
                 p-3 font-normal hover:bg-mist-500/90"
+              tabindex="0"
             >
               Start the test
             </button>
             <div
               id="dropdown-card"
-              tabindex="0"
               class="dropdown-content card mt-20 rounded-lg bg-mist-400 p-1"
+              tabindex="0"
             >
               <div class="card-body">
                 <progress class="progress" value="0" max="50"></progress>
@@ -601,22 +601,18 @@
                     >
                       Submit
                     </button>
-                    <div id="score-loading" class="grid place-items-center gap-5" hidden>
+                    <div
+                      id="score-loading"
+                      class="grid place-items-center gap-5"
+                      tabindex="-1"
+                      hidden
+                    >
                       <span class="text-2xl font-medium text-mist-600">
                         Scoring your trait test
                       </span>
                       <span class="loading loading-spinner loading-xl"></span>
                     </div>
                   </div>
-                </div>
-                <!-- Results -->
-                <div
-                  class="grid min-h-138 place-content-center place-items-center gap-4"
-                  data-survey-panel="12"
-                  hidden
-                >
-                  <h3 class="text-3xl font-medium text-mist-600">Trait test results</h3>
-                  <p>...</p>
                 </div>
                 <!-- Trait test nav buttons -->
                 <div class="join mt-3 mr-auto ml-auto">
@@ -724,6 +720,14 @@
           </div>
         </section>
       </div>
+      <!-- Results -->
+      <section
+        class="grid min-h-138 place-content-center place-items-center gap-4"
+        hidden
+      >
+        <h3 class="text-3xl font-medium text-mist-600">Trait test results</h3>
+        <p>...</p>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
