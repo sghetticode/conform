@@ -2,23 +2,16 @@ import './style.css'
 
 console.log('Starting up Conform...')
 
-// Load any saved answers or create empty answers obj
-const answers: { [key: string]: string } = JSON.parse(
-  localStorage.getItem('answers') ?? '{}'
-)
-
-const results: { [key: string]: number } = {}
-
+// Log when 'how it works' collapse expands
 const hiwCollapse = document.getElementById('hiw-collapse')
 
-// Log when 'how it works' collapse expands
 hiwCollapse?.addEventListener('focus', () => {
   console.log('How it works section expanded')
 })
 
+// Log when test dropdown opens
 const dropdownBtn = document.getElementById('dropdown-btn')
 
-// Log when test dropdown opens
 dropdownBtn?.addEventListener('focus', () => {
   console.log('Trait test dropdown opened')
 })
@@ -37,6 +30,11 @@ const factors = [
 type Factor = (typeof factors)[number]
 
 const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
+
+// Load any saved answers or create empty answers obj
+const answers: { [key: string]: string } = JSON.parse(
+  localStorage.getItem('answers') ?? '{}'
+)
 
 itemRows.forEach((row) => {
   const itemString = row.cells[1].textContent!.trim()
@@ -135,6 +133,9 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
+const submitHeading = document.getElementById('submit-heading')!
+const scoreLoading = document.getElementById('score-loading')!
+
 submitButton.addEventListener('click', () => {
   if (!formComplete()) {
     updateSubmitState()
@@ -147,7 +148,13 @@ submitButton.addEventListener('click', () => {
   console.log('Trait test submitted')
   gradeTest(answers)
 
-  // Clear answers after scoring
+  // Replace with loading component
+  submitHeading.hidden = true
+  submitButton.hidden = true
+  joinNav.hidden = true
+  scoreLoading.hidden = false
+
+  // Clear answers from localStorage after scoring
   localStorage.removeItem('answers')
 })
 
@@ -188,6 +195,7 @@ function gradeTest(answersObj: Record<string, string>) {
 
   // Populate results obj with raw sum and percentage for each factor
   const results = {} as Record<Factor, { rawSum: number; percentage: number}>
+
   for (const factor of factors) {
     const rawSum = rawSums[factor]
     results[factor] = { rawSum, percentage: ((rawSum - 10) / 40) * 100 }
@@ -206,17 +214,17 @@ function gradeTest(answersObj: Record<string, string>) {
   )
 }
 
-const panels = document.querySelectorAll<HTMLElement>('[data-page-panel]')
-const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-page]')
+const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
+const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-navbtn]')
 
-// Render current page panel and highlight its nav btn
+// Render current dropdown panel and highlight its nav btn
 function renderPanel() {
   panels.forEach((panel) => {
-    panel.hidden = Number(panel.dataset.pagePanel) !== current
+    panel.hidden = Number(panel.dataset.surveyPanel) !== current
   })
 
   pageButtons.forEach((button) => {
-    const isActive = Number(button.dataset.page) === current
+    const isActive = Number(button.dataset.navbtn) === current
     button.classList.toggle('bg-mist-700/80', !isActive)
     button.classList.toggle('bg-mist-600/70', isActive)
     
@@ -239,8 +247,8 @@ joinNav.addEventListener('click', (ev) => {
   const btn = target.closest('button')
   if (!btn) return
 
-  if (btn.dataset.page) {
-    current = Number(btn.dataset.page)
+  if (btn.dataset.navbtn) {
+    current = Number(btn.dataset.navbtn)
   } else if (btn.dataset.nav === 'prev') {
     current = Math.max(0, current - 1)
   } else if (btn.dataset.nav === 'next') {
