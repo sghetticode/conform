@@ -148,15 +148,17 @@ submitButton.addEventListener('click', () => {
   console.log('Trait test submitted')
   gradeTest(answers)
 
-  // Replace with loading component
+  // Hide submit page content, replace with loading component
   submitHeading.hidden = true
+  scoreLoading.hidden = false
+  scoreLoading.focus()
   submitButton.hidden = true
   joinNav.hidden = true
-  scoreLoading.hidden = false
 
-  // Clear answers from localStorage after scoring
   localStorage.removeItem('answers')
 })
+
+function revealResults() {}
 
 // IPIP plus key item scores
 const plusScores: Record<string, number> = {
@@ -179,8 +181,8 @@ const minusScores: Record<string, number> = {
 function gradeTest(answersObj: Record<string, string>) {
   console.log('Grading trait test...')
 
-  const rawSums = {} as Record<Factor, number>
-  for (const factor of factors) rawSums[factor] = 0
+  const totals = {} as Record<Factor, number>
+  for (const factor of factors) totals[factor] = 0
 
   for (const [itemKey, response] of Object.entries(answersObj)) {
     const meta = items[itemKey]
@@ -190,15 +192,15 @@ function gradeTest(answersObj: Record<string, string>) {
     const score = scoreMap[response]
     if (score === undefined) continue
 
-    rawSums[meta.factor] += score
+    totals[meta.factor] += score
   }
 
   // Populate results obj with raw sum and percentage for each factor
-  const results = {} as Record<Factor, { rawSum: number; percentage: number}>
+  const results = {} as Record<Factor, { total: number; percentage: number}>
 
   for (const factor of factors) {
-    const rawSum = rawSums[factor]
-    results[factor] = { rawSum, percentage: ((rawSum - 10) / 40) * 100 }
+    const total = totals[factor]
+    results[factor] = { total, percentage: ((total - 10) / 40) * 100 }
   }
 
   // Save results to localStorage
@@ -208,7 +210,7 @@ function gradeTest(answersObj: Record<string, string>) {
   console.table(
     factors.map((factor) => ({
       factor,
-      rawSum: results[factor].rawSum,
+      total: results[factor].total,
       percentage: results[factor].percentage,
     }))
   )
