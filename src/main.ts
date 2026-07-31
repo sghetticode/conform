@@ -2,21 +2,29 @@ import './style.css'
 
 console.log('Starting up Conform...')
 
-// Log when 'how it works' collapse expands
-const hiwCollapse = document.getElementById('hiw-collapse')
+// Log focus/blur state of 'how it works' collapse component
+const howItWorksCollapse = document.getElementById('how-it-works')
 
-hiwCollapse?.addEventListener('focus', () => {
+howItWorksCollapse?.addEventListener('focus', () => {
   console.log('How it works section expanded')
 })
 
-// Log when test dropdown opens
+howItWorksCollapse?.addEventListener('blur', () => {
+  console.log('How it works section collapsed')
+})
+
+// Log focus/blur state of 'trait test' dropdown component
 const dropdownBtn = document.getElementById('dropdown-btn')
 
 dropdownBtn?.addEventListener('focus', () => {
   console.log('Trait test dropdown opened')
 })
 
-const itemRows = document.querySelectorAll<HTMLTableRowElement>('tbody tr')
+dropdownBtn?.addEventListener('blur', () => {
+  console.log('Trait test dropdown closed')
+})
+
+const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
 
 // Big Five personality traits
 const factors = [
@@ -49,7 +57,7 @@ itemRows.forEach((row) => {
   const classes = row.cells[1].classList
   const factor = factors.find((f) => classes.contains(f))
 
-  // Note this item's factor and key for grading
+  // Record this item's factor and key for grading
   if (factor) items[itemKey] = { factor, sign: classes.contains('minus') ? '-' : '+' }
 
   const checkedFill = 'checked:text-neutral-100/80'
@@ -95,17 +103,17 @@ document.addEventListener('change', (ev) => {
   }
 })
 
+// Sync progress bar with answered count
 const progress = document.querySelector<HTMLProgressElement>('.progress')!
 
-// Sync progress bar with answered count
 function syncProgressBar() {
   progress.value = getAnsweredCount()
   updateSubmitState()
 }
 
+// Count number of radio btns currently selected
 let current = 0
 
-// Count number of radio btns currently selected
 function getAnsweredCount() {
   return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
 }
@@ -113,7 +121,7 @@ function getAnsweredCount() {
 const submitButton = document.getElementById('submit-button') as HTMLButtonElement
 const submitError = document.getElementById('submit-error')!
 
-// Enable submit when complete or show remaining count
+// Enable submit btn when complete or show remaining count
 function updateSubmitState() {
   const complete = formComplete()
   submitButton.disabled = !complete
@@ -133,6 +141,7 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
+let results;
 const submitHeading = document.getElementById('submit-heading')!
 const scoreLoading = document.getElementById('score-loading')!
 
@@ -146,7 +155,7 @@ submitButton.addEventListener('click', () => {
   submitError.textContent = ''
 
   console.log('Trait test submitted')
-  gradeTest(answers)
+  results = gradeTest(answers)
 
   // Hide submit page content, replace with loading component
   submitHeading.hidden = true
@@ -155,10 +164,10 @@ submitButton.addEventListener('click', () => {
   submitButton.hidden = true
   joinNav.hidden = true
 
+  revealResults(results)
+
   localStorage.removeItem('answers')
 })
-
-function revealResults() {}
 
 // IPIP plus key item scores
 const plusScores: Record<string, number> = {
@@ -178,13 +187,17 @@ const minusScores: Record<string, number> = {
   'spot on': 1
 }
 
-function gradeTest(answersObj: Record<string, string>) {
+// Calculate trait test results for each factor
+function gradeTest(
+  answers: Record<string, string>,
+): Record<Factor, { total: number; percentage: number }> {
+  
   console.log('Grading trait test...')
 
   const totals = {} as Record<Factor, number>
   for (const factor of factors) totals[factor] = 0
 
-  for (const [itemKey, response] of Object.entries(answersObj)) {
+  for (const [itemKey, response] of Object.entries(answers)) {
     const meta = items[itemKey]
     if (meta === undefined) continue
 
@@ -195,7 +208,7 @@ function gradeTest(answersObj: Record<string, string>) {
     totals[meta.factor] += score
   }
 
-  // Populate results obj with raw sum and percentage for each factor
+  // Populate results obj with total and percentage for each factor
   const results = {} as Record<Factor, { total: number; percentage: number}>
 
   for (const factor of factors) {
@@ -203,7 +216,7 @@ function gradeTest(answersObj: Record<string, string>) {
     results[factor] = { total, percentage: ((total - 10) / 40) * 100 }
   }
 
-  // Save results to localStorage
+  // Save results to localStorage and log to console
   localStorage.setItem('results', JSON.stringify(results))
 
   console.log('Trait test results:')
@@ -214,6 +227,19 @@ function gradeTest(answersObj: Record<string, string>) {
       percentage: results[factor].percentage,
     }))
   )
+
+  return results
+}
+
+const resultsDiv = document.getElementById('results')!
+
+function revealResults(results: Record<Factor, { total: number; percentage: number }>) {
+  factors.forEach((factor, i) => {
+    const cell = document.getElementById(`factor-${i + 1}-results`)
+    if (cell) cell.textContent = `${Math.round(results[factor].percentage)}%`
+  })
+
+  resultsDiv.hidden = false
 }
 
 const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
