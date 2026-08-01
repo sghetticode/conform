@@ -14,6 +14,7 @@
       text-neutral-200"
   >
     <div
+      id="header"
       class="navbar ml-6 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px]
         border-b-mist-800/75 bg-mist-600/60 pl-5"
     >
@@ -21,7 +22,7 @@
     </div>
     <main class="flex">
       <div id="column-left" class="mt-6 ml-12 max-w-2/5 flex-auto text-justify">
-        <section id="tagline-intro" class="">
+        <section id="tagline-intro">
           <h2 class="mb-7 text-4xl leading-[1.15] font-normal tracking-tight">
             Give your agent the insight it needs to adapt to your personality.
           </h2>
@@ -79,13 +80,13 @@
                 <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
                   <!-- Trait test instructions panel -->
                   <div
-                    class="grid h-full min-h-138 place-content-center place-items-center
-                      gap-5 text-justify"
+                    class="grid h-full min-h-138 place-content-center place-items-center gap-5 
+                    text-center"
                     data-survey-panel="0"
                     hidden
                   >
-                    <h3 class="mb-2 text-4xl font-medium text-mist-700/90">Instructions</h3>
-                    <p class="max-w-4/5 text-2xl text-mist-600">
+                    <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
+                    <p class="max-w-9/10 text-2xl text-mist-600 leading-normal">
                       This trait test should take less than 5 minutes to complete. In order for it 
                       to accurately evaluate your personality, respond to every statement as you 
                       see yourself most of the time 
@@ -579,8 +580,7 @@
                   </table>
                   <!-- Submit test page -->
                   <div
-                    class="grid h-full min-h-138 place-content-center place-items-center
-                      gap-4"
+                    class="grid h-full min-h-138 place-content-center place-items-center"
                     data-survey-panel="11"
                     hidden
                   >
@@ -589,21 +589,22 @@
                     </h3>
                     <p
                       id="submit-error"
-                      class="text-xl text-orange-800 italic"
+                      class="mt-2 mb-4 text-xl text-orange-800 italic"
                       role="alert"
                       hidden
-                    ></p>
+                    >
+                    </p>
                     <button
                       id="submit-button"
-                      class="btn btn-lg btn-ghost mt-2 mb-4 rounded-md border-none 
-                      bg-mist-500/70 p-3 font-normal shadow-none hover:bg-mist-500/90"
+                      class="btn btn-lg btn-ghost rounded-md border-none  
+                      bg-mist-500/70 p-3 mt-3 font-normal shadow-none hover:bg-mist-500/90"
                       type="button"
                     >
                       Submit
                     </button>
                     <div
                       id="score-loading"
-                      class="grid place-items-center gap-5"
+                      class="grid h-full min-h-138 place-content-center place-items-center gap-5"
                       tabindex="-1"
                       hidden
                     >
@@ -724,40 +725,42 @@
     <!-- Test results -->
     <div
       id="results"
-      class="fixed inset-0 w-full h-screen"
+      class="fixed inset-0 w-full h-screen grid place-items-center 
+        bg-radial from-mist-700 from-30% to-mist-800"
       hidden
     >
-      <div class="card w-1/2 h-fit bg-mist-400 p-6">
-        <h3 class="text-2xl font-medium text-neutral-100 mb-2 pl-3">Your personality traits</h3>
-        <table class="table [&_tr>*]:border-b-mist-500/50 w-3/4">
-          <thead class="text-lg text-neutral-100">
+      <div class="card w-fit h-fit rounded-xl bg-mist-400/75 p-8 shadow-md shadow-mist-900/60">
+        <h3 class="text-2xl font-normal text-neutral-100 mb-6 text-center">Your personality traits!</h3>
+        <table class="table rounded-lg border border-mist-600/60 bg-mist-500/50
+        [&_tr>*]:border-b-mist-600/30 w-[40vw] py-[2px]">
+          <thead class="text-xl text-neutral-100">
             <th>
               Factor
             </th>
             <th>
-              Percentage
+              %
             </th>
           </thead>
-          <tbody class="text-base text-neutral-100">
+          <tbody class="text-lg text-neutral-100">
             <tr>
               <td>Extraversion</td>
-              <td id="factor-1-results">0%</td>
+              <td id="factor-1-results">0</td>
             </tr>
             <tr>
               <td>Agreeableness</td>
-              <td id="factor-2-results">0%</td>
+              <td id="factor-2-results">0</td>
             </tr>
             <tr>
               <td>Conscientiousness</td>
-              <td id="factor-3-results">0%</td>
+              <td id="factor-3-results">0</td>
             </tr>
             <tr>
               <td>Emotional Stability</td>
-              <td id="factor-4-results">0%</td>
+              <td id="factor-4-results">0</td>
             </tr>
             <tr>
               <td>Intellect/Imagination</td>
-              <td id="factor-5-results">0%</td>
+              <td id="factor-5-results">0</td>
             </tr>
           </tbody>
         </table>
