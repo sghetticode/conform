@@ -141,10 +141,6 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
-let results;
-const submitHeading = document.getElementById('submit-heading')!
-const scoreLoading = document.getElementById('score-loading')!
-
 submitButton.addEventListener('click', () => {
   if (!formComplete()) {
     updateSubmitState()
@@ -155,16 +151,18 @@ submitButton.addEventListener('click', () => {
   submitError.textContent = ''
 
   console.log('Trait test submitted')
-  results = gradeTest(answers)
+  const results = gradeTest(answers)
 
-  // Hide submit page content, replace with loading component
-  submitHeading.hidden = true
+  // Hide submit page content then replace with loading component
+  document.getElementById('submit-heading')!.hidden = true
+  const scoreLoading = document.getElementById('score-loading')!
   scoreLoading.hidden = false
   scoreLoading.focus()
   submitButton.hidden = true
   joinNav.hidden = true
 
-  revealResults(results)
+  // Show trait test results
+  setTimeout(() => revealResults(results), 1000)
 
   localStorage.removeItem('answers')
 })
@@ -231,15 +229,16 @@ function gradeTest(
   return results
 }
 
-const resultsDiv = document.getElementById('results')!
-
 function revealResults(results: Record<Factor, { total: number; percentage: number }>) {
   factors.forEach((factor, i) => {
     const cell = document.getElementById(`factor-${i + 1}-results`)
     if (cell) cell.textContent = `${Math.round(results[factor].percentage)}%`
   })
 
-  resultsDiv.hidden = false
+  // Hide landing page content and show results
+  document.getElementById('header')!.hidden = true
+  document.querySelector('main')!.hidden = true
+  document.getElementById('results')!.hidden = false
 }
 
 const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
