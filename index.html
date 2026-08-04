@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Make any agent your agent, by giving it the insight of knowing more about you."
+      content="Give your agent the insight it needs to adapt to your personality."
     />
-    <title>Conform.md</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>CONFORM.md</title>
+    <script>
+      if (localStorage.getItem('results')) {
+        document.documentElement.classList.add('results-found')
+      }
+    </script>
   </head>
   <body
     class="font-rubik h-screen bg-linear-180 from-mist-700 to-mist-800 bg-no-repeat
@@ -15,17 +21,20 @@
   >
     <div
       id="header"
-      class="navbar ml-6 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px]
-        border-b-mist-800/75 bg-mist-600/60 pl-5"
+      class="navbar flex items-baseline ml-8 h-[100px] w-auto rounded-bl-[48px] border-b-[1.5px]
+        border-b-mist-800/75 bg-mist-600/60 pl-6"
     >
-      <h1 class="text-7xl/none font-medium text-shadow-mist-800/50 text-shadow-xs">CONFORM.md</h1>
+      <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
+      <span class="text-5xl font-light text-mist-400/60 pl-4 pr-3">
+        /
+      </span>
+      <h2 class="text-[2rem] font-normal text-neutral-100/80">
+        Give your agent the insight it needs to adapt to your personality.
+      </h2>
     </div>
     <main class="flex">
-      <div id="column-left" class="mt-6 ml-12 max-w-2/5 flex-auto text-justify">
-        <section id="tagline-intro">
-          <h2 class="mb-7 text-4xl leading-[1.15] font-normal tracking-tight">
-            Give your agent the insight it needs to adapt to your personality.
-          </h2>
+      <div id="column-left" class="mt-8 ml-12 max-w-2/5 flex-auto text-justify">
+        <section id="intro">
           <div
             class="card mb-8 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm
               shadow-mist-800/50"
@@ -39,7 +48,7 @@
         </section>
         <section
           id="how-it-works"
-          class="collapse collapse-arrow max-w-9/10 flex-auto rounded-none"
+          class="collapse collapse-arrow flex-auto rounded-none"
           tabindex="0"
         >
           <h3 class="collapse-title text-2xl">How it works</h3>
@@ -60,11 +69,11 @@
         </section>
       </div>
       <div id="column-right" class="max-w-3/5 flex-auto">
-        <section id="trait-test" class="mt-5 mr-8 flex flex-col items-end">
+        <section id="trait-test" class="mt-8 mr-8 flex flex-col items-end">
           <div class="dropdown dropdown-end flex w-19/20 justify-end">
             <button
               id="dropdown-btn"
-              class="btn btn-lg btn-ghost mt-3 mb-4 rounded-lg border-none bg-mist-500/70
+              class="btn btn-lg btn-ghost mb-4 rounded-lg border-none bg-mist-500/70
                 p-3 font-normal hover:bg-mist-500/90"
               tabindex="0"
             >
@@ -738,7 +747,7 @@
               Factor
             </th>
             <th>
-              %
+              Percent
             </th>
           </thead>
           <tbody class="text-lg text-neutral-100">
