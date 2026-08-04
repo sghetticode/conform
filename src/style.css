@@ -6,3 +6,15 @@
 @theme {
   --font-rubik: 'Rubik', ui-sans-serif;
 }
+
+html.results-found #header {
+  display: none !important;
+}
+
+html.results-found main {
+  display: none !important;
+}
+
+html.results-found #results {
+  display: grid !important;
+}
