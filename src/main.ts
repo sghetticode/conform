@@ -1,5 +1,3 @@
-import './style.css'
-
 console.log('Starting up Conform...')
 
 // Log focus/blur state of 'how it works' collapse component
@@ -39,10 +37,16 @@ type Factor = (typeof factors)[number]
 
 const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
 
-// Load any saved answers or create empty answers obj
+// Load saved answers or create empty answers obj
 const answers: { [key: string]: string } = JSON.parse(
   localStorage.getItem('answers') ?? '{}'
 )
+
+// Load saved results if user has taken test
+const savedResults = localStorage.getItem('results')
+if (savedResults) {
+  revealResults(JSON.parse(savedResults))
+}
 
 itemRows.forEach((row) => {
   const itemString = row.cells[1].textContent!.trim()
@@ -163,6 +167,7 @@ submitButton.addEventListener('click', () => {
 
   // Show trait test results
   setTimeout(() => revealResults(results), 1000)
+  document.body.classList.add('overflow-hidden')
 
   localStorage.removeItem('answers')
 })
