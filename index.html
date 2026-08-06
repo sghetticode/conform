@@ -21,7 +21,7 @@
   >
     <div
       id="header"
-      class="navbar ml-8 flex h-[100px] w-auto items-baseline rounded-bl-[48px] border-b-[1.5px] 
+      class="navbar mx-6 flex h-[100px] w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
       border-b-mist-800/75 bg-mist-600/60 pl-6"
     >
       <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
@@ -31,7 +31,7 @@
       </h2>
     </div>
     <main class="flex flex-1">
-      <div id="column-left" class="mt-8 ml-12 max-w-2/5 flex-auto text-justify">
+      <div id="column-left" class="mt-8 ml-6 min-w-0 max-w-1/2 flex-1 text-justify">
         <section id="intro">
           <div
             class="card mb-8 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm
@@ -44,32 +44,8 @@
             </p>
           </div>
         </section>
-        <section
-          id="how-it-works"
-          class="collapse-arrow collapse flex-auto rounded-none"
-          tabindex="0"
-        >
-          <h3 class="collapse-title text-2xl">How it works</h3>
-          <div
-            class="collapse-content ml-4 h-auto border-l-[3px] border-l-neutral-400/75
-              pb-0 pl-5"
-          >
-            <p class="text-[1.375rem] leading-tight font-light tracking-normal">
-              The results of the trait test are separated into five factors, known as the 
-              "Big Five" markers for modeling personality (extraversion, agreeableness, 
-              conscientiousness, emotional stability, and intellect/imagination). Each of them has 
-              a percentage associated with it based on the statements you ranked during the test. 
-              These are used to generate a short description of your personality that's saved to a
-              <span class="font-normal">CONFORM.md</span> file. All you have to do is put this in
-              your home directory, then reference it in your AGENTS.md to begin shaping how your
-              agent interacts with you.
-            </p>
-          </div>
-        </section>
-      </div>
-      <div id="column-right" class="max-w-3/5 flex-auto">
-        <section id="trait-test" class="mt-8 mr-8 flex flex-col items-end">
-          <div class="dropdown dropdown-end flex w-19/20 justify-end">
+        <section id="trait-test" class="mt-8 mr-8 flex flex-col">
+          <div class="dropdown dropdown-start flex w-19/20">
             <button
               id="dropdown-btn"
               class="btn btn-lg btn-ghost mb-4 rounded-lg border-none bg-mist-500/70 p-3
@@ -740,6 +716,28 @@
           </div>
         </section>
       </div>
+      <div id="column-right" class="ml-auto mt-4 mr-6 max-w-2/5 shrink-0">
+        <section
+          id="how-it-works"
+          class="collapse-arrow collapse flex-auto rounded-none"
+          tabindex="0"
+        >
+          <h3 class="collapse-title text-2xl">How it works</h3>
+          <div class="collapse-content ml-4 h-auto border-l-[3px] border-l-neutral-400/75 
+            pb-0 pl-5">
+            <p class="text-[1.375rem] leading-tight font-light tracking-normal text-justify">
+              The results of the trait test are separated into five factors, known as the 
+              "Big Five" markers for modeling personality (extraversion, agreeableness, 
+              conscientiousness, emotional stability, and intellect/imagination). Each of them has 
+              a percentage associated with it based on the statements you ranked during the test. 
+              These are used to generate a short description of your personality that's saved to a
+              <span class="font-normal">CONFORM.md</span> file. All you have to do is put this in
+              your home directory, then reference it in your AGENTS.md to begin shaping how your
+              agent interacts with you.
+            </p>
+          </div>
+        </section>
+      </div>
     </main>
     <!-- Test results -->
     <div
@@ -787,9 +785,9 @@
     </div>
     <footer class="footer footer-center fixed inset-x-0 bottom-0 z-50 bg-mist-900/40 p-3 
     text-neutral-300/75">
-      <aside>
-        <h4 class="text-base font-medium">YOUR DATA</h4>
-        <p class="text-sm italic">
+      <aside class="text-sm">
+        <h4 class="font-medium">YOUR DATA</h4>
+        <p class="italic">
           Trait test answers and results are temporarily stored in your browser.
         </p>
       </aside>
