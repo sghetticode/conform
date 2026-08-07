@@ -11,11 +11,16 @@ hiwToggle?.addEventListener('change', () => {
   }
 })
 
-// Log clicks of start test button
+// Enables nav button group on click
 const startBtn = document.getElementById('start-btn')
+const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 
 startBtn?.addEventListener('click', () => {
-  console.log('Start test btn clicked')
+  console.log('User started test')
+  navBtns.forEach((btn) => {
+    btn.disabled = false
+  })
+  console.log('Nav buttons enabled')
 })
 
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
@@ -163,7 +168,7 @@ document.addEventListener('change', (ev) => {
   }
 })
 
-const submitButton = document.getElementById('submit-button') as HTMLButtonElement
+const submitButton = document.getElementById('submit-button')! as HTMLButtonElement
 const submitError = document.getElementById('submit-error')!
 
 // Enable submit btn when complete or show remaining count
