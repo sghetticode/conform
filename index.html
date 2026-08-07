@@ -21,707 +21,710 @@
   >
     <div
       id="header"
-      class="navbar mx-6 flex h-[100px] w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
-      border-b-mist-800/75 bg-mist-600/60 pl-6"
+      class="navbar mx-6 pl-6 flex h-[100px] w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
+      border-b-mist-800/75 bg-mist-600/60"
     >
       <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
       <span class="pr-3 pl-4 text-5xl font-light text-mist-400/60"> / </span>
       <h2 class="text-[2rem] font-normal text-neutral-100/80">
-        Give your agent the insight it needs to adapt to your personality.
+        Give your agent the insight it needs
       </h2>
     </div>
-    <main class="flex flex-1">
-      <div id="column-left" class="mt-8 ml-6 min-w-0 max-w-1/2 flex-1 text-justify">
-        <section id="intro">
+    <main class="flex flex-1 mt-9 mr-8 ml-8">
+      <div id="column-left" class="max-w-1/2 flex-1 text-justify">
+        <section id="trait-test" class="flex flex-col">
           <div
-            class="card mb-8 rounded-md rounded-bl-3xl bg-mist-600/60 shadow-sm
-              shadow-mist-800/50"
+            id="card-deck"
+            class="card w-fit rounded-lg rounded-tl-2xl rounded-bl-2xl p-2 bg-mist-400"
+            tabindex="0"
           >
-            <p class="px-5 py-4 text-2xl leading-tight font-light tracking-normal">
-              <span class="italic">Conform</span> gives your agent a deeper understanding of you, 
-              by using results from a short test designed to evaluate your personality. Take the 
-              trait test to get started! Read on to find out how it works.
-            </p>
-          </div>
-        </section>
-        <section id="trait-test" class="mt-8 mr-8 flex flex-col">
-          <div class="dropdown dropdown-start flex w-19/20">
-            <button
-              id="dropdown-btn"
-              class="btn btn-lg btn-ghost mb-4 rounded-lg border-none bg-mist-500/70 p-3
-                font-normal hover:bg-mist-500/90"
-              tabindex="0"
-            >
-              Start the test
-            </button>
-            <div
-              id="dropdown-card"
-              class="dropdown-content card mt-16 rounded-lg bg-mist-400 p-1"
-              tabindex="0"
-            >
-              <div class="card-body">
-                <progress class="progress" value="0" max="50"></progress>
-                <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
-                  <!-- Trait test instructions panel -->
+            <div class="card-body">
+              <progress class="progress" value="0" max="50"></progress>
+              <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
+                <!-- Trait test instructions panel -->
+                <div
+                  class="grid h-full min-h-138 place-content-center place-items-center
+                    gap-5 text-center"
+                  data-survey-panel="0"
+                  hidden
+                >
+                  <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
+                  <p class="max-w-9/10 text-2xl leading-normal text-mist-600">
+                    This trait test should take less than 5 minutes to complete. In order for it
+                    to accurately assess your personality, respond to every statement as you 
+                    see yourself most of the time <br><span class="italic">(not how you think you 
+                    should be)</span>.
+                  </p>
+                  <button
+                  id="start-btn"
+                  class="btn btn-lg btn-ghost rounded-lg border-none bg-mist-500/70 p-3 font-normal
+                  hover:bg-mist-500/90 shadow-none"
+                  tabindex="0"
+                >
+                  Start test
+                </button>
+                </div>
+                <!-- Trait test page 1 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="1"
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td class="extraversion plus">Am the life of the party.</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td class="agreeableness minus">Feel little concern for others.</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td class="conscientiousness plus">Am always prepared.</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td class="emotional-stability minus">Get stressed out easily.</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td class="intellect-imagination plus">Have a rich vocabulary.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 2 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="2"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>6</td>
+                      <td class="extraversion minus">Don't talk a lot.</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td class="agreeableness plus">Am interested in people.</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td class="conscientiousness minus">Leave my belongings around.</td>
+                    </tr>
+                    <tr>
+                      <td>9</td>
+                      <td class="emotional-stability plus">Am relaxed most of the time.</td>
+                    </tr>
+                    <tr>
+                      <td>10</td>
+                      <td class="intellect-imagination minus">
+                        Have difficulty understanding abstract ideas.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 3 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="3"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>11</td>
+                      <td class="extraversion plus">Feel comfortable around people.</td>
+                    </tr>
+                    <tr>
+                      <td>12</td>
+                      <td class="agreeableness minus">Insult people.</td>
+                    </tr>
+                    <tr>
+                      <td>13</td>
+                      <td class="conscientiousness plus">Pay attention to details.</td>
+                    </tr>
+                    <tr>
+                      <td>14</td>
+                      <td class="emotional-stability minus">Worry about things.</td>
+                    </tr>
+                    <tr>
+                      <td>15</td>
+                      <td class="intellect-imagination plus">Have a vivid imagination.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 4 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="4"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>16</td>
+                      <td class="extraversion minus">Keep in the background.</td>
+                    </tr>
+                    <tr>
+                      <td>17</td>
+                      <td class="agreeableness plus">Sympathize with others' feelings.</td>
+                    </tr>
+                    <tr>
+                      <td>18</td>
+                      <td class="conscientiousness minus">Make a mess of things.</td>
+                    </tr>
+                    <tr>
+                      <td>19</td>
+                      <td class="emotional-stability plus">Seldom feel blue.</td>
+                    </tr>
+                    <tr>
+                      <td>20</td>
+                      <td class="intellect-imagination minus">
+                        Am not interested in abstract ideas.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 5 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="5"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>21</td>
+                      <td class="extraversion plus">Start conversations.</td>
+                    </tr>
+                    <tr>
+                      <td>22</td>
+                      <td class="agreeableness minus">
+                        Am not interested in other people's problems.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>23</td>
+                      <td class="conscientiousness plus">Get chores done right away.</td>
+                    </tr>
+                    <tr>
+                      <td>24</td>
+                      <td class="emotional-stability minus">Am easily disturbed.</td>
+                    </tr>
+                    <tr>
+                      <td>25</td>
+                      <td class="intellect-imagination plus">Have excellent ideas.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 6 -->
+                <table
+                  class="table w-full table-fixed text-base
+                    [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="6"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center
+                          text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>26</td>
+                      <td class="extraversion minus">Have little to say.</td>
+                    </tr>
+                    <tr>
+                      <td>27</td>
+                      <td class="agreeableness plus">Have a soft heart.</td>
+                    </tr>
+                    <tr>
+                      <td>28</td>
+                      <td class="conscientiousness minus">
+                        Often forget to put things back in their proper place.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>29</td>
+                      <td class="emotional-stability minus">Get upset easily.</td>
+                    </tr>
+                    <tr>
+                      <td>30</td>
+                      <td class="intellect-imagination minus">
+                        Do not have a good imagination.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 7 -->
+                <table
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="7"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>31</td>
+                      <td class="extraversion plus">
+                        Talk to a lot of different people at parties.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>32</td>
+                      <td class="agreeableness minus">Am not really interested in others.</td>
+                    </tr>
+                    <tr>
+                      <td>33</td>
+                      <td class="conscientiousness plus">Like order.</td>
+                    </tr>
+                    <tr>
+                      <td>34</td>
+                      <td class="emotional-stability minus">Change my mood a lot.</td>
+                    </tr>
+                    <tr>
+                      <td>35</td>
+                      <td class="intellect-imagination plus">Am quick to understand things.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 8 -->
+                <table
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="8"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>36</td>
+                      <td class="extraversion minus">Don't like to draw attention to myself.</td>
+                    </tr>
+                    <tr>
+                      <td>37</td>
+                      <td class="agreeableness plus">Take time out for others.</td>
+                    </tr>
+                    <tr>
+                      <td>38</td>
+                      <td class="conscientiousness minus">Shirk my duties.</td>
+                    </tr>
+                    <tr>
+                      <td>39</td>
+                      <td class="emotional-stability minus">Have frequent mood swings.</td>
+                    </tr>
+                    <tr>
+                      <td>40</td>
+                      <td class="intellect-imagination plus">Use difficult words.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 9 -->
+                <table
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="9"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>41</td>
+                      <td class="extraversion plus">
+                        Don't mind being the center of attention.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>42</td>
+                      <td class="agreeableness plus">Feel others' emotions.</td>
+                    </tr>
+                    <tr>
+                      <td>43</td>
+                      <td class="conscientiousness plus">Follow a schedule.</td>
+                    </tr>
+                    <tr>
+                      <td>44</td>
+                      <td class="emotional-stability minus">Get irritated easily.</td>
+                    </tr>
+                    <tr>
+                      <td>45</td>
+                      <td class="intellect-imagination plus">
+                        Spend time reflecting on things.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Trait test page 10 -->
+                <table
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
+                  data-survey-panel="10"
+                  hidden
+                >
+                  <colgroup>
+                    <col class="w-12" />
+                    <col />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-label="Rating"></th>
+                      <th>
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
+                          <span class="text-red-800/75">Way off</span>
+                          <span class="text-amber-700/75">Inaccurate</span>
+                          <span class="text-gray-600/75">Neither</span>
+                          <span class="text-cyan-700/75">Accurate</span>
+                          <span class="text-green-800/75">Spot on</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>46</td>
+                      <td class="extraversion minus">Am quiet around strangers.</td>
+                    </tr>
+                    <tr>
+                      <td>47</td>
+                      <td class="agreeableness plus">Make people feel at ease.</td>
+                    </tr>
+                    <tr>
+                      <td>48</td>
+                      <td class="conscientiousness plus">Am exacting in my work.</td>
+                    </tr>
+                    <tr>
+                      <td>49</td>
+                      <td class="emotional-stability minus">Often feel blue.</td>
+                    </tr>
+                    <tr>
+                      <td>50</td>
+                      <td class="intellect-imagination plus">Am full of ideas.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Submit test page -->
+                <div
+                  class="grid h-full min-h-138 place-content-center place-items-center"
+                  data-survey-panel="11"
+                  hidden
+                >
+                  <h3 id="submit-heading" class="text-3xl font-medium text-mist-600">
+                    Submit your trait test
+                  </h3>
+                  <p
+                    id="submit-error"
+                    class="mt-2 mb-4 text-xl text-orange-800 italic"
+                    role="alert"
+                    hidden
+                  ></p>
+                  <button
+                    id="submit-button"
+                    class="btn btn-lg btn-ghost rounded-md border-none bg-mist-500/70 p-3 
+                      font-normal shadow-none hover:bg-mist-500/90"
+                    type="button"
+                  >
+                    Submit
+                  </button>
                   <div
-                    class="grid h-full min-h-138 place-content-center place-items-center
-                      gap-5 text-center"
-                    data-survey-panel="0"
+                    id="score-loading"
+                    class="grid h-full min-h-138 place-content-center place-items-center gap-5"
+                    tabindex="-1"
                     hidden
                   >
-                    <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
-                    <p class="max-w-9/10 text-2xl leading-normal text-mist-600">
-                      This trait test should take less than 5 minutes to complete. In order for it
-                      to accurately evaluate your personality, respond to every statement as you 
-                      see yourself most of the time <span class="italic">(not how you think you 
-                      should be)</span>.
-                    </p>
-                  </div>
-                  <!-- Trait test page 1 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="1"
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td class="extraversion plus">Am the life of the party.</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td class="agreeableness minus">Feel little concern for others.</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td class="conscientiousness plus">Am always prepared.</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td class="emotional-stability minus">Get stressed out easily.</td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td class="intellect-imagination plus">Have a rich vocabulary.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 2 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="2"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>6</td>
-                        <td class="extraversion minus">Don't talk a lot.</td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td class="agreeableness plus">Am interested in people.</td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td class="conscientiousness minus">Leave my belongings around.</td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td class="emotional-stability plus">Am relaxed most of the time.</td>
-                      </tr>
-                      <tr>
-                        <td>10</td>
-                        <td class="intellect-imagination minus">
-                          Have difficulty understanding abstract ideas.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 3 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="3"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>11</td>
-                        <td class="extraversion plus">Feel comfortable around people.</td>
-                      </tr>
-                      <tr>
-                        <td>12</td>
-                        <td class="agreeableness minus">Insult people.</td>
-                      </tr>
-                      <tr>
-                        <td>13</td>
-                        <td class="conscientiousness plus">Pay attention to details.</td>
-                      </tr>
-                      <tr>
-                        <td>14</td>
-                        <td class="emotional-stability minus">Worry about things.</td>
-                      </tr>
-                      <tr>
-                        <td>15</td>
-                        <td class="intellect-imagination plus">Have a vivid imagination.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 4 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="4"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>16</td>
-                        <td class="extraversion minus">Keep in the background.</td>
-                      </tr>
-                      <tr>
-                        <td>17</td>
-                        <td class="agreeableness plus">Sympathize with others' feelings.</td>
-                      </tr>
-                      <tr>
-                        <td>18</td>
-                        <td class="conscientiousness minus">Make a mess of things.</td>
-                      </tr>
-                      <tr>
-                        <td>19</td>
-                        <td class="emotional-stability plus">Seldom feel blue.</td>
-                      </tr>
-                      <tr>
-                        <td>20</td>
-                        <td class="intellect-imagination minus">
-                          Am not interested in abstract ideas.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 5 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="5"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>21</td>
-                        <td class="extraversion plus">Start conversations.</td>
-                      </tr>
-                      <tr>
-                        <td>22</td>
-                        <td class="agreeableness minus">
-                          Am not interested in other people's problems.
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>23</td>
-                        <td class="conscientiousness plus">Get chores done right away.</td>
-                      </tr>
-                      <tr>
-                        <td>24</td>
-                        <td class="emotional-stability minus">Am easily disturbed.</td>
-                      </tr>
-                      <tr>
-                        <td>25</td>
-                        <td class="intellect-imagination plus">Have excellent ideas.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 6 -->
-                  <table
-                    class="table w-full table-fixed text-base
-                      [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="6"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center
-                            text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>26</td>
-                        <td class="extraversion minus">Have little to say.</td>
-                      </tr>
-                      <tr>
-                        <td>27</td>
-                        <td class="agreeableness plus">Have a soft heart.</td>
-                      </tr>
-                      <tr>
-                        <td>28</td>
-                        <td class="conscientiousness minus">
-                          Often forget to put things back in their proper place.
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>29</td>
-                        <td class="emotional-stability minus">Get upset easily.</td>
-                      </tr>
-                      <tr>
-                        <td>30</td>
-                        <td class="intellect-imagination minus">
-                          Do not have a good imagination.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 7 -->
-                  <table
-                    class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="7"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>31</td>
-                        <td class="extraversion plus">
-                          Talk to a lot of different people at parties.
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>32</td>
-                        <td class="agreeableness minus">Am not really interested in others.</td>
-                      </tr>
-                      <tr>
-                        <td>33</td>
-                        <td class="conscientiousness plus">Like order.</td>
-                      </tr>
-                      <tr>
-                        <td>34</td>
-                        <td class="emotional-stability minus">Change my mood a lot.</td>
-                      </tr>
-                      <tr>
-                        <td>35</td>
-                        <td class="intellect-imagination plus">Am quick to understand things.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 8 -->
-                  <table
-                    class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="8"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>36</td>
-                        <td class="extraversion minus">Don't like to draw attention to myself.</td>
-                      </tr>
-                      <tr>
-                        <td>37</td>
-                        <td class="agreeableness plus">Take time out for others.</td>
-                      </tr>
-                      <tr>
-                        <td>38</td>
-                        <td class="conscientiousness minus">Shirk my duties.</td>
-                      </tr>
-                      <tr>
-                        <td>39</td>
-                        <td class="emotional-stability minus">Have frequent mood swings.</td>
-                      </tr>
-                      <tr>
-                        <td>40</td>
-                        <td class="intellect-imagination plus">Use difficult words.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 9 -->
-                  <table
-                    class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="9"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>41</td>
-                        <td class="extraversion plus">
-                          Don't mind being the center of attention.
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>42</td>
-                        <td class="agreeableness plus">Feel others' emotions.</td>
-                      </tr>
-                      <tr>
-                        <td>43</td>
-                        <td class="conscientiousness plus">Follow a schedule.</td>
-                      </tr>
-                      <tr>
-                        <td>44</td>
-                        <td class="emotional-stability minus">Get irritated easily.</td>
-                      </tr>
-                      <tr>
-                        <td>45</td>
-                        <td class="intellect-imagination plus">
-                          Spend time reflecting on things.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Trait test page 10 -->
-                  <table
-                    class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                    data-survey-panel="10"
-                    hidden
-                  >
-                    <colgroup>
-                      <col class="w-12" />
-                      <col />
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" aria-label="Rating"></th>
-                        <th>
-                          <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
-                            <span class="text-red-800/75">Way off</span>
-                            <span class="text-amber-700/75">Inaccurate</span>
-                            <span class="text-gray-600/75">Neither</span>
-                            <span class="text-cyan-700/75">Accurate</span>
-                            <span class="text-green-800/75">Spot on</span>
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>46</td>
-                        <td class="extraversion minus">Am quiet around strangers.</td>
-                      </tr>
-                      <tr>
-                        <td>47</td>
-                        <td class="agreeableness plus">Make people feel at ease.</td>
-                      </tr>
-                      <tr>
-                        <td>48</td>
-                        <td class="conscientiousness plus">Am exacting in my work.</td>
-                      </tr>
-                      <tr>
-                        <td>49</td>
-                        <td class="emotional-stability minus">Often feel blue.</td>
-                      </tr>
-                      <tr>
-                        <td>50</td>
-                        <td class="intellect-imagination plus">Am full of ideas.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- Submit test page -->
-                  <div
-                    class="grid h-full min-h-138 place-content-center place-items-center"
-                    data-survey-panel="11"
-                    hidden
-                  >
-                    <h3 id="submit-heading" class="text-3xl font-medium text-mist-600">
-                      Submit your trait test
-                    </h3>
-                    <p
-                      id="submit-error"
-                      class="mt-2 mb-4 text-xl text-orange-800 italic"
-                      role="alert"
-                      hidden
-                    ></p>
-                    <button
-                      id="submit-button"
-                      class="btn btn-lg btn-ghost mt-3 rounded-md border-none bg-mist-500/70 p-3 
-                        font-normal shadow-none hover:bg-mist-500/90"
-                      type="button"
-                    >
-                      Submit
-                    </button>
-                    <div
-                      id="score-loading"
-                      class="grid h-full min-h-138 place-content-center place-items-center gap-5"
-                      tabindex="-1"
-                      hidden
-                    >
-                      <span class="text-2xl font-medium text-mist-600">
-                        Scoring your trait test
-                      </span>
-                      <span class="loading loading-spinner loading-xl"></span>
-                    </div>
+                    <span class="text-2xl font-medium text-mist-600">
+                      Scoring your trait test
+                    </span>
+                    <span class="loading loading-spinner loading-xl"></span>
                   </div>
                 </div>
-                <!-- Trait test nav buttons -->
-                <div class="join mt-3 mr-auto ml-auto">
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-nav="prev"
-                    aria-label="Previous page"
-                  >
-                    &lt;
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="1"
-                  >
-                    1
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="2"
-                  >
-                    2
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="3"
-                  >
-                    3
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="4"
-                  >
-                    4
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="5"
-                  >
-                    5
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="6"
-                  >
-                    6
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="7"
-                  >
-                    7
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="8"
-                  >
-                    8
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="9"
-                  >
-                    9
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-navbtn="10"
-                  >
-                    10
-                  </button>
-                  <button
-                    class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                      hover:bg-mist-600/70"
-                    type="button"
-                    data-nav="next"
-                    aria-label="Next page"
-                  >
-                    &gt;
-                  </button>
-                </div>
+              </div>
+              <!-- Trait test nav buttons -->
+              <div class="join mt-3 mr-auto ml-auto">
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-nav="prev"
+                  aria-label="Previous page"
+                >
+                  &lt;
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="1"
+                >
+                  1
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="2"
+                >
+                  2
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="3"
+                >
+                  3
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="4"
+                >
+                  4
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="5"
+                >
+                  5
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="6"
+                >
+                  6
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="7"
+                >
+                  7
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="8"
+                >
+                  8
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="9"
+                >
+                  9
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-navbtn="10"
+                >
+                  10
+                </button>
+                <button
+                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
+                    hover:bg-mist-600/70"
+                  type="button"
+                  data-nav="next"
+                  aria-label="Next page"
+                >
+                  &gt;
+                </button>
               </div>
             </div>
           </div>
+        </div>
         </section>
       </div>
-      <div id="column-right" class="ml-auto mt-4 mr-6 max-w-2/5 shrink-0">
+      <div id="column-right" class="max-w-2/5 ml-auto shrink-0">
+        <section id="intro">
+          <div
+            class="card rounded-lg rounded-tr-2xl rounded-br-2xl mb-4 bg-mist-600/60 shadow-sm
+              shadow-mist-800/50"
+          >
+            <p class="text-2xl font-light leading-tight tracking-normal text-justify px-5 py-4">
+              <span class="italic">Conform</span> helps your agent adapt to you, by using results 
+              from a short test that evaluate your personality. Take the trait test to get started! 
+              Read on to find out how it works.
+            </p>
+          </div>
+        </section>
         <section
           id="how-it-works"
-          class="collapse-arrow collapse flex-auto rounded-none"
-          tabindex="0"
+          class="collapse collapse-arrow flex-auto rounded-none"
         >
+          <input
+            id="hiw-toggle"
+            type="checkbox"
+            aria-label="Toggle the 'how it works' section"
+          />
           <h3 class="collapse-title text-2xl">How it works</h3>
           <div class="collapse-content ml-4 h-auto border-l-[3px] border-l-neutral-400/75 
             pb-0 pl-5">
