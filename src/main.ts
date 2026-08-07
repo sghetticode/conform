@@ -1,25 +1,21 @@
 console.log('Starting up Conform...')
 
-// Log focus/blur state of 'how it works' collapse component
-const howItWorksCollapse = document.getElementById('how-it-works')
+// Log un/checked state of 'how it works' collapse component
+const hiwToggle = document.querySelector<HTMLInputElement>('#hiw-toggle')
 
-howItWorksCollapse?.addEventListener('focus', () => {
-  console.log('How it works section expanded')
+hiwToggle?.addEventListener('change', () => {
+  if (hiwToggle.checked) {
+    console.log('How it works section expanded')
+  } else {
+    console.log('How it works section collapsed')
+  }
 })
 
-howItWorksCollapse?.addEventListener('blur', () => {
-  console.log('How it works section collapsed')
-})
+// Log clicks of start test button
+const startBtn = document.getElementById('start-btn')
 
-// Log focus/blur state of 'trait test' dropdown component
-const dropdownBtn = document.getElementById('dropdown-btn')
-
-dropdownBtn?.addEventListener('focus', () => {
-  console.log('Trait test dropdown opened')
-})
-
-dropdownBtn?.addEventListener('blur', () => {
-  console.log('Trait test dropdown closed')
+startBtn?.addEventListener('click', () => {
+  console.log('Start test btn clicked')
 })
 
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
@@ -42,69 +38,102 @@ const answers: { [key: string]: string } = JSON.parse(
   localStorage.getItem('answers') ?? '{}'
 )
 
-// Load saved results if user has taken test
 const savedResults = localStorage.getItem('results')
+
+// Load saved results if user has already taken test
 if (savedResults) {
   revealResults(JSON.parse(savedResults))
+} else {
+  itemRows.forEach((row) => {
+    const itemString = row.cells[1].textContent!.trim()
+    const itemKey = itemString.toLowerCase().replace(/\.$/, '')
+    const blankCell = document.createElement('td')
+    const responseRow = document.createElement('tr')
+    const responseCell = document.createElement('td')
+    const radioGroup = document.createElement('div')
+  
+    radioGroup.className = 'grid grid-cols-5 justify-items-center'
+  
+    const classes = row.cells[1].classList
+    const factor = factors.find((f) => classes.contains(f))
+  
+    // Record this item's factor and key for grading
+    if (factor) items[itemKey] = { factor, sign: classes.contains('minus') ? '-' : '+' }
+  
+    const checkedFill = 'checked:text-neutral-100/80'
+  
+    // Generate radio rows for every item and assign label vals to each btn
+    const radioProps = [
+      { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', fill: checkedFill },
+      { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', fill: checkedFill },
+      { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', fill: checkedFill },
+      { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', fill: checkedFill },
+      { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', fill: checkedFill }
+    ]
+  
+    radioProps.forEach(({ val, color, border, fill}) => {
+      const radio = document.createElement('input')
+  
+      radio.type = 'radio'
+      radio.name = `${itemKey}`
+      radio.value = val
+      radio.dataset.traitRadio = ''
+      radio.className = `radio ${color} ${border} ${fill}`
+      radio.setAttribute('aria-label', `${val}`)
+      radioGroup.append(radio)
+  
+      // Check for saved answers and restore on load
+      if (answers[radio.name] === radio.value) radio.checked = true
+    })
+  
+    responseCell.append(radioGroup)
+    responseRow.append(blankCell, responseCell)
+    row.after(responseRow)
+  })
 }
 
-itemRows.forEach((row) => {
-  const itemString = row.cells[1].textContent!.trim()
-  const itemKey = itemString.toLowerCase().replace(/\.$/, '')
-  const blankCell = document.createElement('td')
-  const responseRow = document.createElement('tr')
-  const responseCell = document.createElement('td')
-  const radioGroup = document.createElement('div')
+const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
+const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-navbtn]')
 
-  radioGroup.className = 'grid grid-cols-5 justify-items-center'
-
-  const classes = row.cells[1].classList
-  const factor = factors.find((f) => classes.contains(f))
-
-  // Record this item's factor and key for grading
-  if (factor) items[itemKey] = { factor, sign: classes.contains('minus') ? '-' : '+' }
-
-  const checkedFill = 'checked:text-neutral-100/80'
-
-  // Generate radio rows for every item and assign label vals to each btn
-  const radioProps = [
-    { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', fill: checkedFill },
-    { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', fill: checkedFill },
-    { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', fill: checkedFill },
-    { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', fill: checkedFill },
-    { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', fill: checkedFill }
-  ]
-
-  radioProps.forEach(({ val, color, border, fill}) => {
-    const radio = document.createElement('input')
-
-    radio.type = 'radio'
-    radio.name = `${itemKey}`
-    radio.value = val
-    radio.dataset.traitRadio = ''
-    radio.className = `radio ${color} ${border} ${fill}`
-    radio.setAttribute('aria-label', `${val}`)
-    radioGroup.append(radio)
-
-    // Check localStorage for saved answers and restore on load
-    if (answers[radio.name] === radio.value) radio.checked = true
+// Render current dropdown panel and highlight its nav btn
+function renderPanel() {
+  panels.forEach((panel) => {
+    panel.hidden = Number(panel.dataset.surveyPanel) !== current
   })
 
-  responseCell.append(radioGroup)
-  responseRow.append(blankCell, responseCell)
-  row.after(responseRow)
-})
+  pageButtons.forEach((button) => {
+    const isActive = Number(button.dataset.navbtn) === current
+    button.classList.toggle('bg-mist-700/80', !isActive)
+    button.classList.toggle('bg-mist-600/70', isActive)
+    
+    if (isActive) {
+      button.setAttribute('aria-current', 'page')
+    } else {
+      button.removeAttribute('aria-current')
+    }
+  })
+}
 
-// Save radio input to localStorage and update progress bar
-document.addEventListener('change', (ev) => {
-  const target = ev.target as HTMLInputElement
+const joinNav = document.querySelector<HTMLElement>('.join')!
+const pages = 12
 
-  if (target.matches('input[type="radio"][data-trait-radio]')) {
-    console.log(`${target.name}: ${target.value}`)
-    answers[target.name] = target.value
-    localStorage.setItem('answers', JSON.stringify(answers))
-    syncProgressBar()
+// Use previous, number, or next buttons to navigate pages
+joinNav.addEventListener('click', (ev) => {
+  const target = ev.target
+  if (!(target instanceof Element)) return
+
+  const btn = target.closest('button')
+  if (!btn) return
+
+  if (btn.dataset.navbtn) {
+    current = Number(btn.dataset.navbtn)
+  } else if (btn.dataset.nav === 'prev') {
+    current = Math.max(0, current - 1)
+  } else if (btn.dataset.nav === 'next') {
+    current = Math.min(pages - 1, current + 1)
   }
+
+  renderPanel()
 })
 
 // Sync progress bar with answered count
@@ -121,6 +150,18 @@ let current = 0
 function getAnsweredCount() {
   return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
 }
+
+// Save radio input to localStorage and update progress bar
+document.addEventListener('change', (ev) => {
+  const target = ev.target as HTMLInputElement
+
+  if (target.matches('input[type="radio"][data-trait-radio]')) {
+    console.log(`${target.name}: ${target.value}`)
+    answers[target.name] = target.value
+    localStorage.setItem('answers', JSON.stringify(answers))
+    syncProgressBar()
+  }
+})
 
 const submitButton = document.getElementById('submit-button') as HTMLButtonElement
 const submitError = document.getElementById('submit-error')!
@@ -245,50 +286,6 @@ function revealResults(results: Record<Factor, { total: number; percentage: numb
   document.querySelector('main')!.hidden = true
   document.getElementById('results')!.hidden = false
 }
-
-const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
-const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-navbtn]')
-
-// Render current dropdown panel and highlight its nav btn
-function renderPanel() {
-  panels.forEach((panel) => {
-    panel.hidden = Number(panel.dataset.surveyPanel) !== current
-  })
-
-  pageButtons.forEach((button) => {
-    const isActive = Number(button.dataset.navbtn) === current
-    button.classList.toggle('bg-mist-700/80', !isActive)
-    button.classList.toggle('bg-mist-600/70', isActive)
-    
-    if (isActive) {
-      button.setAttribute('aria-current', 'page')
-    } else {
-      button.removeAttribute('aria-current')
-    }
-  })
-}
-
-const joinNav = document.querySelector<HTMLElement>('.join')!
-const pages = 12
-
-// Use previous, number, or next buttons to navigate pages
-joinNav.addEventListener('click', (ev) => {
-  const target = ev.target
-  if (!(target instanceof Element)) return
-
-  const btn = target.closest('button')
-  if (!btn) return
-
-  if (btn.dataset.navbtn) {
-    current = Number(btn.dataset.navbtn)
-  } else if (btn.dataset.nav === 'prev') {
-    current = Math.max(0, current - 1)
-  } else if (btn.dataset.nav === 'next') {
-    current = Math.min(pages - 1, current + 1)
-  }
-
-  renderPanel()
-})
 
 renderPanel()
 syncProgressBar()
