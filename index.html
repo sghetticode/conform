@@ -22,7 +22,7 @@
     <div
       id="header"
       class="navbar mx-6 pl-6 flex h-[100px] w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
-      border-b-mist-800/75 bg-mist-600/60"
+      bg-mist-600/60 border-b-mist-800/75"
     >
       <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
       <span class="pr-3 pl-4 text-5xl font-light text-mist-400/60"> / </span>
@@ -35,7 +35,7 @@
         <section id="trait-test" class="flex flex-col">
           <div
             id="card-deck"
-            class="card w-fit rounded-lg rounded-tl-2xl rounded-bl-2xl p-2 bg-mist-400"
+            class="card w-fit rounded-xl p-2 bg-mist-400"
             tabindex="0"
           >
             <div class="card-body">
@@ -598,13 +598,14 @@
                 </div>
               </div>
               <!-- Trait test nav buttons -->
-              <div class="join mt-3 mr-auto ml-auto">
+              <div id ="nav-btns" class="join mt-3 mr-auto ml-auto">
                 <button
                   class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
                     hover:bg-mist-600/70"
                   type="button"
                   data-nav="prev"
                   aria-label="Previous page"
+                  disabled
                 >
                   &lt;
                 </button>
@@ -613,6 +614,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="1"
+                  disabled
                 >
                   1
                 </button>
@@ -621,6 +623,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="2"
+                  disabled
                 >
                   2
                 </button>
@@ -629,6 +632,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="3"
+                  disabled
                 >
                   3
                 </button>
@@ -637,6 +641,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="4"
+                  disabled
                 >
                   4
                 </button>
@@ -645,6 +650,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="5"
+                  disabled
                 >
                   5
                 </button>
@@ -653,6 +659,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="6"
+                  disabled
                 >
                   6
                 </button>
@@ -661,6 +668,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="7"
+                  disabled
                 >
                   7
                 </button>
@@ -669,6 +677,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="8"
+                  disabled
                 >
                   8
                 </button>
@@ -677,6 +686,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="9"
+                  disabled
                 >
                   9
                 </button>
@@ -685,6 +695,7 @@
                     hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="10"
+                  disabled
                 >
                   10
                 </button>
@@ -694,6 +705,7 @@
                   type="button"
                   data-nav="next"
                   aria-label="Next page"
+                  disabled
                 >
                   &gt;
                 </button>
@@ -706,19 +718,20 @@
       <div id="column-right" class="max-w-2/5 ml-auto shrink-0">
         <section id="intro">
           <div
-            class="card rounded-lg rounded-tr-2xl rounded-br-2xl mb-4 bg-mist-600/60 shadow-sm
+            class="card rounded-lg rounded-t-2xl rounded-b-md mb-3 bg-mist-500/75 shadow-sm
               shadow-mist-800/50"
           >
-            <p class="text-2xl font-light leading-tight tracking-normal text-justify px-5 py-4">
-              <span class="italic">Conform</span> helps your agent adapt to you, by using results 
-              from a short test that evaluate your personality. Take the trait test to get started! 
-              Read on to find out how it works.
+            <p class="text-2xl font-light tracking-tight leading-tight text-justify px-5 py-4">
+              <span class="font-normal italic">Conform</span> helps your agent adapt to you, by using results 
+              from a short test that evaluates your personality. Read on to learn how it works or  
+              take the trait test to get started now!
             </p>
           </div>
         </section>
         <section
           id="how-it-works"
-          class="collapse collapse-arrow flex-auto rounded-none"
+          class="collapse collapse-plus flex-auto rounded-lg rounded-t-md rounded-b-2xl
+            bg-mist-500/75 p-1 shadow-sm shadow-mist-800/50"
         >
           <input
             id="hiw-toggle"
@@ -726,17 +739,15 @@
             aria-label="Toggle the 'how it works' section"
           />
           <h3 class="collapse-title text-2xl">How it works</h3>
-          <div class="collapse-content ml-4 h-auto border-l-[3px] border-l-neutral-400/75 
-            pb-0 pl-5">
-            <p class="text-[1.375rem] leading-tight font-light tracking-normal text-justify">
+          <div class="collapse-content h-auto pr-8 pl-4">
+            <p class="text-[1.375rem] font-light tracking-normal leading-normal text-justify pl-4
+              border-l-[3px] border-l-mist-400/80"> 
               The results of the trait test are separated into five factors, known as the 
-              "Big Five" markers for modeling personality (extraversion, agreeableness, 
-              conscientiousness, emotional stability, and intellect/imagination). Each of them has 
+              "Big Five" markers for modeling personality. Each of them has 
               a percentage associated with it based on the statements you ranked during the test. 
               These are used to generate a short description of your personality that's saved to a
-              <span class="font-normal">CONFORM.md</span> file. All you have to do is put this in
-              your home directory, then reference it in your AGENTS.md to begin shaping how your
-              agent interacts with you.
+              <span class="font-normal">CONFORM.md</span> file. Follow the instructions provided 
+              on the results page to use as intended.
             </p>
           </div>
         </section>
