@@ -11,16 +11,22 @@ hiwToggle?.addEventListener('change', () => {
   }
 })
 
-// Enables nav button group on click
-const startBtn = document.getElementById('start-btn')
+const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')
 const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 
+// Start trait test, advance to page 1, and enable nav buttons
 startBtn?.addEventListener('click', () => {
   console.log('User started test')
+
   navBtns.forEach((btn) => {
     btn.disabled = false
   })
-  console.log('Nav buttons enabled')
+
+  current = 1
+  renderPanel()
+  console.log('Advanced to panel 1 of test')
+
+  startBtn.disabled = true
 })
 
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
