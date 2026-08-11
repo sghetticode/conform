@@ -16,13 +16,13 @@
     </script>
   </head>
   <body
-    class="font-rubik flex min-h-screen flex-col bg-linear-180 
-    from-mist-700 to-mist-800 bg-no-repeat text-neutral-200"
+    class="font-rubik flex min-h-screen flex-col bg-linear-180 from-mist-700 to-mist-800 
+      bg-no-repeat text-neutral-200"
   >
     <div
       id="header"
-      class="navbar mx-6 pl-6 flex h-25 w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
-      bg-mist-600/60 border-b-mist-800/75"
+      class="navbar mx-6 flex h-25 w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
+      border-b-mist-800/75 bg-mist-600/60 pl-6"
     >
       <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
       <span class="pr-3 pl-4 text-5xl font-light text-mist-400/60"> / </span>
@@ -30,14 +30,10 @@
         Give your agent the insight it needs
       </h2>
     </div>
-    <main class="flex flex-1 mt-9 mr-8 ml-8">
+    <main class="mt-9 mr-8 ml-8 flex flex-1">
       <div id="column-left" class="max-w-1/2 flex-1 text-justify">
         <section id="trait-test" class="flex flex-col">
-          <div
-            id="card-deck"
-            class="card w-fit rounded-xl p-2 bg-mist-400"
-            tabindex="0"
-          >
+          <div id="card-deck" class="card w-fit rounded-xl bg-mist-400 p-2" tabindex="0">
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
               <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
@@ -50,24 +46,22 @@
                 >
                   <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
                   <p class="max-w-9/10 text-2xl leading-normal text-mist-600">
-                    This should take less than 5 minutes to complete. In order for it
-                    to accurately assess your personality, respond to every statement as you 
-                    see yourself most of the time <br><span class="italic">(not how you think you 
-                    should be)</span>.
+                    This should take less than 5 minutes to complete. In order for it to accurately
+                    assess your personality, respond to every statement as you see yourself most of
+                    the time <br /><span class="italic">(not how you think you should be)</span>.
                   </p>
                   <button
-                  id="start-btn"
-                  class="btn btn-lg btn-ghost rounded-lg border-none bg-mist-500/70 p-3
-                  font-normal hover:bg-mist-500/90 shadow-none"
-                  tabindex="0"
-                >
-                  Start test
-                </button>
+                    id="start-btn"
+                    class="btn btn-lg btn-ghost rounded-lg border-none bg-mist-500/70 p-3 
+                      font-normal shadow-none hover:bg-mist-500/90"
+                    tabindex="0"
+                  >
+                    Start test
+                  </button>
                 </div>
                 <!-- Trait test page 1 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="1"
                 >
                   <colgroup>
@@ -78,8 +72,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -114,8 +107,7 @@
                 </table>
                 <!-- Trait test page 2 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="2"
                   hidden
                 >
@@ -127,8 +119,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -165,8 +156,7 @@
                 </table>
                 <!-- Trait test page 3 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="3"
                   hidden
                 >
@@ -178,8 +168,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -214,8 +203,7 @@
                 </table>
                 <!-- Trait test page 4 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="4"
                   hidden
                 >
@@ -227,8 +215,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -265,8 +252,7 @@
                 </table>
                 <!-- Trait test page 5 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="5"
                   hidden
                 >
@@ -278,8 +264,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -316,8 +301,7 @@
                 </table>
                 <!-- Trait test page 6 -->
                 <table
-                  class="table w-full table-fixed text-base
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
                   data-survey-panel="6"
                   hidden
                 >
@@ -329,8 +313,7 @@
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center
-                          text-base">
+                        <div class="mb-2 grid grid-cols-5 justify-items-center text-base">
                           <span class="text-red-800/75">Way off</span>
                           <span class="text-amber-700/75">Inaccurate</span>
                           <span class="text-gray-600/75">Neither</span>
@@ -361,9 +344,7 @@
                     </tr>
                     <tr>
                       <td>30</td>
-                      <td class="intellect-imagination minus">
-                        Do not have a good imagination.
-                      </td>
+                      <td class="intellect-imagination minus">Do not have a good imagination.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -490,9 +471,7 @@
                   <tbody>
                     <tr>
                       <td>41</td>
-                      <td class="extraversion plus">
-                        Don't mind being the center of attention.
-                      </td>
+                      <td class="extraversion plus">Don't mind being the center of attention.</td>
                     </tr>
                     <tr>
                       <td>42</td>
@@ -508,9 +487,7 @@
                     </tr>
                     <tr>
                       <td>45</td>
-                      <td class="intellect-imagination plus">
-                        Spend time reflecting on things.
-                      </td>
+                      <td class="intellect-imagination plus">Spend time reflecting on things.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -577,16 +554,17 @@
                     hidden
                   ></p>
                   <button
-                    id="submit-button"
-                    class="btn btn-lg btn-ghost mt-4 rounded-md border-none bg-mist-500/70 p-3 
-                      font-normal shadow-none hover:bg-mist-500/90"
+                    id="submit-btn"
+                    class="btn btn-lg btn-ghost mt-4 rounded-md border-none bg-mist-500/70
+                      p-3 font-normal shadow-none hover:bg-mist-500/90"
                     type="button"
                   >
                     Submit
                   </button>
                   <div
                     id="score-loading"
-                    class="grid h-full min-h-138 place-content-center place-items-center gap-5"
+                    class="grid h-full min-h-138 place-content-center place-items-center
+                      gap-5"
                     tabindex="-1"
                     hidden
                   >
@@ -598,7 +576,7 @@
                 </div>
               </div>
               <!-- Trait test nav buttons -->
-              <div id ="nav-btns" class="join mt-3 mr-auto ml-auto">
+              <div id="nav-btns" class="join mt-3 mr-auto ml-auto">
                 <button
                   class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
                     hover:bg-mist-600/70"
@@ -712,61 +690,59 @@
               </div>
             </div>
           </div>
-        </div>
         </section>
       </div>
-      <div id="column-right" class="max-w-2/5 ml-auto shrink-0">
+      <div id="column-right" class="ml-auto max-w-2/5 shrink-0">
         <section id="intro">
           <div
-            class="card rounded-lg rounded-t-2xl rounded-b-md mb-3 bg-mist-500/75 shadow-sm
+            class="card mb-3 rounded-lg rounded-t-2xl rounded-b-md bg-mist-500/75 shadow-sm 
               shadow-mist-800/50"
           >
-            <p class="text-2xl font-light tracking-tight leading-tight text-justify px-5 py-4">
-              <span class="font-normal italic">Conform</span> helps your agent adapt to you, by 
-              using results from a short test that evaluates your personality. Read on to learn 
-              how it works or take the trait test to get started now!
+            <p class="px-5 py-4 text-justify text-2xl leading-tight font-light tracking-tight">
+              <span class="font-normal italic">Conform</span> helps your agent adapt to you, by
+              using results from a short test that evaluates your personality. Read on to learn how
+              it works or take the trait test to get started now!
             </p>
           </div>
         </section>
         <section
           id="how-it-works"
-          class="collapse collapse-plus flex-auto rounded-lg rounded-t-md rounded-b-2xl
-            bg-mist-500/75 p-1 shadow-sm shadow-mist-800/50"
+          class="collapse-plus collapse flex-auto rounded-lg rounded-t-md rounded-b-2xl 
+          bg-mist-500/75 p-1 shadow-sm shadow-mist-800/50"
         >
-          <input
-            id="hiw-toggle"
-            type="checkbox"
-            aria-label="Toggle the 'how it works' section"
-          />
+          <input id="hiw-toggle" type="checkbox" aria-label="Toggle the 'how it works' section" />
           <h3 class="collapse-title text-2xl">How it works</h3>
           <div class="collapse-content h-auto pr-8 pl-4">
-            <p class="text-[1.375rem] font-light tracking-normal leading-normal text-justify pl-4
-              border-l-[3px] border-l-mist-400/80"> 
-              The results of the trait test are separated into five factors, known as the 
-              "Big Five" markers for modeling personality. Each of them has a percentage associated 
-              with it based on the statements you ranked as way off, inaccurate, neither, accurate, 
-              or spot on. These values are used to generate a short description of your personality 
-              that's saved to a <span class="font-normal">CONFORM.md</span> file. Follow the 
-              instructions provided on the results page to use as intended.
+            <p
+              class="border-l-[3px] border-l-mist-400/80 pl-4 text-justify text-[1.375rem] 
+                leading-normal font-light tracking-normal"
+            >
+              The results of the trait test are separated into five factors, known as the "Big Five"
+              markers for modeling personality. Each of them has a percentage associated with it
+              based on the statements you ranked as way off, inaccurate, neither, accurate, or spot
+              on. These values are used to generate a short description of your personality that's
+              saved to a <span class="font-normal">CONFORM.md</span> file. Follow the instructions
+              provided after you finish to use as intended.
             </p>
           </div>
         </section>
       </div>
     </main>
-    <!-- Test results -->
+    <!-- Test results view -->
     <div
-      id="results"
-      class="fixed inset-0 grid h-screen w-full place-items-center bg-radial from-mist-700 
-        from-30% to-mist-800"
+      id="test-results"
+      class="fixed inset-0 flex h-screen w-full flex-col items-center justify-center gap-8
+        bg-radial from-mist-700 from-30% to-mist-800"
       hidden
     >
-      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-8 shadow-md shadow-mist-900/60">
+      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-8 shadow-md
+        shadow-mist-900/60">
         <h3 class="mb-6 text-center text-2xl font-normal text-neutral-100">
           Your personality traits!
         </h3>
         <table
-          class="table w-[40vw] rounded-lg border border-mist-600/60 bg-mist-500/50 py-0.5 
-          [&_tr>*]:border-b-mist-600/30"
+          class="table w-[40vw] rounded-lg border border-mist-600/60 bg-mist-500/50 py-0.5
+            [&_tr>*]:border-b-mist-600/30"
         >
           <thead class="text-xl text-neutral-100">
             <th>Factor</th>
@@ -796,14 +772,24 @@
           </tbody>
         </table>
       </div>
+      <button
+        id="download-btn"
+        class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-6 font-normal 
+          shadow-sm shadow-mist-900/60 hover:bg-mist-500"
+        tabindex="0"
+      >
+        Download Results
+      </button>
     </div>
-    <footer class="footer footer-center fixed inset-x-0 bottom-0 z-50 bg-mist-900/40 p-3 
-    text-neutral-300/75">
+    <footer
+      class="footer footer-center fixed inset-x-0 bottom-0 z-50 bg-mist-900/40 p-3
+        text-neutral-300/75"
+    >
       <aside class="text-sm">
         <h4 class="font-medium">YOUR DATA</h4>
         <p class="italic">
-          Trait test answers and results are temporarily stored in your browser and deleted upon 
-          downloading results.
+          Trait test related data is temporarily stored in your browser. All of it is deleted 
+          after you download your CONFORM.md file.
         </p>
       </aside>
     </footer>
