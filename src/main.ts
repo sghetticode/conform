@@ -1,16 +1,5 @@
 console.log('Starting up Conform...')
 
-// Log un/checked state of 'how it works' collapse component
-const hiwToggle = document.querySelector<HTMLInputElement>('#hiw-toggle')
-
-hiwToggle?.addEventListener('change', () => {
-  if (hiwToggle.checked) {
-    console.log('How it works section expanded')
-  } else {
-    console.log('How it works section collapsed')
-  }
-})
-
 const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')
 const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 
@@ -37,7 +26,7 @@ const factors = [
   'agreeableness',
   'conscientiousness',
   'emotional-stability',
-  'intellect-imagination'
+  'intellect-imagination',
 ] as const
 
 type Factor = (typeof factors)[number]
@@ -45,9 +34,7 @@ type Factor = (typeof factors)[number]
 const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
 
 // Load saved answers or create empty answers obj
-const answers: { [key: string]: string } = JSON.parse(
-  localStorage.getItem('answers') ?? '{}'
-)
+const answers: { [key: string]: string } = JSON.parse(localStorage.getItem('answers') ?? '{}')
 
 const savedResults = localStorage.getItem('results')
 
@@ -62,29 +49,39 @@ if (savedResults) {
     const responseRow = document.createElement('tr')
     const responseCell = document.createElement('td')
     const radioGroup = document.createElement('div')
-  
+
     radioGroup.className = 'grid grid-cols-5 justify-items-center'
-  
+
     const classes = row.cells[1].classList
     const factor = factors.find((f) => classes.contains(f))
-  
+
     // Record this item's factor and key for grading
     if (factor) items[itemKey] = { factor, sign: classes.contains('minus') ? '-' : '+' }
-  
+
     const checkedFill = 'checked:text-neutral-100/80'
-  
+
     // Generate radio rows for every item and assign label vals to each btn
     const radioProps = [
       { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', fill: checkedFill },
-      { val: 'inaccurate', color: 'bg-amber-700/60', border: 'border-amber-800/70', fill: checkedFill },
+      {
+        val: 'inaccurate',
+        color: 'bg-amber-700/60',
+        border: 'border-amber-800/70',
+        fill: checkedFill,
+      },
       { val: 'neither', color: 'bg-gray-600/60', border: 'border-gray-700/70', fill: checkedFill },
       { val: 'accurate', color: 'bg-cyan-700/60', border: 'border-cyan-800/70', fill: checkedFill },
-      { val: 'spot on', color: 'bg-green-800/60', border: 'border-green-900/70', fill: checkedFill }
+      {
+        val: 'spot on',
+        color: 'bg-green-800/60',
+        border: 'border-green-900/70',
+        fill: checkedFill,
+      },
     ]
-  
-    radioProps.forEach(({ val, color, border, fill}) => {
+
+    radioProps.forEach(({ val, color, border, fill }) => {
       const radio = document.createElement('input')
-  
+
       radio.type = 'radio'
       radio.name = `${itemKey}`
       radio.value = val
@@ -92,11 +89,11 @@ if (savedResults) {
       radio.className = `radio ${color} ${border} ${fill}`
       radio.setAttribute('aria-label', `${val}`)
       radioGroup.append(radio)
-  
+
       // Check for saved answers and restore on load
       if (answers[radio.name] === radio.value) radio.checked = true
     })
-  
+
     responseCell.append(radioGroup)
     responseRow.append(blankCell, responseCell)
     row.after(responseRow)
@@ -104,7 +101,6 @@ if (savedResults) {
 }
 
 const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
-const pageButtons = document.querySelectorAll<HTMLElement>('.join [data-navbtn]')
 
 // Render current dropdown panel and highlight its nav btn
 function renderPanel() {
@@ -112,15 +108,15 @@ function renderPanel() {
     panel.hidden = Number(panel.dataset.surveyPanel) !== current
   })
 
-  pageButtons.forEach((button) => {
-    const isActive = Number(button.dataset.navbtn) === current
-    button.classList.toggle('bg-mist-700/80', !isActive)
-    button.classList.toggle('bg-mist-600/70', isActive)
-    
+  navBtns.forEach((btn) => {
+    const isActive = Number(btn.dataset.navbtn) === current
+    btn.classList.toggle('bg-mist-700/80', !isActive)
+    btn.classList.toggle('bg-mist-600/70', isActive)
+
     if (isActive) {
-      button.setAttribute('aria-current', 'page')
+      btn.setAttribute('aria-current', 'page')
     } else {
-      button.removeAttribute('aria-current')
+      btn.removeAttribute('aria-current')
     }
   })
 }
@@ -174,13 +170,13 @@ document.addEventListener('change', (ev) => {
   }
 })
 
-const submitButton = document.getElementById('submit-button')! as HTMLButtonElement
+const submitBtn = document.querySelector<HTMLButtonElement>('#submit-btn')!
 const submitError = document.getElementById('submit-error')!
 
 // Enable submit btn when complete or show remaining count
 function updateSubmitState() {
   const complete = formComplete()
-  submitButton.disabled = !complete
+  submitBtn.disabled = !complete
 
   if (complete) {
     submitError.hidden = true
@@ -197,7 +193,7 @@ function formComplete() {
   return getAnsweredCount() === 50
 }
 
-submitButton.addEventListener('click', () => {
+submitBtn.addEventListener('click', () => {
   if (!formComplete()) {
     updateSubmitState()
     return
@@ -214,11 +210,11 @@ submitButton.addEventListener('click', () => {
   const scoreLoading = document.getElementById('score-loading')!
   scoreLoading.hidden = false
   scoreLoading.focus()
-  submitButton.hidden = true
+  submitBtn.hidden = true
   joinNav.hidden = true
 
   // Show trait test results
-  setTimeout(() => revealResults(results), 1000)
+  setTimeout(() => revealResults(results), 750)
   document.body.classList.add('overflow-hidden')
 
   localStorage.removeItem('answers')
@@ -227,26 +223,25 @@ submitButton.addEventListener('click', () => {
 // IPIP plus key item scores
 const plusScores: Record<string, number> = {
   'way off': 1,
-  'inaccurate': 2,
-  'neither': 3,
-  'accurate': 4,
-  'spot on': 5
+  inaccurate: 2,
+  neither: 3,
+  accurate: 4,
+  'spot on': 5,
 }
 
 // IPIP minus key item scores
 const minusScores: Record<string, number> = {
   'way off': 5,
-  'inaccurate': 4,
-  'neither': 3,
-  'accurate': 2,
-  'spot on': 1
+  inaccurate: 4,
+  neither: 3,
+  accurate: 2,
+  'spot on': 1,
 }
 
 // Calculate trait test results for each factor
 function gradeTest(
   answers: Record<string, string>,
 ): Record<Factor, { total: number; percentage: number }> {
-  
   console.log('Grading trait test...')
 
   const totals = {} as Record<Factor, number>
@@ -264,7 +259,7 @@ function gradeTest(
   }
 
   // Populate results obj with total and percentage for each factor
-  const results = {} as Record<Factor, { total: number; percentage: number}>
+  const results = {} as Record<Factor, { total: number; percentage: number }>
 
   for (const factor of factors) {
     const total = totals[factor]
@@ -280,7 +275,7 @@ function gradeTest(
       factor,
       total: results[factor].total,
       percentage: results[factor].percentage,
-    }))
+    })),
   )
 
   return results
@@ -292,11 +287,28 @@ function revealResults(results: Record<Factor, { total: number; percentage: numb
     if (cell) cell.textContent = `${Math.round(results[factor].percentage)}%`
   })
 
-  // Hide landing page content and show results
+  // Hide landing page content and display test results
   document.getElementById('header')!.hidden = true
   document.querySelector('main')!.hidden = true
-  document.getElementById('results')!.hidden = false
+  document.getElementById('test-results')!.hidden = false
 }
+
+// Log un/checked state of 'how it works' collapse component
+const hiwToggle = document.querySelector<HTMLInputElement>('#hiw-toggle')
+
+hiwToggle?.addEventListener('change', () => {
+  if (hiwToggle.checked) {
+    console.log('How it works section expanded')
+  } else {
+    console.log('How it works section collapsed')
+  }
+})
+
+const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')
+
+downloadBtn?.addEventListener('click', () => {
+  console.log('Downloading results.md file...')
+})
 
 renderPanel()
 syncProgressBar()
