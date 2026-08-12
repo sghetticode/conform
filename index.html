@@ -10,9 +10,8 @@
     <link rel="stylesheet" href="/src/style.css" />
     <title>CONFORM.md</title>
     <script>
-      if (localStorage.getItem('results')) {
-        document.documentElement.classList.add('results-found')
-      }
+      // Load results view on first paint if found
+      if (localStorage.getItem('results')) document.documentElement.classList.add('results-found')
     </script>
   </head>
   <body
@@ -37,11 +36,11 @@
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
               <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
-                <!-- Trait test instructions panel -->
+                <!-- Trait test instructions -->
                 <div
                   class="grid h-full min-h-138 place-content-center place-items-center
                     gap-5 text-center"
-                  data-survey-panel="0"
+                  data-test-panel="0"
                   hidden
                 >
                   <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
@@ -59,10 +58,10 @@
                     Start test
                   </button>
                 </div>
-                <!-- Trait test page 1 -->
+                <!-- Trait test panel 1 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="1"
+                  data-test-panel="1"
                 >
                   <colgroup>
                     <col class="w-12" />
@@ -105,10 +104,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 2 -->
+                <!-- Trait test panel 2 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="2"
+                  data-test-panel="2"
                   hidden
                 >
                   <colgroup>
@@ -154,10 +153,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 3 -->
+                <!-- Trait test panel 3 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="3"
+                  data-test-panel="3"
                   hidden
                 >
                   <colgroup>
@@ -201,10 +200,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 4 -->
+                <!-- Trait test panel 4 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="4"
+                  data-test-panel="4"
                   hidden
                 >
                   <colgroup>
@@ -250,10 +249,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 5 -->
+                <!-- Trait test panel 5 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="5"
+                  data-test-panel="5"
                   hidden
                 >
                   <colgroup>
@@ -299,10 +298,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 6 -->
+                <!-- Trait test panel 6 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="6"
+                  data-test-panel="6"
                   hidden
                 >
                   <colgroup>
@@ -348,10 +347,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 7 -->
+                <!-- Trait test panel 7 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="7"
+                  data-test-panel="7"
                   hidden
                 >
                   <colgroup>
@@ -397,10 +396,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 8 -->
+                <!-- Trait test panel 8 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="8"
+                  data-test-panel="8"
                   hidden
                 >
                   <colgroup>
@@ -444,10 +443,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 9 -->
+                <!-- Trait test panel 9 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="9"
+                  data-test-panel="9"
                   hidden
                 >
                   <colgroup>
@@ -491,10 +490,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Trait test page 10 -->
+                <!-- Trait test panel 10 -->
                 <table
                   class="table w-full table-fixed text-base [&_tr>*]:border-b-mist-500/50"
-                  data-survey-panel="10"
+                  data-test-panel="10"
                   hidden
                 >
                   <colgroup>
@@ -538,10 +537,10 @@
                     </tr>
                   </tbody>
                 </table>
-                <!-- Submit test page -->
+                <!-- Submit trait test -->
                 <div
                   class="grid h-full min-h-138 place-content-center place-items-center"
-                  data-survey-panel="11"
+                  data-test-panel="11"
                   hidden
                 >
                   <h3 id="submit-heading" class="text-3xl font-medium text-mist-600">
