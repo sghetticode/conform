@@ -36,12 +36,12 @@ const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
 // Load saved answers or create empty answers obj
 const answers: { [key: string]: string } = JSON.parse(localStorage.getItem('answers') ?? '{}')
 
+// Load saved results if they exist
 const savedResults = localStorage.getItem('results')
-
-// Load saved results if user has already taken test
 if (savedResults) {
   revealResults(JSON.parse(savedResults))
 } else {
+  // Insert response rows after every IPIP item
   itemRows.forEach((row) => {
     const itemString = row.cells[1].textContent!.trim()
     const itemKey = itemString.toLowerCase().replace(/\.$/, '')
@@ -60,7 +60,7 @@ if (savedResults) {
 
     const checkedFill = 'checked:text-neutral-100/80'
 
-    // Generate radio rows for every item and assign label vals to each btn
+    // Generate radio rows for every item and assign label values to each btn
     const radioProps = [
       { val: 'way off', color: 'bg-red-800/60', border: 'border-red-900/70', fill: checkedFill },
       {
@@ -217,6 +217,7 @@ submitBtn.addEventListener('click', () => {
   setTimeout(() => revealResults(results), 750)
   document.body.classList.add('overflow-hidden')
 
+  // Delete saved answers after test is graded
   localStorage.removeItem('answers')
 })
 
@@ -306,8 +307,45 @@ hiwToggle?.addEventListener('change', () => {
 
 const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')
 
+// Map factor keys to display names
+const factorNames: Record<Factor, string> = {
+  extraversion: 'Extraversion',
+  agreeableness: 'Agreeableness',
+  conscientiousness: 'Conscientiousness',
+  'emotional-stability': 'Emotional Stability',
+  'intellect-imagination': 'Intellect/Imagination',
+}
+
+// Allow the user to download trait test results
 downloadBtn?.addEventListener('click', () => {
+  if (!savedResults) return
+
+  const results = JSON.parse(savedResults) as Record<Factor, { total: number; percentage: number }>
+
+  // Build results table with factor and percentage columns
+  const rows = factors
+    .map((factor) => `| ${factorNames[factor]} | ${results[factor].percentage.toFixed(1)}% |`)
+    .join('\n')
+
+  const markdown = `| Factor | Percent |
+| ------ | ------- |
+${rows}
+`
+
   console.log('Downloading results.md file...')
+
+  // Create object URL blob and trigger browser download of results Markdown
+  const url = URL.createObjectURL(new Blob([markdown], { type: 'text/markdown' }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'results.md'
+  document.body.append(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 0)
+
+  // Delete saved results after file downloads
+  localStorage.removeItem('results')
 })
 
 renderPanel()
