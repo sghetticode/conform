@@ -1,24 +1,18 @@
 console.log('Starting up Conform...')
 
-const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')
-const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
-
 // Start trait test, advance to page 1, and enable nav buttons
+const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')
+let started: Boolean = false
+
 startBtn?.addEventListener('click', () => {
   console.log('User started test')
+  started = true
 
-  navBtns.forEach((btn) => {
-    btn.disabled = false
-  })
-
-  current = 1
-  renderPanel()
+  renderPanel(1)
   console.log('Advanced to panel 1 of test')
 
   startBtn.disabled = true
 })
-
-const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
 
 // Big Five personality traits
 const factors = [
@@ -32,6 +26,7 @@ const factors = [
 type Factor = (typeof factors)[number]
 
 const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
+const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
 
 // Load saved answers or create empty answers obj
 const answers: { [key: string]: string } = JSON.parse(localStorage.getItem('answers') ?? '{}')
@@ -100,16 +95,26 @@ if (savedResults) {
   })
 }
 
-const panels = document.querySelectorAll<HTMLElement>('[data-survey-panel]')
+const savedPanel = Number(localStorage.getItem('panelState'))
+let currentPanel = Number.isFinite(savedPanel) ? savedPanel : 0
+const panels = document.querySelectorAll<HTMLElement>('[data-test-panel]')
+const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 
-// Render current dropdown panel and highlight its nav btn
-function renderPanel() {
+// Render current test panel and highlight its corresponding nav button
+function renderPanel(panelNum: number = currentPanel) {
+  currentPanel = panelNum
+  localStorage.setItem('panelState', String(panelNum))
+
   panels.forEach((panel) => {
-    panel.hidden = Number(panel.dataset.surveyPanel) !== current
+    panel.hidden = Number(panel.dataset.testPanel) !== panelNum
   })
 
   navBtns.forEach((btn) => {
-    const isActive = Number(btn.dataset.navbtn) === current
+    if (started || savedPanel > 0) {
+      btn.disabled = false
+    }
+
+    const isActive = Number(btn.dataset.navbtn) === panelNum
     btn.classList.toggle('bg-mist-700/80', !isActive)
     btn.classList.toggle('bg-mist-600/70', isActive)
 
@@ -119,6 +124,10 @@ function renderPanel() {
       btn.removeAttribute('aria-current')
     }
   })
+}
+
+if (savedPanel > 0) {
+  startBtn!.disabled = true
 }
 
 const joinNav = document.querySelector<HTMLElement>('.join')!
@@ -132,29 +141,29 @@ joinNav.addEventListener('click', (ev) => {
   const btn = target.closest('button')
   if (!btn) return
 
+  let nextPanel = currentPanel
+
   if (btn.dataset.navbtn) {
-    current = Number(btn.dataset.navbtn)
+    nextPanel = Number(btn.dataset.navbtn)
   } else if (btn.dataset.nav === 'prev') {
-    current = Math.max(0, current - 1)
+    nextPanel = Math.max(0, currentPanel - 1)
   } else if (btn.dataset.nav === 'next') {
-    current = Math.min(pages - 1, current + 1)
+    nextPanel = Math.min(pages - 1, currentPanel + 1)
   }
 
-  renderPanel()
+  renderPanel(nextPanel)
 })
 
-// Sync progress bar with answered count
+// Sync progress bar with number of radios selected
 const progress = document.querySelector<HTMLProgressElement>('.progress')!
 
 function syncProgressBar() {
-  progress.value = getAnsweredCount()
+  progress.value = countSelectedRadios()
   updateSubmitState()
 }
 
-// Count number of radio btns currently selected
-let current = 0
-
-function getAnsweredCount() {
+// Count number of radios currently selected
+function countSelectedRadios() {
   return document.querySelectorAll('input[type="radio"][data-trait-radio]:checked').length
 }
 
@@ -182,7 +191,7 @@ function updateSubmitState() {
     submitError.hidden = true
     submitError.textContent = ''
   } else {
-    const remaining = 50 - getAnsweredCount()
+    const remaining = 50 - countSelectedRadios()
     submitError.textContent = `Rate every item to submit (${remaining} remain)`
     submitError.hidden = false
   }
@@ -190,7 +199,7 @@ function updateSubmitState() {
 
 // Block incomplete submissions until all items have ratings
 function formComplete() {
-  return getAnsweredCount() === 50
+  return countSelectedRadios() === 50
 }
 
 submitBtn.addEventListener('click', () => {
@@ -344,8 +353,8 @@ ${rows}
   link.remove()
   setTimeout(() => URL.revokeObjectURL(url), 0)
 
-  // Delete saved results after file downloads
-  localStorage.removeItem('results')
+  // Delete saved results and panel state after file downloads
+  localStorage.clear()
 })
 
 renderPanel()
