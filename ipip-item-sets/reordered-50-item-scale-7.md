@@ -7,7 +7,7 @@ This set of IPIP items is a reordered version of the table in
 | -- | ------------------------------------------------------ | --------------------- | --- |
 | 01 | Don't like to draw attention to myself.                | Extraversion          | 1-  |
 | 02 | Take time out for others.                              | Agreeableness         | 2+  |
-| 03 | Shirk my duties.                                       | Conscientiousness     | 3-  |
+| 03 | Avoid my responsibilities.                             | Conscientiousness     | 3-  |
 | 04 | Have frequent mood swings.                             | Emotional Stability   | 4-  |
 | 05 | Use difficult words.                                   | Intellect/Imagination | 5+  |
 | 06 | Don't mind being the center of attention.              | Extraversion          | 1+  |

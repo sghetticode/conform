@@ -27,7 +27,7 @@ This set of IPIP items is a reordered version of the table in
 | 20 | Am quick to understand things.                         | Intellect/Imagination | 5+  |
 | 21 | Don't like to draw attention to myself.                | Extraversion          | 1-  |
 | 22 | Take time out for others.                              | Agreeableness         | 2+  |
-| 23 | Shirk my duties.                                       | Conscientiousness     | 3-  |
+| 23 | Avoid my responsibilities.                             | Conscientiousness     | 3-  |
 | 24 | Have frequent mood swings.                             | Emotional Stability   | 4-  |
 | 25 | Use difficult words.                                   | Intellect/Imagination | 5+  |
 | 26 | Don't mind being the center of attention.              | Extraversion          | 1+  |
