@@ -56,9 +56,9 @@ per factor:
 
 Sanity properties to eyeball:
 
-- EXT is always 30/50% (perfectly balanced 5+/5-).
-- "Way off" and "Spot on" rows mirror each other (per-factor totals add to 60).
-- ES swings opposite to II (ES is minus-heavy, II is plus-heavy) that is the reversal logic working.
+- EXT is always 30/50% (perfectly balanced 5+/5-)
+- "Way off" and "Spot on" rows mirror each other (per-factor totals add to 60)
+- ES swings opposite to II (ES is minus-heavy, II is plus-heavy) that's the reversal logic working
 
 ### Test area 2: Single-factor isolation
 
@@ -72,8 +72,8 @@ Target factor all **Spot on**:
 | Extraversion          | 30 / 50%               | all 30 / 50%    |
 | Agreeableness         | 34 / 60%               | all 30 / 50%    |
 | Conscientiousness     | 34 / 60%               | all 30 / 50%    |
-| Emotional stability   | 18 / 20%               | all 30 / 50%    |
-| Intellect/imagination | 38 / 70%               | all 30 / 50%    |
+| Emotional Stability   | 18 / 20%               | all 30 / 50%    |
+| Intellect/Imagination | 38 / 70%               | all 30 / 50%    |
 
 Target factor all **Way off**:
 
@@ -82,17 +82,16 @@ Target factor all **Way off**:
 | Extraversion          | 30 / 50%               | all 30 / 50%    |
 | Agreeableness         | 26 / 40%               | all 30 / 50%    |
 | Conscientiousness     | 26 / 40%               | all 30 / 50%    |
-| Emotional stability   | 42 / 80%               | all 30 / 50%    |
-| Intellect/imagination | 22 / 30%               | all 30 / 50%    |
+| Emotional Stability   | 42 / 80%               | all 30 / 50%    |
+| Intellect/Imagination | 22 / 30%               | all 30 / 50%    |
 
-Item numbers are shown in the left column of each table, so you can count off
-which items belong to a factor (or check the `class="factor plus/minus"` attribute in
-`index.html`).
+Item numbers are shown in the left column of each table, so you can count off which items belong 
+to a factor or check the `class="factor plus/minus"` attribute in `index.html`.
 
 ### Test area 3: Single-item flips
 
-Cleanest unit test of +/- scoring on known items (`index.html:113-131`). Baseline:
-all items "Neither" (every factor 30 / 50%). Change exactly one item:
+Cleanest unit test of +/- scoring on known items (`index.html:113-131`). 
+Baseline: all items "Neither" (every factor 30 / 50%). Change exactly one item:
 
 | Flip                                                        | Expected change | Expected factor result |
 | ----------------------------------------------------------- | --------------- | ---------------------- |
@@ -102,21 +101,11 @@ all items "Neither" (every factor 30 / 50%). Change exactly one item:
 | #2 -> Way off                                               | AGR **+2**      | 32 / 55%               |
 | #4 "Get stressed out easily." (ES **-**) -> Spot on         | ES -2           | 28 / 45%               |
 
-If item #2 or #4 moves its factor the "wrong" direction, minus items are not being
-reversed.
+If minus-keyed factors move in the wrong direction, then they're not being reversed correctly.
 
 ### Test area 4: Boundary checks
 
-Requires answering by item key direction):
+Requires answering by item key direction:
 
 - Every **+** item "Spot on" and every **-** item "Way off" -> every factor **50 / 100%**
 - Inverse (- "Spot on", + "Way off") -> every factor **10 / 0%**
-
-### Failure signatures
-
-| Symptom cause                                                           | Likely                                                 |
-| ----------------------------------------------------------------------- | -------------------------------------------------------|
-| Minus-keyed factors move the wrong direction (test area 3)              | Reversal logic missing/inverted                        |
-| All factors identical on every uniform run                              | Score maps not keyed by sign, or sign detection broken |
-| `NaN` in results                                                        | Missing guard for unknown response values              |
-| Non-EXT factors off by a constant on uniform runs                       | Wrong factor attribution from CSS classes              |
