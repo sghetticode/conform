@@ -17,7 +17,7 @@ This set of IPIP items is a reordered version of the table in
 | 10 | Have excellent ideas.                                  | Intellect/Imagination | 5+  |
 | 11 | Have little to say.                                    | Extraversion          | 1-  |
 | 12 | Have a soft heart.                                     | Agreeableness         | 2+  |
-| 13 | Often forget to put things back in their proper place. | Conscientiousness     | 3-  |
+| 13 | Often forget to put things back where they belong.     | Conscientiousness     | 3-  |
 | 14 | Get upset easily.                                      | Emotional Stability   | 4-  |
 | 15 | Do not have a good imagination.                        | Intellect/Imagination | 5-  |
 | 16 | Talk to a lot of different people at parties.          | Extraversion          | 1+  |
