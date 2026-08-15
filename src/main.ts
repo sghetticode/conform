@@ -1,15 +1,24 @@
 console.log('Starting up Conform...')
 
-// Start trait test, advance to page 1, and enable nav buttons
-const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')
-let started: Boolean = false
+let started: Boolean
 
-startBtn?.addEventListener('click', () => {
+if (localStorage.getItem('testStarted') === 'true') {
+  started = true
+} else {
+  localStorage.setItem('testStarted', 'false')
+  started = false
+}
+
+// Start trait test, load panel 1, and enable nav buttons
+const startBtn = document.querySelector<HTMLButtonElement>('#start-btn')!
+
+startBtn.addEventListener('click', () => {
   console.log('User started test')
   started = true
+  localStorage.setItem('testStarted', 'true')
 
   renderPanel(1)
-  console.log('Advanced to panel 1 of test')
+  console.log('Loaded test panel 1')
 
   startBtn.disabled = true
 })
@@ -33,6 +42,7 @@ const answers: { [key: string]: string } = JSON.parse(localStorage.getItem('answ
 
 // Load saved results if they exist
 const savedResults = localStorage.getItem('results')
+
 if (savedResults) {
   revealResults(JSON.parse(savedResults))
 } else {
@@ -95,7 +105,7 @@ if (savedResults) {
   })
 }
 
-const savedPanel = Number(localStorage.getItem('panelState'))
+const savedPanel = Number(localStorage.getItem('panelRendered'))
 let currentPanel = Number.isFinite(savedPanel) ? savedPanel : 0
 const panels = document.querySelectorAll<HTMLElement>('[data-test-panel]')
 const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
@@ -103,31 +113,27 @@ const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 // Render current test panel and highlight its corresponding nav button
 function renderPanel(panelNum: number = currentPanel) {
   currentPanel = panelNum
-  localStorage.setItem('panelState', String(panelNum))
+  localStorage.setItem('panelRendered', String(panelNum))
 
   panels.forEach((panel) => {
     panel.hidden = Number(panel.dataset.testPanel) !== panelNum
   })
 
   navBtns.forEach((btn) => {
-    if (started || savedPanel > 0) {
+    if (currentPanel === 0 && started === false) {
+      btn.disabled = true
+    } else if (currentPanel >= 0 && started === true) {
+      startBtn.disabled = true
       btn.disabled = false
-    }
 
-    const isActive = Number(btn.dataset.navbtn) === panelNum
-    btn.classList.toggle('bg-mist-700/80', !isActive)
-    btn.classList.toggle('bg-mist-600/70', isActive)
+      const isActive = Number(btn.dataset.navbtn) === panelNum
+      btn.classList.toggle('bg-mist-700/80', !isActive)
+      btn.classList.toggle('bg-mist-600/70', isActive)
 
-    if (isActive) {
-      btn.setAttribute('aria-current', 'page')
-    } else {
+      if (isActive) btn.setAttribute('aria-current', 'page')
       btn.removeAttribute('aria-current')
     }
   })
-}
-
-if (savedPanel > 0) {
-  startBtn!.disabled = true
 }
 
 const joinNav = document.querySelector<HTMLElement>('.join')!
@@ -314,8 +320,6 @@ hiwToggle?.addEventListener('change', () => {
   }
 })
 
-const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')
-
 // Map factor keys to display names
 const factorNames: Record<Factor, string> = {
   extraversion: 'Extraversion',
@@ -325,33 +329,46 @@ const factorNames: Record<Factor, string> = {
   'intellect-imagination': 'Intellect/Imagination',
 }
 
-// Allow the user to download trait test results
-downloadBtn?.addEventListener('click', () => {
-  if (!savedResults) return
-
-  const results = JSON.parse(savedResults) as Record<Factor, { total: number; percentage: number }>
-
-  // Build results table with factor and percentage columns
-  const rows = factors
-    .map((factor) => `| ${factorNames[factor]} | ${results[factor].percentage.toFixed(1)}% |`)
+// Build results table with factor and percentage columns
+function buildMarkdown(results: Record<Factor, { total: number; percentage: number }>): string {
+  const lines = factors
+    .map((factor) => {
+      const name = factorNames[factor].padEnd(21)
+      const percent = `${Math.round(results[factor].percentage)}%`.padEnd(7)
+      return `| ${name} | ${percent} |`
+    })
     .join('\n')
 
-  const markdown = `| Factor | Percent |
-| ------ | ------- |
-${rows}
+  return `# Your Personality Traits
+
+| Factor                | Percent |
+| --------------------- | ------- |
+${lines}
 `
+}
 
-  console.log('Downloading results.md file...')
-
-  // Create object URL blob and trigger browser download of results Markdown
-  const url = URL.createObjectURL(new Blob([markdown], { type: 'text/markdown' }))
+// Create object URL blob and trigger browser download of results Markdown
+function downloadResults(results: Record<Factor, { total: number; percentage: number }>) {
+  const blob = new Blob([buildMarkdown(results)], { type: 'text/markdown' })
+  const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
+
   link.href = url
   link.download = 'results.md'
   document.body.append(link)
   link.click()
   link.remove()
   setTimeout(() => URL.revokeObjectURL(url), 0)
+}
+
+const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')!
+
+// Download trait test results and clear local data
+downloadBtn.addEventListener('click', () => {
+  if (!savedResults) return
+
+  console.log('Downloading results.md file...')
+  downloadResults(JSON.parse(savedResults))
 
   // Delete saved results and panel state after file downloads
   localStorage.clear()
