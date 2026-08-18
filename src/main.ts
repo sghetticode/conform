@@ -365,13 +365,14 @@ const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')!
 
 // Download trait test results and clear local data
 downloadBtn.addEventListener('click', () => {
-  if (!savedResults) return
-
+  const currentResults = localStorage.getItem('results')
+  if (!currentResults) return
   console.log('Downloading results.md file...')
-  downloadResults(JSON.parse(savedResults))
+  downloadResults(JSON.parse(currentResults))
 
   // Delete saved results and panel state after file downloads
-  localStorage.clear()
+  localStorage.removeItem('results')
+  localStorage.removeItem('panelRendered')
 })
 
 renderPanel()
