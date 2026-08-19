@@ -1,3 +1,10 @@
+import { getGenerator } from './smoke-test'
+
+getGenerator()
+  .then((gen) => gen('Write one sentence about smoke testing.'))
+  .then(console.log)
+  .catch(console.error)
+
 console.log('Starting up Conform...')
 
 let started: Boolean
