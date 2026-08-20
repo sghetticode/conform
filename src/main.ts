@@ -1,10 +1,5 @@
 import { getGenerator } from './smoke-test'
 
-getGenerator()
-  .then((gen) => gen('Write one sentence about smoke testing.'))
-  .then(console.log)
-  .catch(console.error)
-
 console.log('Starting up Conform...')
 
 let started: Boolean
@@ -384,3 +379,26 @@ downloadBtn.addEventListener('click', () => {
 
 renderPanel()
 syncProgressBar()
+
+console.log('Beginning smoke test...')
+const smokeTestStart = performance.now()
+getGenerator()
+  .then((gen) =>
+    gen([{ role: 'user', content: 'Write a sentence about web dev smoke tests.' }], {
+      max_new_tokens: 64,
+    }),
+  )
+  .then((output) => {
+    const elapsed = Math.round(performance.now() - smokeTestStart)
+    const text = output[0].generated_text.at(-1)?.content
+
+    if (text) {
+      console.log(`[SMOKE TEST] PASS (${elapsed}ms): ${text}`)
+    } else {
+      console.error(`[SMOKE TEST] FAIL (${elapsed}ms): empty output`, output)
+    }
+  })
+  .catch((err) => {
+    const elapsed = Math.round(performance.now() - smokeTestStart)
+    console.error(`[SMOKE TEST] FAIL (${elapsed}ms):`, err)
+  })
