@@ -29,10 +29,10 @@
         Give your agent the insight it needs
       </h2>
     </div>
-    <main class="mt-9 mr-8 ml-8 flex flex-1">
+    <main class="mt-10 mr-9 mb-5 ml-9 flex flex-1">
       <div id="column-left" class="max-w-1/2 flex-1 text-justify">
         <section id="trait-test" class="flex flex-col">
-          <div id="card-deck" class="card w-fit rounded-xl bg-mist-400 p-2" tabindex="0">
+          <div id="card-deck" class="card w-fit rounded-xl bg-mist-400 p-2 mb-4" tabindex="0">
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
               <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
@@ -730,8 +730,8 @@
     <!-- Test results view -->
     <div
       id="test-results"
-      class="fixed inset-0 flex h-screen w-full flex-col items-center justify-center gap-8
-        bg-radial from-mist-700 from-30% to-mist-800"
+      class="flex flex-1 flex-col min-h-0 items-center justify-center gap-8 overflow-y-auto
+        p-6 bg-radial from-mist-700 from-30% to-mist-800"
       hidden
     >
       <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-8 shadow-md
@@ -781,8 +781,7 @@
       </button>
     </div>
     <footer
-      class="footer footer-center fixed inset-x-0 bottom-0 z-50 bg-mist-900/40 p-3
-        text-neutral-300/75"
+      class="footer footer-center h-fit mt-auto bg-mist-900/40 p-3 text-neutral-300/75"
     >
       <aside class="text-sm">
         <h4 class="font-medium">YOUR DATA</h4>
