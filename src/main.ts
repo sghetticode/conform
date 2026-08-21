@@ -1,4 +1,4 @@
-import { getGenerator } from './smoke-test'
+import { getGenerator, getDevice } from './smoke-test'
 
 console.log('Starting up Conform...')
 
@@ -385,20 +385,22 @@ const smokeTestStart = performance.now()
 getGenerator()
   .then((gen) =>
     gen([{ role: 'user', content: 'Write a sentence about web dev smoke tests.' }], {
-      max_new_tokens: 64,
+      max_new_tokens: 50,
     }),
   )
   .then((output) => {
     const elapsed = Math.round(performance.now() - smokeTestStart)
+    const device = getDevice() ?? 'unknown'
     const text = output[0].generated_text.at(-1)?.content
 
     if (text) {
-      console.log(`[SMOKE TEST] PASS (${elapsed}ms): ${text}`)
+      console.log(`[SMOKE TEST] PASS (${elapsed}ms, ${device}): ${text}`)
     } else {
-      console.error(`[SMOKE TEST] FAIL (${elapsed}ms): empty output`, output)
+      console.error(`[SMOKE TEST] FAIL (${elapsed}ms, ${device}): empty output`, output)
     }
   })
   .catch((err) => {
     const elapsed = Math.round(performance.now() - smokeTestStart)
-    console.error(`[SMOKE TEST] FAIL (${elapsed}ms):`, err)
+    const device = getDevice() ?? 'unknown'
+    console.error(`[SMOKE TEST] FAIL (${elapsed}ms, ${device}):`, err)
   })
