@@ -2,6 +2,12 @@ import { getGenerator, getDevice } from './smoke-test'
 
 console.log('Starting up Conform...')
 
+const downloadTimestamp = Number(localStorage.getItem('downloadTimestamp'))
+// Delete following keys: downloadTimestamp, panelRendered, results, testSubmitted
+if (downloadTimestamp && Date.now() - downloadTimestamp > 3600_000) {
+  localStorage.clear()
+}
+
 let started: Boolean
 
 if (localStorage.getItem('testStarted') === 'true') {
@@ -190,9 +196,14 @@ document.addEventListener('change', (ev) => {
 const submitBtn = document.querySelector<HTMLButtonElement>('#submit-btn')!
 const submitError = document.getElementById('submit-error')!
 
-// Enable submit btn when complete or show remaining count
+// Block incomplete submissions until all items have ratings
+function testComplete() {
+  return countSelectedRadios() === 50
+}
+
+// Enable submit button when test is complete or show remaining count
 function updateSubmitState() {
-  const complete = formComplete()
+  const complete = testComplete()
   submitBtn.disabled = !complete
 
   if (complete) {
@@ -204,39 +215,6 @@ function updateSubmitState() {
     submitError.hidden = false
   }
 }
-
-// Block incomplete submissions until all items have ratings
-function formComplete() {
-  return countSelectedRadios() === 50
-}
-
-submitBtn.addEventListener('click', () => {
-  if (!formComplete()) {
-    updateSubmitState()
-    return
-  }
-
-  submitError.hidden = true
-  submitError.textContent = ''
-
-  console.log('Trait test submitted')
-  const results = gradeTest(answers)
-
-  // Hide submit page content then replace with loading component
-  document.getElementById('submit-heading')!.hidden = true
-  const scoreLoading = document.getElementById('score-loading')!
-  scoreLoading.hidden = false
-  scoreLoading.focus()
-  submitBtn.hidden = true
-  joinNav.hidden = true
-
-  // Show trait test results
-  setTimeout(() => revealResults(results), 750)
-  document.body.classList.add('overflow-hidden')
-
-  // Delete saved answers after test is graded
-  localStorage.removeItem('answers')
-})
 
 // IPIP plus key item scores
 const plusScores: Record<string, number> = {
@@ -311,6 +289,35 @@ function revealResults(results: Record<Factor, { total: number; percentage: numb
   document.getElementById('test-results')!.hidden = false
 }
 
+submitBtn.addEventListener('click', () => {
+  if (!testComplete()) {
+    updateSubmitState()
+    return
+  }
+
+  submitError.hidden = true
+  submitError.textContent = ''
+
+  console.log('Trait test submitted')
+  localStorage.removeItem('testStarted')
+  localStorage.setItem('testSubmitted', 'true')
+
+  const results = gradeTest(answers)
+  localStorage.removeItem('answers')
+
+  // Hide submit page content then replace with loading component
+  document.getElementById('submit-heading')!.hidden = true
+  const scoreLoading = document.getElementById('score-loading')!
+  scoreLoading.hidden = false
+  scoreLoading.focus()
+  submitBtn.hidden = true
+  joinNav.hidden = true
+
+  // Show trait test results
+  setTimeout(() => revealResults(results), 1000)
+  document.body.classList.add('overflow-hidden')
+})
+
 // Log un/checked state of 'how it works' collapse component
 const hiwToggle = document.querySelector<HTMLInputElement>('#hiw-toggle')
 
@@ -365,16 +372,14 @@ function downloadResults(results: Record<Factor, { total: number; percentage: nu
 
 const downloadBtn = document.querySelector<HTMLButtonElement>('#download-btn')!
 
-// Download trait test results and clear local data
+// Download trait test results and clear local data after an hour
 downloadBtn.addEventListener('click', () => {
   const currentResults = localStorage.getItem('results')
   if (!currentResults) return
-  console.log('Downloading results.md file...')
-  downloadResults(JSON.parse(currentResults))
 
-  // Delete saved results and panel state after file downloads
-  localStorage.removeItem('results')
-  localStorage.removeItem('panelRendered')
+  console.log('Downloading results.md file...')
+  localStorage.setItem('downloadTimestamp', String(Date.now()))
+  downloadResults(JSON.parse(currentResults))
 })
 
 renderPanel()
@@ -382,6 +387,7 @@ syncProgressBar()
 
 console.log('Beginning smoke test...')
 const smokeTestStart = performance.now()
+
 getGenerator()
   .then((gen) =>
     gen([{ role: 'user', content: 'Write a sentence about web dev smoke tests.' }], {
