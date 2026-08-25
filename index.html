@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="/src/style.css" />
     <title>CONFORM.md</title>
     <script>
-      // Load results view on first paint if found
-      if (localStorage.getItem('results')) document.documentElement.classList.add('results-found')
+      // Check for expired results before first paint, then show results view if valid
+      const downloadTimestamp = Number(localStorage.getItem('downloadTimestamp'))
+      if (downloadTimestamp && Date.now() - downloadTimestamp > 3600_000) {
+        localStorage.clear()
+      } else if (localStorage.getItem('testSubmitted')) {
+        document.documentElement.classList.add('results-found')
+      }
     </script>
   </head>
   <body
@@ -719,9 +724,9 @@
               The results of the trait test are separated into five factors, known as the "Big Five"
               markers for modeling personality. Each of them has a percentage associated with it
               based on the statements you ranked as way off, inaccurate, neither, accurate, or spot
-              on. These values are used to generate a short description of your personality that's
-              saved to a <span class="font-normal">CONFORM.md</span> file. Follow the instructions
-              provided after you finish to use as intended.
+              on. These values are passed to an LLM that generates a short description of your 
+              personality. This is saved to a Markdown file that's specific to your attributes. 
+              Follow the instructions provided after you finish to use as intended.
             </p>
           </div>
         </section>
