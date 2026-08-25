@@ -1,6 +1,6 @@
 import { env, pipeline, type TextGenerationPipeline } from '@huggingface/transformers'
 
-const MODEL_ID = 'onnx-community/SmolLM2-135M-Instruct-ONNX'
+const MODEL_ID = 'onnx-community/SmolLM2-360M-Instruct-ONNX'
 const DTYPE_FOR = { wasm: 'q8', webgpu: 'q4' } as const
 
 let selectedDevice: 'webgpu' | 'wasm' | null = null
@@ -19,7 +19,7 @@ async function detectDevice(): Promise<'webgpu' | 'wasm'> {
 function configureWasm() {
   const threads = self.crossOriginIsolated ? navigator.hardwareConcurrency ?? 1 : 1
   if (!self.crossOriginIsolated) {
-    console.warn('[SMOKE TEST] Not cross-origin isolated — falling back to single-threaded WASM.')
+    console.warn('[Smoke test] Not cross-origin isolated — falling back to single-threaded WASM.')
   }
 
   Object.assign(env.backends.onnx.wasm!, { numThreads: threads })
@@ -46,7 +46,7 @@ export function getGenerator(): Promise<TextGenerationPipeline> {
           const bucket = Math.floor(percent / 10) * 10
           if (bucket > (lastLoggedPercent.get(data.file) ?? -1)) {
             lastLoggedPercent.set(data.file, bucket)
-            console.log(`[SMOKE TEST] Downloading ${data.file}: ${bucket}%`)
+            console.log(`[Smoke test] Downloading ${data.file}: ${bucket}%`)
           }
         },
       })
