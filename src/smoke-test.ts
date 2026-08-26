@@ -1,9 +1,24 @@
-import { env, pipeline, type TextGenerationPipeline } from '@huggingface/transformers'
+import { env, pipeline, type Message, type TextGenerationPipeline } from '@huggingface/transformers'
 
 const MODEL_ID = 'onnx-community/SmolLM2-360M-Instruct-ONNX'
 const DTYPE_FOR = { wasm: 'q8', webgpu: 'q4' } as const
 
-let selectedDevice: 'webgpu' | 'wasm' | null = null
+// Events this worker sends to the main thread
+type WorkerEvent =
+  | { type: 'progress'; file: string; percent: number }
+  | { type: 'generating' }
+  | { type: 'result'; text: string }
+  | { type: 'error'; message: string }
+
+// Commands the main thread sends in
+type WorkerCommand = { type: 'load' } | { type: 'generate'; messages: Message[] }
+
+// Self (self) is typed as Window under the project's DOM lib so cast to worker global shape
+const workerScope = self as unknown as {
+  postMessage(message: WorkerEvent): void
+  onmessage: ((ev: MessageEvent<WorkerCommand>) => void) | null
+}
+
 let generatorPromise: Promise<TextGenerationPipeline> | null = null
 
 async function detectDevice(): Promise<'webgpu' | 'wasm'> {
@@ -19,13 +34,11 @@ async function detectDevice(): Promise<'webgpu' | 'wasm'> {
 function configureWasm() {
   const threads = self.crossOriginIsolated ? navigator.hardwareConcurrency ?? 1 : 1
   if (!self.crossOriginIsolated) {
-    console.warn('[Smoke test] Not cross-origin isolated — falling back to single-threaded WASM.')
+    console.warn('Generator: Not cross-origin isolated. Falling back to single-threaded WASM...')
   }
 
   Object.assign(env.backends.onnx.wasm!, { numThreads: threads })
 }
-
-export function getDevice() { return selectedDevice }
 
 const lastLoggedPercent = new Map<string, number>()
 
@@ -33,7 +46,6 @@ export function getGenerator(): Promise<TextGenerationPipeline> {
   if (!generatorPromise) {
     generatorPromise = (async () => {
       const device = await detectDevice()
-      selectedDevice = device
       if (device === 'wasm') configureWasm()
       
       return pipeline('text-generation', MODEL_ID, {
@@ -46,11 +58,50 @@ export function getGenerator(): Promise<TextGenerationPipeline> {
           const bucket = Math.floor(percent / 10) * 10
           if (bucket > (lastLoggedPercent.get(data.file) ?? -1)) {
             lastLoggedPercent.set(data.file, bucket)
-            console.log(`[Smoke test] Downloading ${data.file}: ${bucket}%`)
+            console.log(`Generator: Downloading ${data.file}: ${bucket}%`)
+            workerScope.postMessage({ type: 'progress', file: data.file, percent: bucket })
           }
         },
       })
     })()
+
+    // Reset so failed load can be retried by a later command
+    generatorPromise.catch(() => {
+      generatorPromise = null
+    })
   }
   return generatorPromise
+}
+
+workerScope.onmessage = async (ev) => {
+  const command = ev.data
+
+  try {
+    if (command.type === 'load') {
+      await getGenerator()
+      return
+    }
+
+    // Generate: reuse in-flight or ready pipeline, so no re-download after preload
+    const generator = await getGenerator()
+    workerScope.postMessage({ type: 'generating' })
+
+    const output = await generator(command.messages, {
+      max_new_tokens: 250,
+      do_sample: false,
+    })
+
+    const content = output[0].generated_text.at(-1)?.content
+    if (typeof content === 'string' && content.length > 0) {
+      workerScope.postMessage({ type: 'result', text: content })
+    } else {
+      workerScope.postMessage({ type: 'error', message: 'Model returned empty output' })
+    }
+  } catch (err) {
+    console.error('Generator: failed', err)
+    workerScope.postMessage({
+      type: 'error',
+      message: err instanceof Error ? err.message : String(err),
+    })
+  }
 }
