@@ -736,17 +736,18 @@
     <!-- Test results view -->
     <div
       id="test-results"
-      class="flex flex-1 flex-col min-h-0 items-center justify-center gap-8 overflow-y-auto
-        p-6 bg-radial from-mist-700 from-30% to-mist-800"
+      class="flex flex-1 flex-col min-h-0 items-center justify-center gap-9 overflow-y-auto
+        p-9 bg-radial from-mist-700 from-30% to-mist-800"
       hidden
     >
-      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-8 shadow-md
+      <h3 class="text-center text-2xl font-normal text-neutral-100">
+        Your personality traits!
+      </h3>
+      <!-- Factor/percent table -->
+      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-7 shadow-md
         shadow-mist-900/60">
-        <h3 class="mb-6 text-center text-2xl font-normal text-neutral-100">
-          Your personality traits!
-        </h3>
         <table
-          class="table w-[40vw] rounded-lg border border-mist-600/60 bg-mist-500/50 py-0.5
+          class="table w-[40vw] rounded-lg border border-mist-600/60 bg-mist-500/50 py-1
             [&_tr>*]:border-b-mist-600/30"
         >
           <thead class="text-xl text-neutral-100">
@@ -777,32 +778,36 @@
           </tbody>
         </table>
       </div>
-      <p
-        id="description"
-        class="max-w-2xl text-justify text-xl leading-normal text-neutral-100"
-        hidden>
-      </p>
-      <button
-        id="download-btn"
-        class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-6 font-normal 
-          shadow-sm shadow-mist-900/60 hover:bg-mist-500"
-        tabindex="0"
-      >
-        Download Results
-      </button>
-      <div
-        class="card w-fit max-w-2xl rounded-lg bg-mist-500/75 p-6 shadow-sm shadow-mist-900/60"
-      >
-        <h3 class="mb-3 text-xl font-normal text-neutral-100">How to use your Conform profile</h3>
-        <ol class="list-decimal space-y-2 pl-6 text-lg text-neutral-100">
-          <li>Download your CONFORM.md file.</li>
+      <div class="card h-fit max-w-[60vw] rounded-lg bg-mist-400/80 p-7 shadow-md shadow-mist-900/60">
+        <p
+          id="trait-description"
+          class="text-justify text-xl leading-normal text-neutral-100 rounded-md border
+          border-mist-600/40 bg-mist-500/70 p-4"
+          hidden>
+        </p>
+      </div>
+      <!-- Intructions -->
+      <div class="w-full max-w-[60vw]">
+        <h3 class="mb-3 text-xl font-normal text-neutral-100">To use your Conform profile:</h3>
+        <ol class="list-decimal list-inside space-y-2 text-lg text-neutral-100">
           <li>
-            Move it to the dot agents folder in your home directory:
-            <code class="text-neutral-50">~/.agents/CONFORM.md</code>
+            Download your 
+            <button
+            id="download-btn"
+            class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-3 ml-1 font-normal 
+              shadow-sm shadow-mist-900/60 hover:bg-mist-500"
+            tabindex="0"
+          >
+            CONFORM.md
+          </button>
           </li>
           <li>
-            Reference it in your global <code class="text-neutral-50">AGENTS.md</code> file so 
-            any agent can use your trait data to adapt how it interacts with you.
+            Move it to the agents folder in your home directory:
+            <code>~/.agents/CONFORM.md</code>
+          </li>
+          <li>
+            Reference it in a global <code>AGENTS.md</code> so any of your agents can access your  
+            trait data
           </li>
         </ol>
       </div>
@@ -814,7 +819,7 @@
         <h4 class="font-medium">YOUR DATA</h4>
         <p class="italic">
           Trait test related data is temporarily stored in your browser. All of it is deleted 
-          after you download your CONFORM.md file.
+          an hour after you download your CONFORM.md file.
         </p>
       </aside>
     </footer>
