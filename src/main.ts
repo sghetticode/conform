@@ -1,14 +1,16 @@
-import { getGenerator, getDevice } from './smoke-test'
+import { preloadGenerator, generateDescription } from './generator'
+import { factors, factorNames, type Factor } from './factors'
 
 console.log('Starting up Conform...')
 
 const downloadTimestamp = Number(localStorage.getItem('downloadTimestamp'))
+const hour = 3600 * 1000
 // Delete following keys: downloadTimestamp, panelRendered, results, testSubmitted
-if (downloadTimestamp && Date.now() - downloadTimestamp > 3600_000) {
+if (downloadTimestamp && Date.now() - downloadTimestamp > hour) {
   localStorage.clear()
 }
 
-let started: Boolean
+let started: boolean
 
 if (localStorage.getItem('testStarted') === 'true') {
   started = true
@@ -26,21 +28,13 @@ startBtn.addEventListener('click', () => {
   localStorage.setItem('testStarted', 'true')
 
   renderPanel(1)
-  console.log('Loaded test panel 1')
+  console.log('Rendered test panel 1')
 
   startBtn.disabled = true
+
+  // Load lang model in background
+  preloadGenerator()
 })
-
-// Big Five personality traits
-const factors = [
-  'extraversion',
-  'agreeableness',
-  'conscientiousness',
-  'emotional-stability',
-  'intellect-imagination',
-] as const
-
-type Factor = (typeof factors)[number]
 
 const items: Record<string, { factor: Factor; sign: '+' | '-' }> = {}
 const itemRows = document.querySelectorAll<HTMLTableRowElement>('#trait-test tbody tr')
@@ -138,8 +132,11 @@ function renderPanel(panelNum: number = currentPanel) {
       btn.classList.toggle('bg-mist-700/80', !isActive)
       btn.classList.toggle('bg-mist-600/70', isActive)
 
-      if (isActive) btn.setAttribute('aria-current', 'page')
-      btn.removeAttribute('aria-current')
+      if (isActive) {
+        btn.setAttribute('aria-current', 'page')
+      } else {
+        btn.removeAttribute('aria-current')
+      }
     }
   })
 }
@@ -283,13 +280,20 @@ function revealResults(results: Record<Factor, { total: number; percentage: numb
     if (cell) cell.textContent = `${Math.round(results[factor].percentage)}%`
   })
 
+  // Show generated description below table
+  const storedDesc = localStorage.getItem('traitDescription')
+  const traitDesc = document.getElementById('trait-description')!
+  traitDesc.hidden = !storedDesc
+  if (storedDesc) traitDesc.textContent = storedDesc
+
   // Hide landing page content and display test results
   document.getElementById('header')!.hidden = true
   document.querySelector('main')!.hidden = true
   document.getElementById('test-results')!.hidden = false
 }
 
-submitBtn.addEventListener('click', () => {
+// Test submission handler
+submitBtn.addEventListener('click', async () => {
   if (!testComplete()) {
     updateSubmitState()
     return
@@ -313,8 +317,20 @@ submitBtn.addEventListener('click', () => {
   submitBtn.hidden = true
   joinNav.hidden = true
 
+  const scoreStatus = document.getElementById('score-status')!
+
+  try {
+    const description = await generateDescription(results, (status) => {
+      scoreStatus.textContent = status
+    })
+    localStorage.setItem('description', description)
+  } catch (err) {
+    console.error('Generator: Falling back to table-only results:', err)
+    localStorage.removeItem('traitDescription')
+  }
+
   // Show trait test results
-  setTimeout(() => revealResults(results), 1000)
+  revealResults(results)
   document.body.classList.add('overflow-hidden')
 })
 
@@ -329,17 +345,11 @@ hiwToggle?.addEventListener('change', () => {
   }
 })
 
-// Map factor keys to display names
-const factorNames: Record<Factor, string> = {
-  extraversion: 'Extraversion',
-  agreeableness: 'Agreeableness',
-  conscientiousness: 'Conscientiousness',
-  'emotional-stability': 'Emotional Stability',
-  'intellect-imagination': 'Intellect/Imagination',
-}
-
-// Build results table with factor and percentage columns
-function buildMarkdown(results: Record<Factor, { total: number; percentage: number }>): string {
+// Build results table with factor and percentage columns and personality description below
+function buildMarkdown(
+  results: Record<Factor, { total: number; percentage: number }>,
+  description: string | null,
+): string {
   const lines = factors
     .map((factor) => {
       const name = factorNames[factor].padEnd(21)
@@ -348,22 +358,29 @@ function buildMarkdown(results: Record<Factor, { total: number; percentage: numb
     })
     .join('\n')
 
-  return `# Your Personality Traits
+  let markdown = `# Your Personality Traits
 
 | Factor                | Percent |
 | --------------------- | ------- |
 ${lines}
 `
+
+  if (description) markdown += `\n${description}\n`
+
+  return markdown
 }
 
 // Create object URL blob and trigger browser download of results Markdown
-function downloadResults(results: Record<Factor, { total: number; percentage: number }>) {
-  const blob = new Blob([buildMarkdown(results)], { type: 'text/markdown' })
+function downloadResults(
+  results: Record<Factor, { total: number; percentage: number }>,
+  description: string | null,
+) {
+  const blob = new Blob([buildMarkdown(results, description)], { type: 'text/markdown' })
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
 
   link.href = url
-  link.download = 'results.md'
+  link.download = 'CONFORM.md'
   document.body.append(link)
   link.click()
   link.remove()
@@ -377,36 +394,10 @@ downloadBtn.addEventListener('click', () => {
   const currentResults = localStorage.getItem('results')
   if (!currentResults) return
 
-  console.log('Downloading results.md file...')
+  console.log('Downloading CONFORM.md file...')
   localStorage.setItem('downloadTimestamp', String(Date.now()))
-  downloadResults(JSON.parse(currentResults))
+  downloadResults(JSON.parse(currentResults), localStorage.getItem('traitDescription'))
 })
 
 renderPanel()
 syncProgressBar()
-
-console.log('Beginning smoke test...')
-const smokeTestStart = performance.now()
-
-getGenerator()
-  .then((gen) =>
-    gen([{ role: 'user', content: 'Write a sentence about web dev smoke tests.' }], {
-      max_new_tokens: 50,
-    }),
-  )
-  .then((output) => {
-    const elapsed = Math.round(performance.now() - smokeTestStart)
-    const device = getDevice() ?? 'unknown'
-    const text = output[0].generated_text.at(-1)?.content
-
-    if (text) {
-      console.log(`[SMOKE TEST] PASS (${elapsed}ms, ${device}): ${text}`)
-    } else {
-      console.error(`[SMOKE TEST] FAIL (${elapsed}ms, ${device}): empty output`, output)
-    }
-  })
-  .catch((err) => {
-    const elapsed = Math.round(performance.now() - smokeTestStart)
-    const device = getDevice() ?? 'unknown'
-    console.error(`[SMOKE TEST] FAIL (${elapsed}ms, ${device}):`, err)
-  })
