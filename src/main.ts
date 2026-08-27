@@ -107,8 +107,8 @@ if (savedResults) {
   })
 }
 
-const savedPanel = Number(localStorage.getItem('panelRendered'))
-let currentPanel = Number.isFinite(savedPanel) ? savedPanel : 0
+const storedPanel = Number(localStorage.getItem('panelRendered'))
+let currentPanel = Number.isFinite(storedPanel) ? storedPanel : 0
 const panels = document.querySelectorAll<HTMLElement>('[data-test-panel]')
 const navBtns = document.querySelectorAll<HTMLButtonElement>('#nav-btns button')
 
@@ -323,15 +323,16 @@ submitBtn.addEventListener('click', async () => {
     const description = await generateDescription(results, (status) => {
       scoreStatus.textContent = status
     })
-    localStorage.setItem('description', description)
+    localStorage.setItem('traitDescription', description)
   } catch (err) {
     console.error('Generator: Falling back to table-only results:', err)
     localStorage.removeItem('traitDescription')
   }
 
   // Show trait test results
+  localStorage.removeItem('panelRendered')
   revealResults(results)
-  document.body.classList.add('overflow-hidden')
+  document.body.classList.add('overflow-x-hidden')
 })
 
 // Log un/checked state of 'how it works' collapse component
