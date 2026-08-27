@@ -78,7 +78,7 @@ export function generateDescription(
       {
         role: 'system',
         content:
-          "Use the percentages of each factor from the trait test to write a personality description.",
+          "Write a personality description, in second person, based on the test results. One sentence per factor.",
       },
       { role: 'user', content: percentages },
     ]
