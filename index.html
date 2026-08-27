@@ -576,6 +576,7 @@
                       Scoring your trait test
                     </span>
                     <span class="loading loading-spinner loading-xl"></span>
+                    <p id="score-status" class="text-lg text-mist-600 italic" roll="status"></p>
                   </div>
                 </div>
               </div>
@@ -776,6 +777,11 @@
           </tbody>
         </table>
       </div>
+      <p
+        id="description"
+        class="max-w-2xl text-justify text-xl leading-normal text-neutral-100"
+        hidden>
+      </p>
       <button
         id="download-btn"
         class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-6 font-normal 
@@ -784,6 +790,22 @@
       >
         Download Results
       </button>
+      <div
+        class="card w-fit max-w-2xl rounded-lg bg-mist-500/75 p-6 shadow-sm shadow-mist-900/60"
+      >
+        <h3 class="mb-3 text-xl font-normal text-neutral-100">How to use your Conform profile</h3>
+        <ol class="list-decimal space-y-2 pl-6 text-lg text-neutral-100">
+          <li>Download your CONFORM.md file.</li>
+          <li>
+            Move it to the dot agents folder in your home directory:
+            <code class="text-neutral-50">~/.agents/CONFORM.md</code>
+          </li>
+          <li>
+            Reference it in your global <code class="text-neutral-50">AGENTS.md</code> file so 
+            any agent can use your trait data to adapt how it interacts with you.
+          </li>
+        </ol>
+      </div>
     </div>
     <footer
       class="footer footer-center h-fit mt-auto bg-mist-900/40 p-3 text-neutral-300/75"
