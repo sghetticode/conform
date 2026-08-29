@@ -1,5 +1,5 @@
 import { preloadGenerator, generateDescription } from './generator'
-import { factors, factorNames, type Factor } from './factors'
+import { factors, factorNames, levelFor, type Factor } from './factors'
 
 console.log('Starting up Conform...')
 
@@ -276,8 +276,11 @@ function gradeTest(
 
 function revealResults(results: Record<Factor, { total: number; percentage: number }>) {
   factors.forEach((factor, i) => {
-    const cell = document.getElementById(`factor-${i + 1}-results`)
-    if (cell) cell.textContent = `${Math.round(results[factor].percentage)}%`
+    const percentCell = document.getElementById(`factor-${i + 1}-results`)
+    if (percentCell) percentCell.textContent = `${Math.round(results[factor].percentage)}%`
+
+    const levelCell = document.getElementById(`factor-${i + 1}-level`)
+    if (levelCell) levelCell.textContent = levelFor(results[factor].percentage)
   })
 
   // Show generated description below table
@@ -346,7 +349,7 @@ hiwToggle?.addEventListener('change', () => {
   }
 })
 
-// Build results table with factor and percentage columns and personality description below
+// Build results file with table and personality description
 function buildMarkdown(
   results: Record<Factor, { total: number; percentage: number }>,
   description: string | null,
@@ -355,14 +358,15 @@ function buildMarkdown(
     .map((factor) => {
       const name = factorNames[factor].padEnd(21)
       const percent = `${Math.round(results[factor].percentage)}%`.padEnd(7)
-      return `| ${name} | ${percent} |`
+      const level = levelFor(results[factor].percentage).padEnd(9)
+      return `| ${name} | ${percent} | ${level} |`
     })
     .join('\n')
 
-  let markdown = `# Your Personality Traits
+  let markdown = `# CONFORM.md
 
-| Factor                | Percent |
-| --------------------- | ------- |
+| Factor                | Percent | Level     |
+| --------------------- | ------- | --------- |
 ${lines}
 `
 
