@@ -8,11 +8,11 @@ results like 22.5% still land deterministically ("Low" below).
 
 | Raw percentage | Level    |
 | -------------- | -------- |
-| < 20           | Very low |
+| < 20           | Sparse   |
 | < 40           | Low      |
 | < 60           | Moderate |
 | < 80           | High     |
-| >= 80          | Very high |
+| >= 80          | Dense    |
 
 The results table and downloaded `CONFORM.md` both render `Factor | Percent | Level`.
 
@@ -64,7 +64,7 @@ per factor, plus the level each percentage falls into:
 
 | All items answered | EXT                    | AGR                    | CON                    | ES                     | II                     |
 | ------------------ | ---------------------- | ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| **Way off**        | 30 / 50% / Moderate    | 26 / 40% / Moderate    | 26 / 40% / Moderate    | 42 / 80% / Very high   | 22 / 30% / Low         |
+| **Way off**        | 30 / 50% / Moderate    | 26 / 40% / Moderate    | 26 / 40% / Moderate    | 42 / 80% / Dense       | 22 / 30% / Low         |
 | **Inaccurate**     | 30 / 50% / Moderate    | 28 / 45% / Moderate    | 28 / 45% / Moderate    | 36 / 65% / High        | 26 / 40% / Moderate    |
 | **Neither**        | 30 / 50% / Moderate    | 30 / 50% / Moderate    | 30 / 50% / Moderate    | 30 / 50% / Moderate    | 30 / 50% / Moderate    |
 | **Accurate**       | 30 / 50% / Moderate    | 32 / 55% / Moderate    | 32 / 55% / Moderate    | 24 / 35% / Low         | 34 / 60% / High        |
@@ -72,7 +72,7 @@ per factor, plus the level each percentage falls into:
 
 Note: the level always comes from the raw percentage, and exact boundaries resolve to the
 higher adjacent level when they hit a threshold (e.g. 40% -> Moderate, 60% -> High,
-20% -> Low, 80% -> Very high).
+20% -> Low, 80% -> Dense).
 
 Sanity properties to eyeball:
 
@@ -102,7 +102,7 @@ Target factor all **Way off** (others all "Neither", i.e. Moderate):
 | Extraversion          | 30 / 50% / Moderate    | all 30 / 50% / Moderate |
 | Agreeableness         | 26 / 40% / Moderate    | all 30 / 50% / Moderate |
 | Conscientiousness     | 26 / 40% / Moderate    | all 30 / 50% / Moderate |
-| Emotional Stability   | 42 / 80% / Very high   | all 30 / 50% / Moderate |
+| Emotional Stability   | 42 / 80% / Dense       | all 30 / 50% / Moderate |
 | Intellect/Imagination | 22 / 30% / Low         | all 30 / 50% / Moderate |
 
 Item numbers are shown in the left column of each table, so you can count off which items belong 
@@ -127,5 +127,5 @@ If minus-keyed factors move in the wrong direction, then they're not being rever
 
 Requires answering by item key direction:
 
-- Every **+** item "Spot on" and every **-** item "Way off" -> every factor **50 / 100% / Very high**
-- Inverse (- "Spot on", + "Way off") -> every factor **10 / 0% / Very low**
+- Every **+** item "Spot on" and every **-** item "Way off" -> every factor **50 / 100% / Dense**
+- Inverse (- "Spot on", + "Way off") -> every factor **10 / 0% / Sparse**
