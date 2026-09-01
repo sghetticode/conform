@@ -358,15 +358,15 @@ function buildMarkdown(
     .map((factor) => {
       const name = factorNames[factor].padEnd(21)
       const percent = `${Math.round(results[factor].percentage)}%`.padEnd(7)
-      const level = levelFor(results[factor].percentage).padEnd(9)
+      const level = levelFor(results[factor].percentage).padEnd(8)
       return `| ${name} | ${percent} | ${level} |`
     })
     .join('\n')
 
   let markdown = `# CONFORM.md
 
-| Factor                | Percent | Level     |
-| --------------------- | ------- | --------- |
+| Factor                | Percent | Level    |
+| --------------------- | ------- | -------- |
 ${lines}
 `
 
