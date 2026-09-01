@@ -7,12 +7,13 @@ personality. Read on to understand how the trait test works and how to best use 
 
 ### How the trait test works
 
-The results of the trait test are separated into five factors, known as the "Big Five" markers for 
-modeling personality (extraversion, agreeableness, conscientiousness, emotional stability, and 
-intellect/imagination). Each of them has a percentage associated with it based on the statements 
-you ranked as way off, inaccurate, neither, accurate, or spot on. These values are passed to an 
-LLM that generates a short description of your personality. This is saved to a Markdown file that's 
-specific to your attributes.
+The results of the trait test are separated into five factors, known as the "Big Five" personality
+traits (extraversion, agreeableness, conscientiousness, emotional stability, and
+intellect/imagination). Each will have a percentage associated with it based on the statements you
+ranked as way off, inaccurate, neither, accurate, or spot on. These values are passed to an LLM
+running in the browser to generate a description of your personality. Your results are saved to a
+Markdown file that's specific to you. Follow the instructions provided after you finish the test
+to use as intended.
 
 ### Adapting agents to your personality
 
