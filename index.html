@@ -37,7 +37,7 @@
     <main class="mt-10 mr-9 mb-5 ml-9 flex flex-1">
       <div id="column-left" class="max-w-1/2 flex-1 text-justify">
         <section id="trait-test" class="flex flex-col">
-          <div id="card-deck" class="card w-fit rounded-xl bg-mist-400 p-2 mb-4" tabindex="0">
+          <div id="card-deck" class="card w-fit rounded-xl bg-mist-400 p-2 mb-4">
             <div class="card-body">
               <progress class="progress" value="0" max="50"></progress>
               <div class="min-h-138 w-3xl max-w-[calc(100vw-4rem)]">
@@ -50,15 +50,17 @@
                 >
                   <h3 class="text-4xl font-medium text-mist-700/90">Instructions</h3>
                   <p class="max-w-9/10 text-2xl leading-normal text-mist-600">
-                    This should take less than 5 minutes to complete. In order for it to accurately
-                    assess your personality, respond to every statement as you see yourself most of
-                    the time <br /><span class="italic">(not how you think you should be)</span>.
+                    This only takes about 5 minutes to complete. In order for the test to 
+                    accurately assess your personality, respond to every statement as you see 
+                    yourself most of the time
+                    <span class="italic"><br />
+                      (not how you think you should be).
+                    </span>
                   </p>
                   <button
                     id="start-btn"
                     class="btn btn-lg btn-ghost rounded-lg border-none bg-mist-500/70 p-3 
                       font-normal shadow-none hover:bg-mist-500/90"
-                    tabindex="0"
                   >
                     Start test
                   </button>
@@ -722,12 +724,12 @@
               class="border-l-[3px] border-l-mist-400/80 pl-4 text-justify text-[1.375rem] 
                 leading-normal font-light tracking-normal"
             >
-              The results of the trait test are separated into five factors, known as the "Big Five"
-              markers for modeling personality. Each of them has a percentage associated with it
-              based on the statements you ranked as way off, inaccurate, neither, accurate, or spot
-              on. These values are passed to an LLM that generates a short description of your 
-              personality. This is saved to a Markdown file that's specific to your attributes. 
-              Follow the instructions provided after you finish to use as intended.
+              The results of this trait test are separated into five factors, known as the 
+              "Big Five" personality traits. Each will have a percentage associated with it based 
+              on the statements you ranked as way off, inaccurate, neither, accurate, or spot on. 
+              These values are passed to an LLM running in the browser to generate a description 
+              of your personality. Your results are saved to a Markdown file that's specific to 
+              you. Follow the instructions provided after you finish the test to use as intended.
             </p>
           </div>
         </section>
@@ -736,17 +738,17 @@
     <!-- Test results view -->
     <div
       id="test-results"
-      class="flex flex-1 flex-col min-h-0 items-center justify-center gap-9 overflow-y-auto
-        p-9 bg-radial from-mist-700 from-30% to-mist-800"
+      class="flex flex-1 flex-col min-h-0 items-center justify-center gap-9 overflow-y-auto p-9 
+        bg-radial from-mist-700 from-30% to-mist-800"
       hidden
     >
-      <h3 class="text-center text-2xl font-normal text-neutral-100">
-        Your personality traits!
+      <h3 class="text-center text-3xl font-normal text-neutral-100">
+        Your personality traits
       </h3>
-      <!-- Factor/percent table -->
-      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-7 shadow-md
-        shadow-mist-900/60">
+      <!-- Results table -->
+      <div class="card h-fit w-fit rounded-xl bg-mist-400/75 p-6 shadow-md shadow-mist-900/60">
         <table
+          id="results-table"
           class="table w-[40vw] rounded-lg border border-mist-600/60 bg-mist-500/50 py-1
             [&_tr>*]:border-b-mist-600/30"
         >
@@ -784,7 +786,11 @@
           </tbody>
         </table>
       </div>
-      <div class="card h-fit max-w-[60vw] rounded-lg bg-mist-400/80 p-7 shadow-md shadow-mist-900/60">
+      <!-- Trait description -->
+      <div
+        class="card h-fit max-w-[60vw] rounded-lg bg-mist-400/80 p-5 shadow-md 
+          shadow-mist-900/60"
+      >
         <p
           id="trait-description"
           class="text-justify text-xl leading-normal text-neutral-100 rounded-md border
@@ -800,9 +806,8 @@
             Download your 
             <button
             id="download-btn"
-            class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-3 ml-1 font-normal 
-              shadow-sm shadow-mist-900/60 hover:bg-mist-500"
-            tabindex="0"
+            class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-3 ml-1 
+              font-normal shadow-sm shadow-mist-900/60 hover:bg-mist-500"
           >
             CONFORM.md
           </button>
@@ -824,8 +829,9 @@
       <aside class="text-sm">
         <h4 class="font-medium">YOUR DATA</h4>
         <p class="italic">
-          Trait test related data is temporarily stored in your browser. All of it is deleted 
-          an hour after you download your CONFORM.md file.
+          Trait test related data is temporarily stored in your browser.
+          <br />
+          All of it will be deleted an hour after you download your CONFORM.md file.
         </p>
       </aside>
     </footer>
