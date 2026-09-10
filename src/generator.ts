@@ -1,5 +1,5 @@
 import type { Message } from '@huggingface/transformers'
-import { factors, factorNames, type FactorResults } from './factors'
+import { factors, factorNames, levelFor, type FactorResults } from './factors'
 
 export type ProgressHandler = (status: string) => void
 
@@ -70,17 +70,23 @@ export function generateDescription(
     pendingReject = reject
     progressHandler = onProgress
 
-    const percentages = factors
-      .map((factor) => `${factorNames[factor]}: ${Math.round(results[factor].percentage)}%`)
+    const factorData = factors
+      .map((factor) => {
+        const percentage = results[factor].percentage
+        return `${factorNames[factor]}: ${Math.round(percentage)}% (${levelFor(percentage)})`
+      })
       .join('\n')
 
     const messages: Message[] = [
       {
         role: 'system',
         content:
-          "Write a personality description, in second person, based on the test results. One sentence per factor.",
+          `Generate a personality description using the following criteria:
+          1. base it on factor percentages and interpretive levels
+          2. write one sentence for each of the five factors
+          3. use present tense in second person`
       },
-      { role: 'user', content: percentages },
+      { role: 'user', content: factorData },
     ]
 
     onProgress('Preparing model...')

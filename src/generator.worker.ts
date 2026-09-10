@@ -89,6 +89,9 @@ workerScope.onmessage = async (ev) => {
     const output = await generator(command.messages, {
       max_new_tokens: 200,
       do_sample: true,
+      // < 1 more deterministic, > 1 more random
+      temperature: 0.8,
+      top_p: 0.9
     })
 
     const content = output[0].generated_text.at(-1)?.content
