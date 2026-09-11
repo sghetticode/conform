@@ -1,6 +1,6 @@
 import { env, pipeline, type Message, type TextGenerationPipeline } from '@huggingface/transformers'
 
-const MODEL_ID = 'onnx-community/LFM2.5-350M-ONNX'
+const MODEL_ID = 'onnx-community/LFM2-700M-ONNX'
 const DTYPE_FOR = { wasm: 'q8', webgpu: 'q4' } as const
 
 // Events this worker sends to the main thread
@@ -88,10 +88,15 @@ workerScope.onmessage = async (ev) => {
 
     const output = await generator(command.messages, {
       max_new_tokens: 200,
-      do_sample: true,
-      // < 1 more deterministic, > 1 more random
-      temperature: 0.8,
-      top_p: 0.9
+      do_sample: false,
+      repetition_penalty: 1.05
+      /* // < 1 is more deterministic
+       * temperature: 0.3,
+       * // keep tokens covering 90% of probability mass
+         top_p: 0.9, 
+         //
+         min_p: 0.15
+        */
     })
 
     const content = output[0].generated_text.at(-1)?.content
