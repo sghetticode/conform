@@ -81,10 +81,12 @@ export function generateDescription(
       {
         role: 'system',
         content:
-          `Generate a personality description using the following criteria:
-          1. base it on factor percentages and interpretive levels
-          2. write one sentence for each of the five factors
-          3. use present tense in second person`
+          `Write a paragraph describing this person's traits using the following criteria:
+          - base the description on factor percentages and their associated levels
+          - don't explicitly use factor and/or level names in the output
+          - write one sentence for each of the five factors
+          - avoid suggestions for making improvements
+          - use present tense in second person`
       },
       { role: 'user', content: factorData },
     ]
