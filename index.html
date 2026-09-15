@@ -8,7 +8,7 @@
       content="Give your agent the insight it needs to adapt to your personality."
     />
     <link rel="stylesheet" href="/src/style.css" />
-    <title>CONFORM.md</title>
+    <title>TRAITS.md</title>
     <script>
       // Check for expired results before first paint, then show results view if valid
       const downloadTimestamp = Number(localStorage.getItem('downloadTimestamp'))
@@ -25,13 +25,13 @@
   >
     <div
       id="header"
-      class="navbar mx-6 flex h-25 w-auto items-baseline rounded-b-4xl border-b-[1.5px] 
+      class="navbar mx-6 flex h-fit w-auto py-3 items-baseline rounded-b-4xl border-b-[1.5px] 
       border-b-mist-800/75 bg-mist-600/60 pl-6"
     >
-      <h1 class="text-7xl/none font-medium text-neutral-100/90">Conform</h1>
+      <h1 class="text-6xl/none font-medium text-neutral-100/90">TRAITS.md</h1>
       <span class="pr-3 pl-4 text-5xl font-light text-mist-400/60"> / </span>
       <h2 class="text-[2rem] font-normal text-neutral-100/80">
-        Give your agent the insight it needs
+        Have your agent get acquainted with you
       </h2>
     </div>
     <main class="mt-10 mr-9 mb-5 ml-9 flex flex-1">
@@ -706,9 +706,9 @@
               shadow-mist-800/50"
           >
             <p class="px-5 py-4 text-justify text-2xl leading-tight font-light tracking-tight">
-              <span class="font-normal italic">Conform</span> helps your agent adapt to you, by
-              using results from a short test that evaluates your personality. Read on to learn how
-              it works or take the trait test to get started now!
+              <span class="font-normal italic">Traits</span> help your agent adapt to you, by 
+              using results from a trait test to generate an accurate description of your 
+              personality. Read on to learn how it works or take the trait test to get started now!
             </p>
           </div>
         </section>
@@ -800,7 +800,7 @@
       </div>
       <!-- Intructions -->
       <div class="w-full max-w-[60vw]">
-        <h3 class="mb-3 text-xl font-normal text-neutral-100">To use your Conform profile:</h3>
+        <h3 class="mb-3 text-xl font-normal text-neutral-100">To use your trait data:</h3>
         <ol class="list-decimal list-inside space-y-2 text-lg text-neutral-100">
           <li>
             Download your 
@@ -809,12 +809,12 @@
             class="btn btn-lg btn-ghost rounded-full border-none bg-mist-500/75 p-3 ml-1 
               font-normal shadow-sm shadow-mist-900/60 hover:bg-mist-500"
           >
-            CONFORM.md
+            TRAITS.md
           </button>
           </li>
           <li>
             Move it to the agents folder in your home directory:
-            <code>~/.agents/CONFORM.md</code>
+            <code>~/.agents/TRAITS.md</code>
           </li>
           <li>
             Reference it in a global <code>AGENTS.md</code> so any of your agents can access your  
@@ -829,10 +829,8 @@
       <aside class="text-sm">
         <h4 class="font-medium">YOUR DATA DOESN'T LEAVE YOUR DEVICE</h4>
         <p class="italic">
-          Trait test data is temporarily stored in your browser, allowing the web app to function.
-          <br />
-          All of this data will be deleted shortly after you download your CONFORM.md file 
-          (~1 hour).
+          Trait test data is temporarily stored in your browser. All of it is deleted shortly 
+          after you download your TRAITS.md file (~1 hour).
         </p>
       </aside>
     </footer>
