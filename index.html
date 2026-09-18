@@ -25,34 +25,56 @@
   >
     <div
       id="header"
-      class="navbar mx-4 flex h-fit items-baseline rounded-b-4xl border-b-[1.5px] 
-      border-b-mist-800/75 bg-mist-600/60 py-3 pl-6 xl:mx-6 2xl:mx-10"
+      class="navbar mx-4 flex h-fit w-auto flex-col items-start gap-1 rounded-b-4xl
+        border-b-[1.5px] border-b-mist-800/75 bg-mist-600/60 py-3 pr-5 pl-6 sm:mx-6
+        sm:flex-row sm:items-baseline sm:gap-0 lg:mx-8 xl:mx-12 2xl:mx-16"
     >
-      <h1 class="text-4xl/none font-medium text-neutral-100/90 xl:text-6xl/none
-        2xl:text-7xl/none">
+      <h1
+        class="text-3xl/none font-medium text-neutral-100/90 sm:text-4xl/none
+          lg:text-5xl/none xl:text-6xl/none 2xl:text-7xl/none"
+      >
         TRAITS.md
       </h1>
-      <span class="pr-3 pl-4 text-3xl font-light text-mist-400/60 xl:text-5xl
-        2xl:text-6xl">
+      <span
+        class="pr-3 pl-4 text-3xl font-light text-mist-400/60 max-sm:hidden sm:text-4xl
+          lg:text-5xl 2xl:text-6xl"
+      >
         /
       </span>
-      <h2 class="text-xl font-normal text-neutral-100/80 xl:text-[2rem] 2xl:text-[2.5rem]">
+      <h2
+        class="text-lg font-normal text-neutral-100/80 sm:text-xl lg:text-2xl
+          xl:text-[2rem] 2xl:text-[2.5rem]"
+      >
         Have your agent get acquainted with you
       </h2>
     </div>
     <main
-      class="mx-4 mt-6 mb-5 flex flex-1 flex-col gap-6 xl:mx-9 xl:mt-10 xl:flex-row xl:gap-0 
-        2xl:mx-16 2xl:mt-14"
+      class="mx-4 mt-6 mb-5 flex flex-1 flex-col gap-6 sm:mx-6 lg:mx-8 lg:mt-10 lg:grid
+        lg:grid-cols-[minmax(0,5fr)_minmax(18rem,4fr)] lg:grid-rows-[auto_1fr] lg:gap-x-8
+        lg:gap-y-3 xl:mx-12 2xl:mx-16 2xl:mt-14"
     >
-      <div id="column-left" class="text-justify xl:max-w-1/2 xl:flex-1">
+      <section id="intro" class="lg:col-start-2 lg:row-start-1">
+        <div class="card rounded-2xl bg-mist-500/75 shadow-sm shadow-mist-800/50
+          lg:rounded-b-md">
+          <p
+            class="px-5 py-4 text-justify text-lg leading-tight font-light tracking-tight
+              lg:text-xl xl:text-[1.375rem]"
+          >
+            <span class="font-normal italic">Traits</span> help your agent adapt to you, by using
+            results from a trait test to generate an accurate description of your personality. Read
+            on to learn how it works or take the trait test to get started now!
+          </p>
+        </div>
+      </section>
+      <div
+        id="column-left"
+        class="min-w-0 text-justify lg:col-start-1 lg:row-span-2 lg:row-start-1"
+      >
         <section id="trait-test" class="flex flex-col">
-          <div id="card-deck" class="card mb-4 w-fit rounded-xl bg-mist-400 p-2">
-            <div class="card-body">
-              <progress class="progress" value="0" max="50"></progress>
-              <div
-                class="min-h-138 w-[calc(100vw-6rem)] max-w-[calc(100vw-4rem)] xl:w-3xl 
-                  2xl:min-h-150 2xl:w-4xl"
-              >
+          <div id="card-deck" class="card mb-4 w-full rounded-xl bg-mist-400 p-2">
+            <div class="card-body max-sm:px-2">
+              <progress id="test-progress" class="progress" value="0" max="50"></progress>
+              <div class="min-h-138 w-full 2xl:min-h-150">
                 <!-- Trait test instructions -->
                 <div
                   class="grid h-full min-h-138 place-content-center place-items-center
@@ -60,17 +82,17 @@
                   data-test-panel="0"
                   hidden
                 >
-                  <h3 class="text-3xl font-medium text-mist-700/90 xl:text-4xl
-                    2xl:text-5xl">
+                  <h3
+                    class="text-3xl font-medium text-mist-700/90 lg:text-[2.125rem] xl:text-4xl"
+                  >
                     Instructions
                   </h3>
                   <p
-                    class="max-w-9/10 text-xl leading-normal text-mist-600 xl:text-2xl
-                      2xl:text-3xl"
+                    class="max-w-9/10 text-xl leading-normal text-mist-600 lg:text-[1.375rem] xl:text-2xl"
                   >
-                    This only takes about 5 minutes to complete. In order for the test to 
-                    accurately assess your personality, respond to every statement as you see 
-                    yourself most of the time
+                    This only takes about 5 minutes to complete. In order for the test to accurately
+                    assess your personality, respond to every statement as you see yourself most of
+                    the time
                     <span class="italic">
                       <br />
                       (not how you think you should be).
@@ -86,24 +108,27 @@
                 </div>
                 <!-- Trait test panel 1 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="1"
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -135,25 +160,28 @@
                 </table>
                 <!-- Trait test panel 2 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="2"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -183,25 +211,28 @@
                 </table>
                 <!-- Trait test panel 3 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="3"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -233,25 +264,28 @@
                 </table>
                 <!-- Trait test panel 4 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="4"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -283,25 +317,28 @@
                 </table>
                 <!-- Trait test panel 5 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="5"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -333,25 +370,28 @@
                 </table>
                 <!-- Trait test panel 6 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="6"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -383,25 +423,28 @@
                 </table>
                 <!-- Trait test panel 7 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="7"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -431,25 +474,28 @@
                 </table>
                 <!-- Trait test panel 8 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="8"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -479,25 +525,28 @@
                 </table>
                 <!-- Trait test panel 9 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="9"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -527,25 +576,28 @@
                 </table>
                 <!-- Trait test panel 10 -->
                 <table
-                  class="table w-full table-fixed text-sm xl:text-base 2xl:text-lg
-                    [&_tr>*]:border-b-mist-500/50"
+                  class="table w-full table-fixed text-sm md:text-base 2xl:text-lg
+                    [&_tr>*]:border-b-mist-500/50 max-sm:[&_tr>*]:px-1"
                   data-test-panel="10"
                   hidden
                 >
                   <colgroup>
-                    <col class="w-12" />
+                    <col class="w-8 sm:w-12" />
                     <col />
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" aria-label="Rating"></th>
                       <th>
-                        <div class="mb-2 grid grid-cols-5 justify-items-center">
-                          <span class="text-red-800/75">Way off</span>
-                          <span class="text-amber-700/75">Inaccurate</span>
-                          <span class="text-gray-600/75">Neither</span>
-                          <span class="text-cyan-700/75">Accurate</span>
-                          <span class="text-green-800/75">Spot on</span>
+                        <div
+                          class="rating-grid mb-2 text-[10px] leading-tight wrap-break-word
+                            whitespace-normal sm:text-xs md:text-sm"
+                        >
+                          <span class="w-full text-center text-red-800/75">Way off</span>
+                          <span class="w-full text-center text-amber-700/75">Inaccurate</span>
+                          <span class="w-full text-center text-gray-600/75">Neither</span>
+                          <span class="w-full text-center text-cyan-700/75">Accurate</span>
+                          <span class="w-full text-center text-green-800/75">Spot on</span>
                         </div>
                       </th>
                     </tr>
@@ -582,13 +634,15 @@
                 >
                   <h3
                     id="submit-heading"
-                    class="text-2xl font-medium text-mist-600 xl:text-3xl 2xl:text-4xl"
+                    class="text-xl font-medium text-mist-600 sm:text-2xl xl:text-3xl
+                      2xl:text-4xl"
                   >
                     Submit your trait test
                   </h3>
                   <p
                     id="submit-error"
-                    class="mt-2 text-lg text-orange-800 italic xl:text-xl 2xl:text-2xl"
+                    class="mt-2 text-base text-orange-800 italic sm:text-lg xl:text-xl
+                      2xl:text-2xl"
                     role="alert"
                     hidden
                   ></p>
@@ -607,15 +661,18 @@
                     tabindex="-1"
                     hidden
                   >
-                    <span class="text-xl font-medium text-mist-600 xl:text-2xl
-                      2xl:text-3xl">
+                    <span
+                      class="text-lg font-medium text-mist-600 sm:text-xl xl:text-2xl
+                        2xl:text-3xl"
+                    >
                       Scoring your trait test
                     </span>
                     <span class="loading loading-spinner loading-xl"></span>
                     <p
                       id="score-status"
-                      class="text-base text-mist-600 italic xl:text-lg 2xl:text-xl"
-                      roll="status"
+                      class="text-sm text-mist-600 italic sm:text-base xl:text-lg
+                        2xl:text-xl"
+                      role="status"
                     ></p>
                   </div>
                 </div>
@@ -623,8 +680,8 @@
               <!-- Trait test nav buttons -->
               <div id="nav-btns" class="join mx-auto mt-3 flex-wrap justify-center">
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none 
-                  hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-nav="prev"
                   aria-label="Previous page"
@@ -633,8 +690,8 @@
                   &lt;
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="1"
                   disabled
@@ -642,8 +699,8 @@
                   1
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="2"
                   disabled
@@ -651,8 +708,8 @@
                   2
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="3"
                   disabled
@@ -660,8 +717,8 @@
                   3
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="4"
                   disabled
@@ -669,8 +726,8 @@
                   4
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="5"
                   disabled
@@ -678,8 +735,8 @@
                   5
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="6"
                   disabled
@@ -687,8 +744,8 @@
                   6
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="7"
                   disabled
@@ -696,8 +753,8 @@
                   7
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="8"
                   disabled
@@ -705,8 +762,8 @@
                   8
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="9"
                   disabled
@@ -714,8 +771,8 @@
                   9
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-navbtn="10"
                   disabled
@@ -723,8 +780,8 @@
                   10
                 </button>
                 <button
-                  class="join-item btn btn-ghost border-none bg-mist-700/80 shadow-none
-                    hover:bg-mist-600/70"
+                  class="join-item btn btn-sm btn-ghost sm:btn-md border-none
+                    bg-mist-700/80 shadow-none hover:bg-mist-600/70"
                   type="button"
                   data-nav="next"
                   aria-label="Next page"
@@ -737,71 +794,60 @@
           </div>
         </section>
       </div>
-      <div id="column-right" class="xl:ml-auto xl:max-w-2/5 xl:shrink-0">
-        <section id="intro">
-          <div
-            class="card mb-3 rounded-t-2xl rounded-b-md bg-mist-500/75 shadow-sm 
-              shadow-mist-800/50"
+      <section
+        id="how-it-works"
+        class="collapse-plus collapse rounded-2xl bg-mist-500/75 p-1 text-lg shadow-sm
+          shadow-mist-800/50 lg:col-start-2 lg:row-start-2 lg:self-start lg:rounded-t-md"
+      >
+        <input id="hiw-toggle" type="checkbox" aria-label="Toggle the 'how it works' section" />
+        <h3 class="collapse-title lg:text-[1.375rem] xl:text-2xl">How it works</h3>
+        <div class="collapse-content pr-8 pl-4">
+          <p
+            class="border-l-[3px] border-l-mist-400/80 pl-4 text-justify leading-normal 
+              font-light lg:text-xl"
           >
-            <p
-              class="px-5 py-4 text-justify text-xl leading-tight font-light tracking-tight 
-                xl:text-2xl 2xl:text-3xl"
-            >
-              <span class="font-normal italic">Traits</span> help your agent adapt to you, by 
-              using results from a trait test to generate an accurate description of your 
-              personality. Read on to learn how it works or take the trait test to get started now!
-            </p>
-          </div>
-        </section>
-        <section
-          id="how-it-works"
-          class="collapse-plus collapse flex-auto rounded-t-md rounded-b-2xl bg-mist-500/75 p-1 
-            shadow-sm shadow-mist-800/50"
-        >
-          <input id="hiw-toggle" type="checkbox" aria-label="Toggle the 'how it works' section" />
-          <h3 class="collapse-title text-xl xl:text-2xl 2xl:text-3xl">How it works</h3>
-          <div class="collapse-content pr-8 pl-4">
-            <p
-              class="border-l-[3px] border-l-mist-400/80 pl-4 text-justify text-lg
-                leading-normal font-light xl:text-[1.375rem] 2xl:text-2xl"
-            >
-              The results of this trait test are separated into five factors, known as the "Big 
-              Five" personality traits. Each will have a percentage associated with it based on 
-              statements you ranked as either way off, inaccurate, neither, accurate, or spot on. 
-              These values are passed to an LLM running in the browser to generate a description 
-              of your personality. Your results are saved to a Markdown file that's specific to 
-              you. Follow the instructions provided after you finish the test to use as intended.
-            </p>
-          </div>
-        </section>
-      </div>
+            The results of this trait test are separated into five factors, known as the "Big Five"
+            personality traits. Each will have a percentage associated with it based on statements
+            you ranked as either way off, inaccurate, neither, accurate, or spot on. These values
+            are passed to an LLM running in the browser to generate a description of your
+            personality. Your results are saved to a Markdown file that's specific to you. Follow
+            the instructions provided after you finish the test to use as intended.
+          </p>
+        </div>
+      </section>
     </main>
     <!-- Test results view -->
     <div
       id="test-results"
-      class="flex min-h-0 flex-1 flex-col items-center justify-center gap-6 overflow-y-auto 
-        bg-radial from-mist-700 from-30% to-mist-800 p-4 xl:gap-9 xl:p-9 2xl:gap-12 2xl:p-12"
+      class="flex min-h-0 flex-1 flex-col items-center justify-center gap-4
+        overflow-y-auto bg-radial from-mist-700 from-30% to-mist-800 p-4 sm:gap-6 lg:gap-8
+        lg:p-8 xl:gap-9 xl:p-9 2xl:gap-12 2xl:p-12"
       hidden
     >
-      <h3 class="text-center text-2xl font-normal text-neutral-100 xl:text-3xl 2xl:text-4xl">
+      <h3
+        class="text-center text-xl font-normal text-neutral-100 sm:text-2xl xl:text-3xl
+          2xl:text-4xl"
+      >
         Your personality traits
       </h3>
       <!-- Results table -->
       <div
-        class="card h-fit w-fit rounded-xl bg-mist-400/75 p-4 shadow-md shadow-mist-900/60 
-          xl:p-6 2xl:p-8"
+        class="card h-fit w-full max-w-lg rounded-xl bg-mist-400/75 p-4 shadow-md
+          shadow-mist-900/60 lg:max-w-2xl xl:max-w-3xl xl:p-6 2xl:p-8"
       >
         <table
           id="results-table"
-          class="table w-[85vw] rounded-lg border border-mist-600/60 bg-mist-500/50 xl:w-[40vw] 
-          [&_tr>*]:border-b-mist-600/30"
+          class="table w-full rounded-lg border border-mist-600/60 bg-mist-500/50
+            [&_tr>*]:border-b-mist-600/30"
         >
-          <thead class="text-base text-neutral-100 xl:text-xl 2xl:text-2xl">
-            <th>Factor</th>
-            <th>Percent</th>
-            <th>Level</th>
+          <thead class="text-sm text-neutral-100 sm:text-base xl:text-xl 2xl:text-2xl">
+            <tr>
+              <th>Factor</th>
+              <th>Percent</th>
+              <th>Level</th>
+            </tr>
           </thead>
-          <tbody class="text-sm text-neutral-100 xl:text-lg 2xl:text-xl">
+          <tbody class="text-xs text-neutral-100 sm:text-sm xl:text-lg 2xl:text-xl">
             <tr>
               <td>Extraversion</td>
               <td id="factor-1-results">0</td>
@@ -832,31 +878,33 @@
       </div>
       <!-- Trait description -->
       <div
-        class="card h-fit max-w-[85vw] rounded-lg bg-mist-400/80 p-5 shadow-md shadow-mist-900/60 
-          xl:max-w-[60vw]"
+        class="card h-fit w-full max-w-lg rounded-lg bg-mist-400/80 p-5 shadow-md
+          shadow-mist-900/60 lg:max-w-2xl xl:max-w-3xl"
       >
         <p
           id="trait-description"
-          class="rounded-md border border-mist-600/40 bg-mist-500/70 p-4 text-justify text-base 
-            leading-normal text-neutral-100 xl:text-xl 2xl:text-2xl"
+          class="rounded-md border border-mist-600/40 bg-mist-500/70 p-4 text-justify
+            text-sm leading-normal text-neutral-100 sm:text-base xl:text-xl 2xl:text-2xl"
           hidden
         ></p>
       </div>
       <!-- Intructions -->
-      <div class="w-full max-w-[85vw] xl:max-w-[60vw]">
-        <h3 class="mb-3 text-lg font-normal text-neutral-100 xl:text-xl 2xl:text-2xl">
+      <div class="w-full max-w-lg lg:max-w-2xl xl:max-w-3xl">
+        <h3 class="mb-3 text-base font-normal text-neutral-100 sm:text-lg xl:text-xl
+          2xl:text-2xl">
           To use your trait data:
         </h3>
         <ol
-          class="list-inside list-decimal space-y-2 text-base text-neutral-100 xl:text-lg 
-            2xl:text-xl"
+          class="list-inside list-decimal space-y-2 text-sm text-neutral-100 sm:text-base
+            xl:text-lg 2xl:text-xl"
         >
           <li>
             Download your
             <button
               id="download-btn"
-              class="btn btn-lg btn-ghost ml-1 rounded-full border-none bg-mist-500/75 p-3 
-                font-normal shadow-sm shadow-mist-900/60 hover:bg-mist-500"
+              class="btn btn-sm btn-ghost sm:btn-md lg:btn-lg ml-1 rounded-full
+                border-none bg-mist-500/75 p-3 font-normal shadow-sm shadow-mist-900/60
+                hover:bg-mist-500"
             >
               TRAITS.md
             </button>
@@ -872,12 +920,13 @@
         </ol>
       </div>
     </div>
-    <footer class="footer footer-center mt-auto h-fit bg-mist-900/40 p-3 text-neutral-300/75">
+    <footer class="footer footer-center mt-auto h-fit bg-mist-900/40 p-3
+      text-neutral-300/75">
       <aside class="text-sm">
         <h4 class="font-medium">YOUR DATA DOESN'T LEAVE YOUR DEVICE</h4>
         <p class="italic">
-          Trait test data is temporarily stored in your browser. All of it is deleted shortly 
-          after you download your TRAITS.md file (~1 hour).
+          Trait test data is temporarily stored in your browser. All of it is deleted shortly after
+          you download your TRAITS.md file (~1 hour).
         </p>
       </aside>
     </footer>
