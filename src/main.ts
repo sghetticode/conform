@@ -1,8 +1,6 @@
 import { preloadGenerator, generateDescription } from './generator'
 import { factors, factorNames, levelFor, type Factor } from './factors'
 
-console.log('Starting up Conform...')
-
 const downloadTimestamp = Number(localStorage.getItem('downloadTimestamp'))
 const hour = 3600 * 1000
 // Delete following keys: downloadTimestamp, panelRendered, results, testSubmitted
@@ -57,7 +55,7 @@ if (savedResults) {
     const responseCell = document.createElement('td')
     const radioGroup = document.createElement('div')
 
-    radioGroup.className = 'grid grid-cols-5 justify-items-center'
+    radioGroup.className = 'rating-grid'
 
     const classes = row.cells[1].classList
     const factor = factors.find((f) => classes.contains(f))
@@ -141,7 +139,7 @@ function renderPanel(panelNum: number = currentPanel) {
   })
 }
 
-const joinNav = document.querySelector<HTMLElement>('.join')!
+const joinNav = document.querySelector<HTMLElement>('#nav-btns')!
 const pages = 12
 
 // Use previous, number, or next buttons to navigate pages
@@ -166,7 +164,7 @@ joinNav.addEventListener('click', (ev) => {
 })
 
 // Sync progress bar with number of radios selected
-const progress = document.querySelector<HTMLProgressElement>('.progress')!
+const progress = document.querySelector<HTMLProgressElement>('#test-progress')!
 
 function syncProgressBar() {
   progress.value = countSelectedRadios()
@@ -363,7 +361,7 @@ function buildMarkdown(
     })
     .join('\n')
 
-  let markdown = `# CONFORM.md
+  let markdown = `# TRAITS.md
 
 | Factor                | Percent | Level    |
 | --------------------- | ------- | -------- |
@@ -385,7 +383,7 @@ function downloadResults(
   const link = document.createElement('a')
 
   link.href = url
-  link.download = 'CONFORM.md'
+  link.download = 'TRAITS.md'
   document.body.append(link)
   link.click()
   link.remove()
@@ -399,7 +397,7 @@ downloadBtn.addEventListener('click', () => {
   const currentResults = localStorage.getItem('results')
   if (!currentResults) return
 
-  console.log('Downloading CONFORM.md file...')
+  console.log('Downloading TRAITS.md file...')
   localStorage.setItem('downloadTimestamp', String(Date.now()))
   downloadResults(JSON.parse(currentResults), localStorage.getItem('traitDescription'))
 })
